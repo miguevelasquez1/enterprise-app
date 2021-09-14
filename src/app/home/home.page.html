@@ -1,0 +1,34 @@
+<ion-content id="main" scrollY="false">
+    <ion-tabs>
+        <ion-tab-bar [translucent]="true" slot="bottom">
+            <ion-tab-button *ngIf="isEmployee" tab="inventario" layout="icon-top">
+                <ion-icon name="file-tray-stacked"></ion-icon>
+                <ion-label>Inventario</ion-label>
+            </ion-tab-button>
+        
+            <ion-tab-button *ngIf="isEmployee" tab="rutas" layout="icon-top">
+                <ion-icon name="albums"></ion-icon>
+                <ion-label>Rutas</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="home" layout="icon-top">
+                <ion-icon name="home"></ion-icon>
+                <ion-label>Inicio</ion-label>
+            </ion-tab-button>
+        
+            <ion-tab-button *ngIf="isEmployee" tab="charts" layout="icon-top">
+                <ion-icon name="pie-chart"></ion-icon>
+                <ion-label>Estadísticas</ion-label>
+            </ion-tab-button>
+        
+            <ion-tab-button tab="account" layout="icon-top" class="tab-trash">
+                <ion-icon name="person-circle"></ion-icon>
+                <ion-label>Perfil</ion-label>
+            </ion-tab-button>
+        </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
+
+
+
+

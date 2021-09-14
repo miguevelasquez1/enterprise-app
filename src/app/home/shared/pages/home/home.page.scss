@@ -1,0 +1,86 @@
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../../../../../assets/fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../../../../../assets/fonts/Poppins-SemiBold.ttf');
+}
+
+* {
+    font-family: Poppins-Regular;
+}
+
+h1 {
+    font-family: Poppins-Semibold;
+    font-size: 32px;
+}
+
+.label-section {
+    font-family: Poppins-Semibold;
+    font-size: 16px;
+}
+
+ion-card {
+    --background: var(--ion-color-secondary);
+    --color: white;
+    ion-card-header {
+        padding-left: 8px;
+    };
+    ion-card-content {
+        padding-left: 8px;
+        padding-right: 8px;
+        ion-col {
+            padding: 0;
+        }
+        .arrow-col {
+            padding-top: 18px;
+            padding-left: 10px;
+        }
+    }
+}
+
+ion-input {
+    font-family: Poppins-Semibold;
+    font-size: 24px;
+}
+
+ion-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.text {
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+h5 {
+    font-family: Poppins-Regular;
+    color: black;
+    margin: 0;
+}
+
+.img-card {
+    border-radius: 5px;
+}
+
+.col-chips {
+    padding: 0;
+}
+
+ion-slide {
+    ion-grid, .col-card {
+        padding: 0;
+    }
+}
+
+.col-img-card {
+    margin-top: 5px;
+}
+
+.add-card {
+    left: -32px! important;
+}

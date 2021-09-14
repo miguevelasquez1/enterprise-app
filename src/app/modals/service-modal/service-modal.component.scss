@@ -1,0 +1,31 @@
+@font-face {
+    font-family: Poppins-Medium;
+    src: url('../../../assets/fonts/Poppins-MediumItalic.ttf');
+}
+
+@font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+}
+
+.text-preview {
+    padding: 7px;
+}
+
+p {
+    margin: 5px 5px 5px 5px;
+    color: black;
+}
+
+h4 {
+    color: black;
+    margin: 0;
+}
+
+.img-card {
+    border-radius: 5px;
+}
+
+.col-img-card {
+    margin-top: 28px;
+}

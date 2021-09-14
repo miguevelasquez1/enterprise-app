@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Poppins-Light;
+  src: url('../../../../../assets/fonts/Poppins-Light.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../../../../../assets/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../../../../../assets/fonts/Poppins-Bold.ttf')
+}
+
+* {
+  font-family: Poppins-Medium;
+}
+
+ion-toolbar {
+  --background: var(--ion-background-color);
+}
+
+#chart1 {
+  font-family: Poppins-Medium;
+}
+
+ion-card {
+  border-radius: 15px;
+}

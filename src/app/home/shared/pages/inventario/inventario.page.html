@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center" >Inventario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="div-principal">
+
+      <ion-item lines="none">
+  
+        <ion-grid>
+  
+          <ion-card>
+            <ion-row id="registro-list">
+              <ion-col>Nombre</ion-col>
+              <ion-col>Marca</ion-col>
+              <ion-col>Cantidad</ion-col>
+              <ion-col>Accion</ion-col>
+            </ion-row>
+          </ion-card>
+  
+          <ion-card>
+            <div id="square">
+              <div id="row-section" *ngFor="let producto of inventarioList;">
+                <ion-row class="ion-align-items-center" id="registro">
+                  <ion-col size="3" class="col-element">{{producto.nombre}}</ion-col>
+                  <ion-col size="3" class="col-element">{{producto.marca}}</ion-col>
+                  <ion-col size="3" class="col-element-cantidad">{{producto.cantidad}}</ion-col>
+                  <ion-col size="3" class="col-element">
+                    <ion-button (click)="inventarioService.populateForm(producto)" routerLink="/inventario-form">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button *ngIf="isAdmin" (click)="onDelete(producto.$key)">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+          </div>
+          </ion-card>
+          
+          
+        </ion-grid>
+      </ion-item>
+    </div>
+    
+</ion-content>
+
+<ion-footer>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button routerLink="/inventario-form" (click)="newInventario()">
+      <ion-icon class="add-icon" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer>
