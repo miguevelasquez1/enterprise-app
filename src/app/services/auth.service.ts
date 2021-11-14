@@ -49,6 +49,8 @@ export class AuthService {
       this.buildFormAuth();
       this.buildFormPerson();
       this.buildFormCompany();
+
+      this.personsList = this.aFDB.list('persons');
   }
 
   private buildFormAuth() {
@@ -91,13 +93,13 @@ export class AuthService {
   }
 
   insertPerson(person: Person) {
-      // this.personsList.push({
-      //   name: person.name,
-      //   email: person.email,
-      //   phoneNumber: person.phoneNumber,
-      //   records: person.records,
-      //   inventory: person.inventory
-      // });
+      this.personsList.push({
+        name: person.name,
+        email: person.email,
+        phoneNumber: person.phoneNumber,
+        records: person.records,
+        inventory: person.inventory
+      });
   }
 
   updatePerson(person: Person) {
@@ -116,12 +118,12 @@ export class AuthService {
   }
 
   insertCompany(company: Company) {
-      this.companyList.push({
-        name: company.name,
-        email: company.email,
-        phoneNumber: company.phoneNumber,
-        employees: company.employees
-      });
+    this.companyList.push({
+      name: company.name,
+      email: company.email,
+      phoneNumber: company.phoneNumber,
+      employees: company.employees
+    });
   }
 
   updateCompany(company: Company) {
