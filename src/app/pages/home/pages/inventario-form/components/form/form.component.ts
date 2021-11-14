@@ -7,7 +7,7 @@ import { Plugins, CameraResultType, Capacitor, CameraSource } from '@capacitor/c
 
 
 import { InventarioService } from 'src/app/services/inventario.service';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { ShowImagesPage } from '../show-images/show-images.page';
 import { Inventory } from 'src/app/models/inventory';

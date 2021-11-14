@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { InventarioFormPageRoutingModule } from './inventario-form-routing.module';
 
 import { InventarioFormPage } from './inventario-form.page';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { FormComponent } from './components/form/form.component';
 
 @NgModule({

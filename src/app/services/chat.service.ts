@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireList } from '@angular/fire/database';
+import { AngularFireList } from '@angular/fire/compat/database';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AngularFireList } from '@angular/fire/database';
+import { AngularFireList } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'

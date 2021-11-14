@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Injectable({

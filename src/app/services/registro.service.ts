@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Registro } from 'src/app/models/registro';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';

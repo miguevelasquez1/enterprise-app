@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Inventory } from '../models/inventory';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { User } from '../models/user';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
 import { Observable, Subject } from 'rxjs';
 
