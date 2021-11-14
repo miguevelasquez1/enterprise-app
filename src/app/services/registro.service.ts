@@ -22,7 +22,7 @@ export class RegistroService {
    }
 
   private buildForm() {
-    this.form = this.formBuilder.group ({
+    this.form = this.formBuilder.group({
       $key: [null, []],
       userUid: [''],
       userName: [''],
@@ -44,7 +44,7 @@ export class RegistroService {
   }
 
   insertRegistro(registro: Registro) {
-    this.registroList.push ({
+    this.registroList.push({
       userUid: registro.userUid,
       userName: registro.userName,
       fecha: registro.fecha,

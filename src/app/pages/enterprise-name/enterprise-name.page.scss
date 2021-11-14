@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+}
+
+h1 {
+    font-family: Poppins-SemiBold;
+    font-size: 48px;
+}
+
+ion-item {
+    margin: 15px;
+    --border-radius: 15px;
+    --border-width: 1px;
+}
+
+ion-input {
+    font-family: Poppins-Semibold;
+    --color: var(--ion-color-dark-tint);
+}
+
+.arrow-back {
+    font-size: 24px;
+    margin-left: 5px;
+}

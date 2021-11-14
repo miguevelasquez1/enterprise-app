@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon class="arrow-back" name="arrow-back-outline" routerLink="/" slot="start"></ion-icon>
+    <ion-title>Permisos</ion-title>
+    <ion-button slot="end" fill="clear" (click)="isEmployee()">Save</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="div-principal">
+
+      <ion-item>
+  
+        <ion-grid>
+  
+          <ion-card>
+            <ion-row id="registro-list">
+              <ion-col>Nombre del usuario</ion-col>
+              <ion-col>Email del usuario</ion-col>
+              <ion-col>Employee</ion-col>
+            </ion-row>
+          </ion-card>
+  
+          <ion-card>
+            <div id="square" *ngFor="let user of list">
+              <div id="row-section">
+                <ion-row class="ion-align-items-center" id="registro">
+                  <!-- <form [formGroup]="this.authService.authForm"> -->
+                    <ion-col size="4" class="col-element-name">{{user.name}}</ion-col>
+                    <ion-col size="4" class="col-element">{{user.email}}</ion-col>
+                    <ion-col size="4" class="col-element-action">
+                      <ion-toggle [(ngModel)]="user.employee"></ion-toggle>
+                    </ion-col>
+                  <!-- </form> -->
+                </ion-row>
+              </div>
+          </div>
+          </ion-card>
+          
+          
+        </ion-grid>
+      </ion-item>
+    </div>
+    
+</ion-content>

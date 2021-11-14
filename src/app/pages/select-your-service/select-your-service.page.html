@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon
+      class="arrow-back"
+      name="chevron-back-outline"
+      routerLink="/enterprise-name"
+      slot="start">
+   </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-margin">
+        <h1>Select your Type of Service</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="ion-text-center">
+    <ion-row>
+      <ion-col size="6" *ngFor="let service of services">
+        <ion-card [class.active]="selectedCard === service" style="border: 0;" (click)="selectCard(service)" tappable>
+          <ion-card-content>
+            {{service}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-end ion-margin">
+        <ion-button routerLink="/type-a-password">
+          Next
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

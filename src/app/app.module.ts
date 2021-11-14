@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { LayoutComponent } from './components/layout/layout.component';
-import { HomePage } from './home/home.page';
+import { HomePage } from './pages/home/home.page';
 
 @NgModule({
   declarations: [LayoutComponent, AppComponent],

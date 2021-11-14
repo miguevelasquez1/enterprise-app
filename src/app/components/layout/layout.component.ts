@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
-import { HomePage } from 'src/app/home/home.page';
+import { HomePage } from 'src/app/pages/home/home.page';
 
 @Component({
   selector: 'app-layout',
@@ -28,13 +28,6 @@ export class LayoutComponent implements OnInit {
 
   getRole() {
     this.authService.isAuth2().subscribe(auth => {
-      if (auth) {
-        this.userUid = auth.uid;
-        this.authService.isUser(this.userUid).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole).server.admin;
-          this.isEmployee = Object.assign({}, userRole).server.employee;
-        });
-      }
     });
   }
 

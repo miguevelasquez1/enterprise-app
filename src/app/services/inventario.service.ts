@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Inventario } from '../models/inventario';
+import { Inventory } from '../models/inventory';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { User } from '../models/user';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +13,34 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 export class InventarioService {
 
   inventarioList: AngularFireList<any>;
-  selectedInventario: Inventario = new Inventario();
+  selectedInventario: Inventory = new Inventory();
   inventarioForm: FormGroup;
   imageList = [];
+  private userData$ = new Subject<any>();
+  public userDataObsevable$: Observable<any>;
+  public userData;
 
   constructor(
+    private authService: AuthService,
+    private angularFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
     private aFDB: AngularFireDatabase
   ) {
     this.buildForm();
+    this.userDataObsevable$ = this.getUserData$();
+    this.userDataObsevable$.subscribe(user => {
+      this.userData = user;
+      console.log(user, 'user');
+    });
+    this.authService.isAuth2().subscribe(auth => {
+      this.userData$.next(auth);
+      console.log(this.userData$, 'userDataaaa');
+    });
   }
 
   private buildForm() {
     this.inventarioForm = this.formBuilder.group ({
-      $key: [null, []],
+      id: [null, []],
       fecha: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       marca: ['', [Validators.required]],
@@ -56,28 +74,42 @@ export class InventarioService {
     return this.inventarioForm.get('imagen') as FormArray;
   }
 
+  getUserData$() {
+    return this.userData$.asObservable();
+  }
+
   getInventario() {
-    this.inventarioList = this.aFDB.list('inventario');
-    return this.inventarioList.snapshotChanges();
+    return this.angularFirestore.collection('UsersEnterprise').doc(this.userData.uid).collection('inventory').get();
   }
 
-  insertInventario(inventario: Inventario) {
-      this.inventarioList.push({
-        nombre: inventario.nombre,
-        imagen: inventario.imagen,
-        marca: inventario.marca,
-        cantidad: inventario.cantidad,
-        fecha: inventario.fecha
-      });
+  insertInventario(inventario: Inventory) {
+    console.log(inventario, 'inventario');
+    this.authService.isAuth2().subscribe(auth => {
+      if (auth) {
+        this.angularFirestore.collection('UsersEnterprise').doc(auth.uid).collection('inventory').doc('id' + (new Date()).getTime()).set({
+          name: inventario.name,
+          brand: inventario.brand,
+          amount: inventario.amount,
+          date: inventario.date,
+          image: inventario.image
+        });
+      }
+    });
   }
 
-  updateInventario(inventario: Inventario) {
-    this.inventarioList.update(inventario.$key, {
-      nombre: inventario.nombre,
-      imagen: inventario.imagen,
-      marca: inventario.marca,
-      cantidad: inventario.cantidad,
-      fecha: inventario.fecha
+  updateInventario(inventario: Inventory) {
+    console.log(inventario, 'inventario');
+    this.authService.isAuth2().subscribe(auth => {
+      if (auth) {
+        console.log(auth.uid, 'uid');
+        this.angularFirestore.collection('UsersEnterprise').doc(auth.uid).collection('inventory').doc(inventario.id).set({
+          name: inventario.name,
+          brand: inventario.brand,
+          amount: inventario.amount,
+          date: inventario.date,
+          image: inventario.image
+        });
+      }
     });
   }
 
@@ -103,7 +135,7 @@ export class InventarioService {
   resetForm(form?: FormGroup) {
     if (form != null) {
       form.reset();
-      this.selectedInventario = new Inventario();
+      this.selectedInventario = new Inventory();
     }
     this.imageList = [];
     this.removeAllImagenField();

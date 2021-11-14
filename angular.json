@@ -18,6 +18,11 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
+            "allowedCommonJsDependencies": [
+              "twilio",
+              "chart.js",
+              "ngx-google-places-autocomplete"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
