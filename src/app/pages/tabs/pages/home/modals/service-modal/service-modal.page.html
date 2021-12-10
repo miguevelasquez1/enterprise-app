@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Service</ion-title>
+    <ion-icon class="ion-padding" name="close-outline" slot="end" (click)="dismiss()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="homeService.image" alt="" />
+    <ion-grid *ngIf="image">
+      <ion-row class="ion-text-center ion-margin">
+        <ion-col>
+          <ion-button mode="ios" fill="outline" (click)="presentPopoverImages($event)">
+            <ion-icon name="camera-outline"></ion-icon>
+          </ion-button>
+          <ion-button mode="ios" fill="outline" (click)="noImage()"> No<br />Image </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea
+          [maxlength]="homeService.image ? 65 : 128"
+          [(ngModel)]="description"
+          placeholder="I go to your home and fix anything..."
+        ></ion-textarea>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="floating">Time (Hour)</ion-label>
+              <ion-datetime displayFormat="HH:mm" value="01:00"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="floating">Price</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <h1 class="ion-text-center">Preview</h1>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col [size]="!homeService.image ? 8 : 12">
+          <h4>Tecnical Service</h4>
+          <p>{{description}}</p>
+          <ion-chip outline>
+            <ion-avatar>
+              <img src="../../../assets/icon/favicon.png" alt="" />
+            </ion-avatar>
+            <ion-label>AES</ion-label>
+          </ion-chip>
+          <ion-chip outline color="primary">
+            <ion-icon name="time-outline"></ion-icon>
+            <ion-label>01:30</ion-label>
+          </ion-chip>
+          <ion-chip outline color="success">
+            <ion-icon name="cash-outline"></ion-icon>
+            <ion-label>30.000</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col class="col-img-card" *ngIf="image" size="4">
+          <img class="img-card" src="../../../assets/images/services.jpg" width="100%" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block">Save</ion-button>
+</ion-footer>

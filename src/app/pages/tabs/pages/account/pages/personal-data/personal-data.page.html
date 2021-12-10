@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon class="arrow-back" name="arrow-back-outline" [routerLink]="['/account']" slot="start">
+    </ion-icon>
+    <ion-title>Personal Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form
+    [formGroup]="usersService.userForm"
+    (ngSubmit)="presentAlertConfirm(this.usersService.userForm.value)"
+  >
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" class="ion-text-center">
+          <ion-spinner
+            class="ion-margin ion-padding"
+            *ngIf="!photoUrl; else avatar"
+            color="tertiary"
+            name="lines-small"
+          ></ion-spinner>
+          <ng-template #avatar>
+            <img
+              (click)="presentPopoverProfileImage($event)"
+              class="photo"
+              [src]="getImgContent()"
+              alt="image account"
+            />
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-input hidden="true" name="$key" formControlName="$key"> </ion-input>
+
+    <ion-input hidden="true" name="urlImage" formControlName="urlImage"> </ion-input>
+
+    <h6>Name</h6>
+    <ion-item lines="none">
+      <ion-input required name="name" formControlName="name"> </ion-input>
+    </ion-item>
+
+    <h6>Email</h6>
+    <ion-item lines="none">
+      <ion-input name="email" formControlName="email"> </ion-input>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button
+            [disabled]="!usersService.userForm.valid"
+            type="presentAlertConfirm(this.usersService.userForm.value)"
+          >
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

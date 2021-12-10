@@ -1,0 +1,32 @@
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../../../../../../../../../assets/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Light;
+  src: url('../../../../../../../../../assets/fonts/Poppins-Light.ttf');
+}
+
+* {
+  font-family: Poppins-Medium;
+}
+
+ion-item {
+  --border-radius: 15px;
+  --background: var(--ion-color-light);
+}
+
+ion-label {
+  font-family: Poppins-Light;
+}
+
+.collection-item {
+  display: inline-block;
+  padding: 3px 3px 8px 3px;
+  border-radius: 12px;
+  cursor: zoom-in;
+  img {
+    border-radius: 12px;
+  }
+}

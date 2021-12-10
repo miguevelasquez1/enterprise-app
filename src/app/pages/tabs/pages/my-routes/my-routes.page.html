@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>My Routes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="div-principal">
+    <!-- <ion-input class="search" type="text" name="filterRegistro" placeholder="Search..." [(ngModel)]="filterRegistro"></ion-input> -->
+
+    <ion-item lines="none">
+      <ion-grid>
+        <ion-row>
+          <ion-searchbar [(ngModel)]="filterRegistro" debounce="100"></ion-searchbar>
+        </ion-row>
+
+        <ion-card>
+          <ion-card-content class="header-content ion-text-center">
+            <ion-grid>
+              <ion-row>
+                <ion-col>Date</ion-col>
+                <ion-col>Service</ion-col>
+                <ion-col>Address</ion-col>
+                <ion-col>Action</ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card
+          class="card-color"
+          *ngFor="let record of recordList | filter:filterRegistro; let i = index"
+        >
+          <div id="square">
+            <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" [disabled]=""> -->
+            <!-- <ion-reorder *ngFor="let registro of registroList | filter:filterRegistro; let i = index"> -->
+            <div id="row-section">
+              <div *ngIf="record.userUid === userUid">
+                <ion-row
+                  class="ion-align-items-center"
+                  id="registro"
+                  [ngClass]="(i % 2 == 0) ? 'odd' : 'even'"
+                >
+                  <ion-col class="col-element-date">{{record.fecha | date: 'dd-MM-yyyy' }}</ion-col>
+                  <ion-col class="col-element">{{record.servicio}}</ion-col>
+                  <ion-col class="col-element">{{record.direccion}}</ion-col>
+                  <ion-col class="col-element">
+                    <ion-button routerLink="/home/rutas-form">
+                      <ion-icon name="create-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button *ngIf="isAdmin" (click)="onDelete(record)">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+            <!-- </ion-reorder> -->
+            <!-- </ion-reorder-group> -->
+          </div>
+        </ion-card>
+      </ion-grid>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="['/my-routes/routes-form']" (click)="newForm()">
+      <ion-icon class="add-icon" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer>

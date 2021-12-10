@@ -1,0 +1,95 @@
+<form [formGroup]="inventoryService.inventarioForm" (ngSubmit)="onSubmit()">
+  <ion-input type="hidden" formControlName="id"> </ion-input>
+
+  <ion-item lines="none" class="ion-margin">
+    <ion-label position="stacked"> Fecha </ion-label>
+    <ion-datetime
+      required
+      formControlName="date"
+      (ionChange)="getDate($event)"
+      dayShortNames="customDayShortNames"
+      displayFormat="YYYY-MM-DD"
+      monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+    >
+    </ion-datetime>
+  </ion-item>
+
+  <!-- <ion-button
+    [disabled]="buttonCount >= limitCount"
+    (mouseup)="addField()"
+    (click)="inventarioService.addImagenField()"
+  >
+    Añadir imagen
+  </ion-button> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-end">
+        <ion-button mode="ios" color="tertiary" (click)="takePicture()">
+          <ion-icon slot="start" name="camera-outline"></ion-icon>
+          Add a picture
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div>
+    <div class="collection-item" text-center *ngFor="let imagen of imageListTemp; index as i">
+      <img [src]="imagen.urlImage" width="256px" alt="" (click)="showImage(i)" />
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <span>{{ imagen.dateImage }}</span>
+          </ion-col>
+          <ion-col style="text-align: end" (click)="removeImage(imagen)">
+            <ion-icon name="trash" style="font-size: 24px"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <ion-item lines="none" class="ion-margin">
+    <ion-label position="stacked"> Nombre del producto </ion-label>
+    <ion-input required type="name" name="nombre" minlength="1" formControlName="name"> </ion-input>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-margin">
+    <ion-label position="stacked"> Marca </ion-label>
+    <ion-input required type="name" name="marca" formControlName="brand"> </ion-input>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-margin">
+    <ion-label position="stacked"> Cantidad </ion-label>
+    <ion-input required type="number" name="cantidad" formControlName="amount"> </ion-input>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          mode="ios"
+          expand="block"
+          type="onSubmit()"
+          [disabled]="!inventoryService.inventarioForm.valid || button"
+        >
+          Agregar producto
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          mode="ios"
+          fill="outline"
+          color="tertiary"
+          class="ion-text-end"
+          expand="block"
+          (click)="inventoryService.resetForm(inventoryService.inventarioForm)"
+        >
+          Reset
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

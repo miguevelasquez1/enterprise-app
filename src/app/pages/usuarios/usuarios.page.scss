@@ -1,0 +1,84 @@
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../../../assets/fonts/Poppins-Medium.ttf');
+}
+
+ion-col {
+  text-align: center;
+}
+
+.arrow-back {
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.search {
+  margin-left: 10px;
+  padding-left: 15px;
+}
+
+.col-element-name {
+  font-weight: bold;
+}
+
+.col-element {
+  font-size: 11.5px;
+}
+
+.col-element {
+  font-size: 11.5px;
+}
+
+.col-element-date {
+  font-size: 9.5px;
+}
+
+.add-icon {
+  font-size: 25px;
+}
+
+#div-principal {
+  margin: 0px;
+}
+
+#registro-list {
+  color: #808080;
+  padding-left: 7px;
+  font-weight: bold;
+}
+
+#square {
+  border-radius: 5px;
+}
+
+#row-section {
+  font-size: 11.5px;
+  padding-left: 7px;
+}
+
+* {
+  font-family: Poppins-Medium;
+}
+
+ion-content {
+  font-size: 13px;
+}
+
+ion-grid {
+  padding: 0;
+  margin: 0;
+}
+
+ion-card {
+  margin: 24px 0 24px 0;
+}
+
+ion-item {
+  --background: transparent;
+}
+
+ion-toggle {
+  width: 36px;
+  height: 17px;
+  --handle-width: 50%;
+}

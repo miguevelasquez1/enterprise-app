@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon class="ion-padding" name="close-outline" slot="end" (click)="dismiss()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div
+    class="icon-container"
+    style="position: absolute; top: 50%; left: 16px; font-size: 25px; z-index: 2"
+    (click)="slidePrev(slide)"
+  >
+    <ion-icon class="icon-arrow" name="arrow-back"></ion-icon>
+  </div>
+  <div
+    class="icon-container"
+    style="position: absolute; top: 50%; right: 16px; font-size: 25px; z-index: 2"
+    (click)="slideNext(slide)"
+  >
+    <ion-icon class="icon-arrow" name="arrow-forward"></ion-icon>
+  </div>
+  <div class="vertical-center">
+    <ion-slides pager="true" [options]="slideOpts" scrollbar style="height: 100vh" #slide>
+      <ion-slide *ngFor="let image of images">
+        <div syle="display: block">
+          <ion-img [src]="image.urlImage"></ion-img>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
