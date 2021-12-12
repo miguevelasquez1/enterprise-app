@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { TabsPage } from './tabs.page';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+            canActivate: [AuthGuard],
           },
         ],
       },
@@ -24,6 +26,7 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('./pages/inventory/inventory.module').then(m => m.InventoryPageModule),
+            canActivate: [AuthGuard],
           },
         ],
       },
@@ -34,6 +37,7 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('./pages/my-routes/my-routes.module').then(m => m.MyRoutesPageModule),
+            canActivate: [AuthGuard],
           },
         ],
       },
@@ -44,6 +48,7 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('./pages/account/account.module').then(m => m.AccountPageModule),
+            canActivate: [AuthGuard],
           },
         ],
       },
@@ -54,6 +59,29 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('./pages/charts/charts.module').then(m => m.ChartsPageModule),
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
+      {
+        path: 'my-routes',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('./pages/my-routes/my-routes.module').then(m => m.MyRoutesPageModule),
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
+      {
+        path: 'inventory',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('./pages/inventory/inventory.module').then(m => m.InventoryPageModule),
+            canActivate: [AuthGuard],
           },
         ],
       },
@@ -63,16 +91,6 @@ const routes: Routes = [
         pathMatch: 'full',
       },
     ],
-  },
-  {
-    path: 'my-routes',
-    loadChildren: () =>
-      import('./pages/my-routes/my-routes.module').then(m => m.MyRoutesPageModule),
-  },
-  {
-    path: 'inventory',
-    loadChildren: () =>
-      import('./pages/inventory/inventory.module').then(m => m.InventoryPageModule),
   },
 ];
 

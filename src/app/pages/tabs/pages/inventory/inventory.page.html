@@ -21,28 +21,37 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card>
-          <div id="square">
-            <div id="row-section" *ngFor="let item of inventoryList;">
-              <ion-row class="ion-align-items-center" id="registro">
-                <ion-col size="3" class="col-element">{{item.name}}</ion-col>
-                <ion-col size="3" class="col-element">{{item.brand}}</ion-col>
-                <ion-col size="3" class="col-element-cantidad">{{item.amount}}</ion-col>
-                <ion-col size="3" class="col-element">
-                  <ion-button
-                    (click)="inventoryService.populateForm(item)"
-                    routerLink="/inventory/inventory-form"
-                  >
-                    <ion-icon name="create-outline"></ion-icon>
-                  </ion-button>
-                  <ion-button (click)="onDelete(item.key)">
-                    <ion-icon name="trash-outline"></ion-icon>
-                  </ion-button>
-                </ion-col>
-              </ion-row>
+        <ion-spinner
+          class="ion-margin ion-padding"
+          *ngIf="!inventoryList; else inventory"
+          color="tertiary"
+          name="lines-small"
+        ></ion-spinner>
+
+        <ng-template #inventory>
+          <ion-card>
+            <div id="square">
+              <div id="row-section" *ngFor="let item of inventoryList;">
+                <ion-row class="ion-align-items-center" id="registro">
+                  <ion-col size="3" class="col-element">{{item.name}}</ion-col>
+                  <ion-col size="3" class="col-element">{{item.brand}}</ion-col>
+                  <ion-col size="3" class="col-element-cantidad">{{item.amount}}</ion-col>
+                  <ion-col size="3" class="col-element">
+                    <ion-button
+                      (click)="inventoryService.populateForm(item)"
+                      routerLink="/inventory/inventory-form"
+                    >
+                      <ion-icon name="create-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button (click)="onDelete(item.key)">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
             </div>
-          </div>
-        </ion-card>
+          </ion-card>
+        </ng-template>
       </ion-grid>
     </ion-item>
   </div>

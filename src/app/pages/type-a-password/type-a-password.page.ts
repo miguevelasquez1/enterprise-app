@@ -23,23 +23,17 @@ export class TypeAPasswordPage implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmitRegister(): void {
-    console.log(this.authService.authForm.value, 'shiiit');
-    this.authService
-      .register(this.authService.authForm.value)
-      .then(auth => {
-        console.log(auth, 'authhhh');
-        this.router.navigate(['/home']);
-      })
-      .catch(err => {
-        console.log(err, 'ERR');
-        this.presentAlert(err.code);
-      });
+  async onSubmitRegister(): Promise<void> {
+    try {
+      await this.authService.register(this.authService.authForm.value);
+      this.router.navigate(['/account']);
+    } catch (err) {
+      this.presentAlert(err.code);
+    }
   }
 
   async presentAlert(code: any): Promise<void> {
     // code = code.split('/')[1];
-    // console.log(code, 'code');
     // const alert = await this.alertCtrl.create({
     //   cssClass: 'my-custom-class',
     //   header: code,
@@ -50,13 +44,11 @@ export class TypeAPasswordPage implements OnInit {
     //       role: 'cancel',
     //       cssClass: 'secondary',
     //       handler: () => {
-    //         console.log('Confirm Cancel: blah');
     //       },
     //     },
     //     {
     //       text: 'Okay',
     //       handler: () => {
-    //         console.log('Confirm Okay');
     //       },
     //     },
     //   ],

@@ -27,10 +27,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card
-          class="card-color"
-          *ngFor="let record of recordList | filter:filterRegistro; let i = index"
-        >
+        <ion-card *ngFor="let record of recordList | filter:filterRegistro; let i = index">
           <div id="square">
             <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" [disabled]=""> -->
             <!-- <ion-reorder *ngFor="let registro of registroList | filter:filterRegistro; let i = index"> -->
@@ -41,14 +38,17 @@
                   id="registro"
                   [ngClass]="(i % 2 == 0) ? 'odd' : 'even'"
                 >
-                  <ion-col class="col-element-date">{{record.fecha | date: 'dd-MM-yyyy' }}</ion-col>
-                  <ion-col class="col-element">{{record.servicio}}</ion-col>
-                  <ion-col class="col-element">{{record.direccion}}</ion-col>
+                  <ion-col class="col-element-date">{{record.date | date: 'dd-MM-yyyy' }}</ion-col>
+                  <ion-col class="col-element">{{record.service}}</ion-col>
+                  <ion-col class="col-element">{{record.address}}</ion-col>
                   <ion-col class="col-element">
-                    <ion-button routerLink="/home/rutas-form">
+                    <ion-button
+                      routerLink="/my-routes/routes-form"
+                      (click)="recordsService.populateForm(record)"
+                    >
                       <ion-icon name="create-outline"></ion-icon>
                     </ion-button>
-                    <ion-button *ngIf="isAdmin" (click)="onDelete(record)">
+                    <ion-button (click)="onDelete(record)">
                       <ion-icon name="trash-outline"></ion-icon>
                     </ion-button>
                   </ion-col>

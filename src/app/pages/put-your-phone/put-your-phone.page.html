@@ -1,51 +1,60 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-icon
-      class="arrow-back"
-      name="chevron-back-outline"
-      routerLink="/set-email"
-      slot="start">
-   </ion-icon>
+    <ion-icon class="arrow-back" name="chevron-back-outline" routerLink="/set-email" slot="start">
+    </ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-margin">
-        <h1>Put your Phone number</h1>
+  <ion-grid class="global-grid">
+    <ion-row class="global-row ion-align-items-center ion-justify-content-center">
+      <ion-col size-lg="8">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-margin">
+              <h1>Put your Phone number</h1>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <form [formGroup]="authService.authForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col size-lg="10">
+                <ion-item lines="none">
+                  <ion-select
+                    [value]="countryCode"
+                    [interfaceOptions]="customPopoverOptions"
+                    interface="popover"
+                  >
+                    <ion-select-option *ngFor="let country of countries" [value]="country.code"
+                      >{{country.emoji}} ({{country.code}}) {{country.name}}</ion-select-option
+                    >
+                  </ion-select>
+
+                  <ion-input formControlName="phoneNumber" placeholder="Phone number" type="phone">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-end ion-margin">
+              <ion-button
+                color="tertiary"
+                fill="outline"
+                routerLink="/enterprise-name"
+                (click)="testMethod()"
+              >
+                Next
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <form [formGroup]="authService.authForm">
-    <ion-grid>
-      <ion-row>
-        <ion-col >
-            <ion-item lines="none">
-              <ion-select [value]="countryCode" [interfaceOptions]="customPopoverOptions" interface="popover">
-                <ion-select-option *ngFor="let country of countries" [value]="country.code">{{country.emoji}} ({{country.code}}) {{country.name}}</ion-select-option>
-              </ion-select>
-  
-              <ion-input
-               formControlName="phoneNumber"
-               placeholder="Phone number"
-               type="phone" >
-              </ion-input>
-            </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-text-end ion-margin">
-        <ion-button routerLink="/enterprise-name" (click)="testMethod()">
-          Next
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
 </ion-content>

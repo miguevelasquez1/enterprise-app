@@ -1,11 +1,11 @@
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IImage, IItem } from '../../models/item';
 import { Observable, Subject } from 'rxjs';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from '../auth/auth.service';
-import { IItem } from '../../models/item';
 import { IUser } from '../../interfaces/user.interface';
 import { Injectable } from '@angular/core';
 
@@ -33,14 +33,11 @@ export class InventoryService {
     this.userDataObsevable$ = this.getUserData$();
     this.userDataObsevable$.subscribe(user => {
       this.userData = user;
-      console.log(user, 'user');
     });
     this.authService.isAuth2().subscribe(auth => {
       this.userData$.next(auth);
-      console.log(this.userData$, 'userDataaaa');
     });
-    this.inventoryRef = this.aFDB.list('inventory');
-    console.log(this.afAuth.authState.subscribe(data => (this.uid = data.uid)));
+    this.afAuth.authState.subscribe(data => (this.uid = data.uid));
   }
 
   private buildForm() {
@@ -50,15 +47,15 @@ export class InventoryService {
       name: ['', [Validators.required]],
       brand: ['', [Validators.required]],
       amount: ['', [Validators.required]],
-      image: this.formBuilder.array([]),
+      images: this.formBuilder.array([]),
     });
   }
 
-  addImagenField(): void {
-    this.imagenField.push(this.createImagenField());
+  addImageField(): void {
+    this.imagenField.push(this.createImageField());
   }
 
-  createImagenField(): FormGroup {
+  createImageField(): FormGroup {
     const imageField = this.formBuilder.group({
       urlImage: ['', []],
       dateImage: ['', []],
@@ -72,66 +69,60 @@ export class InventoryService {
   }
 
   removeAllImagenField(): void {
-    this.imagenField?.clear();
+    this.imagenField.clear();
   }
 
   get imagenField(): FormArray {
-    return this.inventarioForm.get('imagen') as FormArray;
+    return this.inventarioForm.get('images') as FormArray;
   }
 
   getUserData$(): Observable<IUser> {
     return this.userData$.asObservable();
   }
 
-  getInventory(): AngularFireList<IItem> {
-    console.log('pasa');
-    return this.inventoryRef;
-  }
-
-  insertItem({ name, brand, amount, date, image }: IItem): void {
-    console.log({ name, brand, amount, date, image, employeeUid: this.uid }, 'push');
-    this.inventoryRef.push({ name, brand, amount, date, image, employeeUid: this.uid });
-  }
-
-  updateInventory(item: IItem): void {
-    console.log(item, 'product');
-    this.authService.isAuth2().subscribe((auth: IUser) => {
-      if (auth) {
-        console.log(auth.uid, 'uid');
-        this.angularFirestore
-          .collection('UsersEnterprise')
-          .doc(auth.uid)
-          .collection('inventory')
-          .doc(item.id)
-          .set({
-            name: item.name,
-            brand: item.brand,
-            amount: item.amount,
-            date: item.date,
-            image: item.image,
+  getInventory(): Promise<AngularFireList<IItem>> {
+    return new Promise(resolve => {
+      this.afAuth.authState.subscribe(res => {
+        this.aFDB
+          .object(`persons/${res.uid}`)
+          .snapshotChanges()
+          .subscribe(data => {
+            if (data.key === res.uid) {
+              console.log('persons');
+              this.inventoryRef = this.aFDB.list(`persons/${data.key}/inventory`);
+              resolve(this.inventoryRef);
+            } else {
+              console.log('companies');
+              this.inventoryRef = this.aFDB.list(`companies/${data.key}/inventory`);
+              resolve(this.inventoryRef);
+            }
           });
-      }
+      });
     });
   }
 
+  insertItem({ name, brand, amount, date, images }: IItem) {
+    return this.inventoryRef.push({ name, brand, amount, date, images, employeeUid: this.uid });
+  }
+
+  updateInventory({ $key, name, brand, amount, date, images }: IItem): void {
+    this.inventoryRef.update($key, { name, brand, amount, date, images, employeeUid: this.uid });
+  }
+
   deleteInventario($key: string): void {
-    console.log($key, '$key');
     this.inventoryRef.remove($key);
   }
 
   public populateForm(item: IItem): void {
     this.inventarioForm.patchValue(item);
-    item.image?.forEach(() => {
-      this.addImagenField();
-    });
-    // this.inventarioForm.get('imagen').setValue(producto.image);
-    // if (producto.image) {
-    //   this.imageList = producto.image;
-    //   return this.formBuilder.group({
-    //     urlImage: [producto.image.urlImage, []],
-    //     dateImage: [producto.image.dateImage, []],
-    //   });
-    // }
+
+    if (item.images) {
+      item.images.forEach(() => {
+        this.addImageField();
+      });
+      this.inventarioForm.get('images').setValue(item.images);
+      this.imageList = item.images;
+    }
   }
 
   resetForm(form?: FormGroup): void {
@@ -140,8 +131,7 @@ export class InventoryService {
       this.selectedInventario = new IItem();
     }
     this.imageList = [];
-    console.log(this.imagenField, 'imagenField');
-    if (this.imagenField === null) {
+    if (this.imagenField !== null) {
       this.removeAllImagenField();
     }
   }

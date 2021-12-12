@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { FormGroup } from '@angular/forms';
+import { RecordsService } from 'src/app/shared/services/records/records.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-routes-form',
@@ -20,7 +22,9 @@ export class RoutesFormPage implements OnInit {
   // private serverName: string;
 
   constructor(
-    private authService: AuthService, // public recordService: Record
+    private authService: AuthService,
+    public recordsService: RecordsService,
+    public router: Router, // public recordService: Record
   ) {}
 
   submitted: boolean;
@@ -31,7 +35,12 @@ export class RoutesFormPage implements OnInit {
   }
 
   onSubmit(): void {
-    this.submitted = true;
+    if (this.recordsService.recordForm.get('$key').value === null) {
+      this.recordsService.insertRecord(this.recordsService.recordForm.value);
+    } else {
+      this.recordsService.updateRecord(this.recordsService.recordForm.value);
+    }
+    this.router.navigate(['/my-routes']);
   }
 
   getCurrentUser(): void {

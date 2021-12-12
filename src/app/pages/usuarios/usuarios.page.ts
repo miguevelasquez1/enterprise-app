@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../shared/interfaces/user.interface';
+
 import { AuthService } from '../../shared/services/auth/auth.service';
-import { UsersService } from './services/users/users.service';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { UsersService } from '../../shared/services/users/users.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -22,8 +23,6 @@ export class UsuariosPage implements OnInit {
   }
 
   getCurrentUser(): void {
-    this.authService.isAuth2().subscribe((auth: User) => {
-      console.log(auth);
-    });
+    this.authService.isAuth2().subscribe((auth: IUser) => {});
   }
 }

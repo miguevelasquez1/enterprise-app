@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AlertController } from '@ionic/angular';
+import { AngularFireList } from '@angular/fire/compat/database';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { ChartService } from 'src/app/shared/services/chart/chart.service';
 import { IRecord } from 'src/app/shared/interfaces/record.interface';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { ItemReorderEventDetail } from '@ionic/core';
+import { RecordsService } from 'src/app/shared/services/records/records.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-routes',
@@ -18,6 +21,7 @@ export class MyRoutesPage implements OnInit {
   userUid: string;
 
   constructor(
+    public recordsService: RecordsService,
     private authService: AuthService,
     private alertController: AlertController,
     private chartService: ChartService,
@@ -25,7 +29,15 @@ export class MyRoutesPage implements OnInit {
 
   filterRegistro = '';
 
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<void> {
+    const response = await this.recordsService.getRecords();
+    response
+      .snapshotChanges()
+      .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+      .subscribe(data => {
+        this.recordList = data;
+      });
+  }
 
   async onDelete(ruta: IRecord): Promise<void> {
     const alert = await this.alertController.create({
@@ -64,5 +76,10 @@ export class MyRoutesPage implements OnInit {
 
   doReorder(ev: CustomEvent<ItemReorderEventDetail>): void {
     this.recordList = ev.detail.complete(this.recordList);
+  }
+
+  ionViewDidLeave(): void {
+    console.log('destory');
+    this.recordList = [];
   }
 }

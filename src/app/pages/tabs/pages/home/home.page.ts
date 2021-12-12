@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import {
-  ModalController,
+  AlertController,
+  IonRouterOutlet,
   IonSegment,
   IonSegmentButton,
-  IonRouterOutlet,
-  AlertController,
+  ModalController,
 } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { ChangeNameModalPage } from './modals/change-name-modal/change-name-modal.page';
-import { ServiceModalPage } from './modals/service-modal/service-modal.page';
+import { FormControl } from '@angular/forms';
 import { HomeService } from './services/home.service';
+import { ServiceModalPage } from './modals/service-modal/service-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -67,28 +68,14 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.homeService.getSections().subscribe(async sections => {
-      this.sections = sections.map(section => {
-        console.log(
-          {
-            $key: section.key,
-            ...section.payload.val(),
-          },
-          'hola',
-        );
-        return {
-          $key: section.key,
-          ...section.payload.val(),
-        };
-      });
+      this.sections = sections.map(section => ({
+        $key: section.key,
+        ...section.payload.val(),
+      }));
 
       if (this.sections[0]) {
-        console.log(this.sections, 'aaaaa');
         this.homeService.sectionsForm.patchValue(this.sections);
       }
-
-      console.log(this.sections[0], 'sections[0]');
-
-      // this.homeService.
 
       if (this.sections.length > 0) {
         setTimeout(() => {
@@ -98,18 +85,12 @@ export class HomePage implements OnInit {
     });
 
     setTimeout(() => {
-      console.log(this.sections[0], 'a');
       if (this.sections[0]) {
         // this.homeService.insertSection(this.sections[0]);
         this.sections[0].section.forEach(section => {
           this.homeService.createSection();
-          console.log(section, 'section');
         });
       }
-
-      console.log(this.homeService.sectionsForm.value, 'sectionsFoorm');
-
-      // this.homeService.sectionsForm.get('section').setValue(this.sections[0].section);
     }, 1000);
 
     this.selected = { value: '' };
@@ -180,8 +161,6 @@ export class HomePage implements OnInit {
         services: [],
       },
     });
-    console.log(this.sections, 'sections aa');
-    console.log(this.homeService.sectionsForm.value, 'value a');
     this.homeService.insertSection(this.homeService.sectionsForm.value);
     // this.presentAlertRadio(index);
     // this.homeService.sectionsForm.get('value').setValue(this.sections[this.sections.length - 1].value);

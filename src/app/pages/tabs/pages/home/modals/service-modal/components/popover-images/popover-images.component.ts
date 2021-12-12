@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+
 import { HomeService } from '../../../../services/home.service';
 import { InternetImagesModalComponent } from '../internet-images-modal/internet-images-modal.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-popover-images',
@@ -32,7 +33,6 @@ export class PopoverImagesComponent {
     // this.imagePicker.getPictures(options).then((results) => {
     //   for (const result of results) {
     //     this.homeService.image = result;
-    //       console.log('Image URI: ' + result);
     //   }
     // }, (err) => { });
   }

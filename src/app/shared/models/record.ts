@@ -1,4 +1,5 @@
-export class Record {
+export class IRecord {
+  $key?: string;
   date: Date;
   employee: string;
   client: string;

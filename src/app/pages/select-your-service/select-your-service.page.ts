@@ -27,7 +27,6 @@ export class SelectYourServicePage implements OnInit {
   ngOnInit() {}
 
   selectCard(service) {
-    console.log(this.authService.authForm, 'authForm');
     this.selectedCard = service;
   }
 }

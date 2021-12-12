@@ -22,7 +22,7 @@
     <ion-slides pager="true" [options]="slideOpts" scrollbar style="height: 100vh" #slide>
       <ion-slide *ngFor="let image of images">
         <div syle="display: block">
-          <ion-img [src]="image.urlImage"></ion-img>
+          <img [src]="image.urlImage" />
         </div>
       </ion-slide>
     </ion-slides>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+
 import { AuthService } from '../../services/auth/auth.service';
+import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -10,7 +12,11 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LayoutComponent implements OnInit {
   darkMode = true;
 
-  constructor(private menu: MenuController, private authService: AuthService) {}
+  constructor(
+    private menu: MenuController,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   public isAdmin: boolean;
   public isEmployee: boolean;
@@ -27,5 +33,14 @@ export class LayoutComponent implements OnInit {
   cambio(): void {
     this.darkMode = !this.darkMode;
     document.body.classList.toggle('dark');
+  }
+
+  async signOut(): Promise<void> {
+    try {
+      await this.authService.signOut();
+      this.router.navigate(['/welcome-slide']);
+    } catch (err) {
+      console.log(err, 'err');
+    }
   }
 }

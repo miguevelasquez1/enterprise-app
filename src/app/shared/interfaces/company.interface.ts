@@ -6,4 +6,5 @@ export interface Company {
   email: string;
   phoneNumber: string;
   employees: Person[];
+  uid: string;
 }

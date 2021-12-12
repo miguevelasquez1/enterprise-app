@@ -1,16 +1,22 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './shared/guards/auth.guard';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'welcome-slide',
     loadChildren: () =>
       import('./pages/welcome-slide/welcome-slide.module').then(m => m.WelcomeSlidePageModule),
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
   },
   {
     path: 'choose-category',

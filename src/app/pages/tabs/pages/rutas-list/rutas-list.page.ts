@@ -16,7 +16,6 @@ export class RutasListPage implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log();
     // this.registroService.getRegistros().subscribe(list => {
     //     this.registroList = list.map(item => ({
     //         $key: item.key,

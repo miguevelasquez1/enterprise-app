@@ -33,7 +33,26 @@
     </ion-row>
   </ion-grid>
 
-  <div>
+  <!-- <ion-grid> -->
+  <!-- <ion-row class="ion-justify-content-center"> -->
+  <!-- <ion-col size="10"> -->
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="collection-item">
+        <div class="ion-text-center" *ngFor="let image of imageListTemp; index as i">
+          <img [src]="image.urlImage" width="256px" alt="" (click)="showImage(i)" />
+          <span>{{ image.dateImage }}</span>
+        </div>
+      </ion-col>
+      <ion-col> </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- </ion-col> -->
+  <!-- </ion-row> -->
+  <!-- </ion-grid> -->
+
+  <!-- <div>
     <div class="collection-item" text-center *ngFor="let imagen of imageListTemp; index as i">
       <img [src]="imagen.urlImage" width="256px" alt="" (click)="showImage(i)" />
       <ion-grid>
@@ -47,7 +66,7 @@
         </ion-row>
       </ion-grid>
     </div>
-  </div>
+  </div> -->
 
   <ion-item lines="none" class="ion-margin">
     <ion-label position="stacked"> Nombre del producto </ion-label>

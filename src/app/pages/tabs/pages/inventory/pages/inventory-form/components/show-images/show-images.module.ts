@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { ShowImagesPageRoutingModule } from './show-images-routing.module';
-
+import { NgModule } from '@angular/core';
 import { ShowImagesPage } from './show-images.page';
+import { ShowImagesPageRoutingModule } from './show-images-routing.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, ShowImagesPageRoutingModule],

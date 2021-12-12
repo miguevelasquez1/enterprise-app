@@ -12,7 +12,5 @@ export class SetEmailPage implements OnInit {
 
   ngOnInit(): void {}
 
-  testMethod(): void {
-    console.log(this.authService.authForm.value, 'authValue');
-  }
+  testMethod(): void {}
 }

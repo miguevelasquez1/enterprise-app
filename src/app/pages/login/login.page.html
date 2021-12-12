@@ -1,51 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon
+      class="arrow-back"
+      name="chevron-back-outline"
+      routerLink="/welcome-slide"
+      slot="start"
+    >
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-
-    <h1 class="ingresar">Ingresar</h1>
-
-    <div id="container">
+  <ion-grid class="global-grid">
+    <ion-row class="global-row ion-align-items-center ion-justify-content-center">
+      <ion-col size-lg="10">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-margin">
+              <h1>Hi again</h1>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
         <form [formGroup]="authService.authForm" (ngSubmit)="onSubmitLogin()">
-            <div formGroupName="server">
-                <ion-item>
-                    <ion-input
-                     formControlName="name"
-                     placeholder="Server Name">
-                        <ion-icon name="document-lock-outline"></ion-icon>
-                    </ion-input>
-                </ion-item>
-            </div>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label>
+              <ion-icon name="mail-outline"></ion-icon>
+            </ion-label>
+            <ion-input
+              email
+              class="input-mail"
+              type="email"
+              name="email"
+              formControlName="email"
+              placeholder="Email"
+            >
+            </ion-input>
+          </ion-item>
 
-            <ion-item>
-                <ion-input 
-                 email
-                 class="input-mail"
-                 type="email"
-                 name="email"
-                 formControlName="email"
-                 placeholder="Correo Electronico">
-                    <ion-icon name="mail-outline"></ion-icon>
-                </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label>
+              <ion-icon name="lock-closed-outline"></ion-icon>
+            </ion-label>
+            <ion-input
+              password
+              placeholder="Password"
+              type="password"
+              name="password"
+              formControlName="password"
+              minlength="6"
+            >
+            </ion-input>
+          </ion-item>
 
-            <ion-item>
-                <ion-input
-                password
-                type="password"
-                name="password"
-                formControlName="password"
-                placeholder="Contraseña"
-                minlength="6">
-                    <ion-icon name="lock-closed-outline"></ion-icon>
-                </ion-input>
-            </ion-item>
-
-            <ion-button class="ion-padding" expand="block" type="onSubmitLogin()">Ingresar</ion-button>
-
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-text-end">
+                <ion-button type="onSubmitLogin()"> Sign In </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </form>
-        <div class="ion-text-center ion-padding">
-            <a id="registrarse" class="register" (click)="onSubmitRegister()">Registrarse</a>
-        </div>
-    </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-
-  

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class InventoryPage implements OnInit {
   isAdmin: boolean;
-  inventoryList = [];
+  inventoryList = null;
   userData$: Observable<any>;
   userUid: string;
 
@@ -22,23 +22,28 @@ export class InventoryPage implements OnInit {
     private alertCtrl: AlertController,
     private authService: AuthService,
     public inventoryService: InventoryService,
-  ) {}
+  ) {
+    console.log('pasa 1');
+  }
 
   filterRegistro = '';
 
   ngOnInit(): void {
-    this.inventoryService
-      .getInventory()
+    console.log('pasa 2');
+  }
+
+  async ionViewWillEnter(): Promise<void> {
+    console.log('pasa 3');
+    (await this.inventoryService.getInventory())
       .snapshotChanges()
       .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
       .subscribe(data => {
-        console.log(data, 'data');
+        console.log('pasaaaaaa');
         this.inventoryList = data;
       });
   }
 
   public async onDelete($key: string): Promise<void> {
-    console.log($key, '$key');
     const alert = await this.alertCtrl.create({
       header: '¿Seguro de que quieres eliminarlo?',
       buttons: [
@@ -62,5 +67,10 @@ export class InventoryPage implements OnInit {
     this.inventoryService.inventarioForm.reset();
     this.inventoryService.imageList = [];
     this.inventoryService.selectedInventario = new IItem();
+  }
+
+  ionViewDidLeave(): void {
+    console.log('destory');
+    this.inventoryList = null;
   }
 }

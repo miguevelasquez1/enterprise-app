@@ -22,11 +22,33 @@ ion-label {
 }
 
 .collection-item {
-  display: inline-block;
-  padding: 3px 3px 8px 3px;
-  border-radius: 12px;
-  cursor: zoom-in;
+  column-count: 4;
+
+  @media only screen and (max-width: 1200px) {
+    column-count: 3;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+    column-count: 2;
+  }
+
+  div {
+    margin-bottom: 40px;
+  }
+
+
   img {
-    border-radius: 12px;
+    max-width: 100%;
+    border-radius: 10px;
+  cursor: zoom-in;
+
+  }
+
+  span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: var(--ion-color-medium-tint);
   }
 }

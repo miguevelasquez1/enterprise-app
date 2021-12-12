@@ -155,6 +155,5 @@ export class PersonalDataPage {
     await popover.present();
 
     const { role } = await popover.onDidDismiss();
-    console.log(role, 'role');
   }
 }

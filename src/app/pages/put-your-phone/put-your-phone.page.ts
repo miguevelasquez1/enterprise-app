@@ -1049,6 +1049,5 @@ export class PutYourPhonePage implements OnInit {
   testMethod() {
     // const phoneNumber = ' ' + this.authService.authForm.get('phoneNumber').value;
     // this.authService.authForm.get('phoneNumber').setValue(this.countryCode + phoneNumber);
-    // console.log(this.authService.authForm.value, 'authForm');
   }
 }

@@ -108,8 +108,6 @@ export class AuthService {
       email: person.email,
       phoneNumber: person.phoneNumber,
     });
-
-    console.log(this.personsList, 'personlist');
   }
 
   updatePerson(person: Person): void {
@@ -125,11 +123,14 @@ export class AuthService {
   }
 
   insertCompany(company: Company): void {
-    this.companyList.push({
+    const ref = this.aFDB.database.ref('companies');
+
+    ref.child(company.uid).set({
       name: company.name,
       email: company.email,
       phoneNumber: company.phoneNumber,
       employees: company.employees,
+      uid: company.uid,
     });
   }
 
@@ -185,8 +186,8 @@ export class AuthService {
     }
   }
 
-  signOut(): void {
-    this.firebaseAuth.signOut();
+  signOut(): Promise<void> {
+    return this.firebaseAuth.signOut();
   }
 
   register(user: IUser): Promise<unknown> {
@@ -195,7 +196,6 @@ export class AuthService {
         .createUserWithEmailAndPassword(user.email, user.password)
         .then(userData => {
           this.uid = user.uid;
-          console.log(userData.user.uid, 'user');
           const data = {
             email: user.email,
             name: user.displayName,
@@ -204,16 +204,13 @@ export class AuthService {
           };
           userData.user.updateProfile({ displayName: user.displayName });
           if (this.isPersonForm) {
-            console.log('person');
             this.insertPerson(data);
           } else {
-            console.log('company');
             this.insertCompany({ ...data, employees: [] });
           }
           resolve(userData);
         })
         .catch(err => {
-          console.log(err, 'errrrrrr');
           reject(err);
         });
     });

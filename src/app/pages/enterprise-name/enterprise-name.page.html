@@ -11,39 +11,47 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col
-        *ngIf="authService.authForm.get('company').value; else personBlock"
-        class="ion-margin"
-      >
-        <h1>What is the name of the company?</h1>
-      </ion-col>
-      <ng-template #personBlock>
-        <ion-col class="ion-margin">
-          <h1>What is your name?</h1>
-        </ion-col>
-      </ng-template>
-    </ion-row>
-  </ion-grid>
+  <ion-grid class="global-grid">
+    <ion-row class="global-row ion-align-items-center ion-justify-content-center">
+      <ion-col size-lg="8">
+        <ion-grid>
+          <ion-row>
+            <ion-col
+              *ngIf="authService.authForm.get('company').value; else personBlock"
+              class="ion-margin"
+            >
+              <h1>What is the name of the company?</h1>
+            </ion-col>
+            <ng-template #personBlock>
+              <ion-col class="ion-margin">
+                <h1>What is your name?</h1>
+              </ion-col>
+            </ng-template>
+          </ion-row>
+        </ion-grid>
 
-  <form [formGroup]="authService.authForm">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item lines="none">
-            <ion-input formControlName="displayName" placeholder="Type a name" type="name">
-            </ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+        <form [formGroup]="authService.authForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-input formControlName="displayName" placeholder="Type a name" type="name">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-text-end ion-margin">
-        <ion-button routerLink="/select-your-service"> Next </ion-button>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-end ion-margin">
+              <ion-button color="tertiary" fill="outline" routerLink="/select-your-service">
+                Next
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>

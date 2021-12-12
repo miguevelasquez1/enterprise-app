@@ -12,7 +12,7 @@ export class ChooseCategoryPage implements OnInit {
 
   ngOnInit() {}
 
-  public selectOne(e, option) {
+  public selectOne(e: any, option: string) {
     if (option === 'company' && e) {
       this.authService.authForm.get('person').setValue(false);
     } else if (option === 'person' && e) {

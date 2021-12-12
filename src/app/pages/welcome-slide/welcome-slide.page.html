@@ -1,27 +1,30 @@
 <ion-content>
   <ion-grid>
-    <ion-row>
-        <ion-col>
-            <h1>Welcome to the Enterprise App</h1>
-        </ion-col>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size-xl="8">
+        <h1>Welcome to the Enterprise App</h1>
+      </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
 
 <ion-footer class="ion-no-border">
-<ion-grid>
-  <ion-row>
+  <ion-grid>
+    <ion-row>
       <ion-col>
-          <ion-segment mode="ios" value="sign-up">
-              <ion-segment-button class="padding-segment-button" value="sign-up" routerLink="/choose-category">
-                <ion-label>Sign Up</ion-label>
-              </ion-segment-button>
-              <ion-segment-button class="padding-segment-button" routerLink="/login" value="log-in">
-                <ion-label>Log In</ion-label>
-              </ion-segment-button>
-            </ion-segment>
+        <ion-segment mode="ios" value="sign-up">
+          <ion-segment-button
+            class="padding-segment-button"
+            value="sign-up"
+            routerLink="/choose-category"
+          >
+            <ion-label>Sign Up</ion-label>
+          </ion-segment-button>
+          <ion-segment-button class="padding-segment-button" routerLink="/login" value="log-in">
+            <ion-label>Log In</ion-label>
+          </ion-segment-button>
+        </ion-segment>
       </ion-col>
-  </ion-row>
-</ion-grid>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

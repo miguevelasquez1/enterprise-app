@@ -3,7 +3,6 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import { Component, OnInit } from '@angular/core';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { IItem } from 'src/app/shared/models/item';
 import { InventoryService } from '../../../../../../../../shared/services/inventory/inventory.service';
 import { Router } from '@angular/router';
 import { ShowImagesPage } from '../show-images/show-images.page';
@@ -42,11 +41,6 @@ export class FormComponent implements OnInit {
    * Image list temporal.
    */
   public imageListTemp: Array<any>;
-
-  /**
-   * Object list in the form
-   */
-  private inventarioList: Array<any>;
 
   /**
    * Disabled or enabled button to send form.
@@ -142,7 +136,7 @@ export class FormComponent implements OnInit {
     this.button = true;
     for (const file of this.files) {
       const id = Math.random().toString(36).substring(2);
-      const filePath = `uploads/${id}`;
+      const filePath = `${this.inventoryService.uid}/inventory/${id}`;
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
       task
@@ -169,12 +163,12 @@ export class FormComponent implements OnInit {
               const month = monthNames[date.getMonth()];
               const day = date.getDate();
               const year = date.getFullYear();
-              this.inventoryService.addImagenField();
+              this.inventoryService.addImageField();
               this.imageList.push({
                 urlImage: url.toString(),
                 dateImage: `${day} ${month} / ${year}`,
               });
-              this.inventoryService.inventarioForm.get('imagen').setValue(this.imageList);
+              this.inventoryService.inventarioForm.get('images').setValue(this.imageList);
               if (file === this.files[this.files.length - 1]) {
                 this.sendData();
               }
@@ -190,9 +184,23 @@ export class FormComponent implements OnInit {
    *
    * @author Miguel Velásquez
    */
-  private sendData() {
+  private async sendData(): Promise<void> {
     if (this.inventoryService.inventarioForm.get('id').value === null) {
-      this.inventoryService.insertItem(this.inventoryService.inventarioForm.value);
+      try {
+        await this.inventoryService.insertItem(this.inventoryService.inventarioForm.value);
+        console.log(
+          this.imageList,
+          this.imageListTemp,
+          this.inventoryService.inventarioForm.value,
+          this.inventoryService.imageList,
+          `this.imageList,
+          this.imageListTemp,
+          this.inventoryService.inventarioForm.value,
+          this.inventoryService.imageList,`,
+        );
+      } catch (err) {
+        console.log(err, 'err');
+      }
     } else {
       this.inventoryService.updateInventory(this.inventoryService.inventarioForm.value);
     }

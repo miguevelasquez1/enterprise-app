@@ -1,14 +1,14 @@
-interface Image {
+export interface IImage {
   urlImage: string;
   dateImage: string;
 }
 
 export class IItem {
-  id?: string;
+  $key?: string;
   name: string;
   brand: string;
   amount: number;
   date: Date;
-  image?: Image[];
+  images?: IImage[];
   employeeUid: string;
 }

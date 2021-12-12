@@ -4,48 +4,68 @@
       class="arrow-back"
       name="chevron-back-outline"
       routerLink="/welcome-slide"
-      slot="start">
-   </ion-icon>
+      slot="start"
+    >
+    </ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="global-grid">
+    <ion-row class="global-row ion-align-items-center ion-justify-content-center">
+      <ion-col size-lg="8">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-margin">
+              <h1>Choose Your Category</h1>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-margin">
-        <h1>Choose Your Category</h1>
+        <form [formGroup]="authService.authForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-item lines="none">
+                    <ion-label>Company</ion-label>
+                    <ion-checkbox
+                      mode="ios"
+                      formControlName="company"
+                      (ionChange)="selectOne($event.detail.checked, 'company')"
+                      slot="start"
+                    ></ion-checkbox>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>Person</ion-label>
+                    <ion-checkbox
+                      mode="ios"
+                      formControlName="person"
+                      (ionChange)="selectOne($event.detail.checked, 'person')"
+                      slot="start"
+                    ></ion-checkbox>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-end ion-margin">
+              <ion-button
+                color="tertiary"
+                fill="outline"
+                (click)="selectForm()"
+                routerLink="/set-email"
+              >
+                Next
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
-  <form [formGroup]="authService.authForm">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-list>
-            <ion-item lines="none">
-              <ion-label>Company</ion-label>
-              <ion-checkbox mode="ios" formControlName="company" (ionChange)="selectOne($event.detail.checked, 'company')" slot="start"></ion-checkbox>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-label>Person</ion-label>
-              <ion-checkbox mode="ios" formControlName="person" (ionChange)="selectOne($event.detail.checked, 'person')" slot="start"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
-  
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-text-end ion-margin">
-        <ion-button (click)="selectForm()" routerLink="/set-email">Next</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  
-
 </ion-content>
