@@ -1,4 +1,5 @@
 export interface IRecord {
+  $key?: string;
   date: Date;
   employee: string;
   client: string;

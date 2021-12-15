@@ -29,12 +29,14 @@ export class MyRoutesPage implements OnInit {
 
   filterRegistro = '';
 
-  async ngOnInit(): Promise<void> {
-    const response = await this.recordsService.getRecords();
-    response
+  ngOnInit(): void {}
+
+  async ionViewWillEnter(): Promise<void> {
+    (await this.recordsService.getRecords())
       .snapshotChanges()
       .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
       .subscribe(data => {
+        console.log(data, 'dataaa');
         this.recordList = data;
       });
   }
@@ -51,6 +53,7 @@ export class MyRoutesPage implements OnInit {
         {
           text: 'yes',
           handler: () => {
+            this.recordsService.deleteRecord(ruta.$key);
             // this.registroService.deleteRegistro(ruta.$key);
             // this.chartService.deletePoint(ruta.fecha);
           },
@@ -62,12 +65,11 @@ export class MyRoutesPage implements OnInit {
   }
 
   newForm(): void {
-    // this.registroService.form.reset();
-    // this.registroService.selectedRegistro = new Registro();
+    this.recordsService.recordForm.reset();
   }
 
   getCurrentUser(): void {
-    this.authService.isAuth2().subscribe((auth: IUser) => {
+    this.authService.isAuth().subscribe((auth: IUser) => {
       if (auth) {
         this.userUid = auth.uid;
       }

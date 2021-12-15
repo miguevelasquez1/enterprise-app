@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '../../services/auth/auth.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -14,9 +15,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    this.afAuth.currentUser.then(res => console.log(res, 'res'));
-    return true;
+    return this.authService
+      .getUser()
+      .then(user => {
+        console.log(user, 'user');
+        if (!user) {
+          this.router.navigate(['/welcome-slide']);
+          return false;
+        }
+        return true;
+      })
+      .catch(err => {
+        console.log(err, 'err');
+        return false;
+      });
   }
 }

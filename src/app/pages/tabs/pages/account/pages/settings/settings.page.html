@@ -6,8 +6,54 @@
       [routerLink]="['/account']"
       slot="start"
     ></ion-icon>
-    <ion-title>Settings</ion-title>
+    <ion-title>{{'settings.title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-grid style="height: 90%">
+    <ion-row class="full-height ion-justify-content-center">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="8">
+            <ion-list lines="none">
+              <ion-item lines="none">
+                <ion-text>{{ 'settings.language.title' | translate }}</ion-text>
+                <ion-select
+                  [value]="currentLanguage"
+                  lines="none"
+                  slot="end"
+                  interface="popover"
+                  (ionChange)="changeLanguage($event)"
+                >
+                  <ion-select-option lines="none" value="en"
+                    >{{ 'settings.language.english' | translate }}</ion-select-option
+                  >
+                  <ion-select-option lines="none" value="es"
+                    >{{ 'settings.language.spanish' | translate }}</ion-select-option
+                  >
+                  <ion-select-option lines="none" value="pt"
+                    >{{ 'settings.language.portuguese' | translate }}</ion-select-option
+                  >
+                  <ion-select-option lines="none" value="de"
+                    >{{ 'settings.language.german' | translate }}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="8">
+            <ion-button expand="block">hola</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+    <ion-row class="ion-align-items-end">
+      <ion-col>
+        <ion-button expand="block">{{ 'settings.sign-out' | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

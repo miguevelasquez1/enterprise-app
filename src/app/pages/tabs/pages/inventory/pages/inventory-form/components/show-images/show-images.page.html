@@ -1,29 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-icon class="ion-padding" name="close-outline" slot="end" (click)="dismiss()"></ion-icon>
+    <ion-icon
+      color="dark"
+      class="ion-padding"
+      name="close-circle"
+      slot="end"
+      (click)="dismiss()"
+    ></ion-icon>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content scrollY="false">
   <div
     class="icon-container"
     style="position: absolute; top: 50%; left: 16px; font-size: 25px; z-index: 2"
-    (click)="slidePrev(slide)"
+    (click)="isBeginning ? dismiss() : slidePrev(slides)"
   >
-    <ion-icon class="icon-arrow" name="arrow-back"></ion-icon>
+    <ion-icon
+      [ngClass]="isBeginning ? 'disabled' : ''"
+      class="icon-arrow"
+      name="chevron-back-outline"
+    ></ion-icon>
   </div>
   <div
     class="icon-container"
     style="position: absolute; top: 50%; right: 16px; font-size: 25px; z-index: 2"
-    (click)="slideNext(slide)"
+    (click)="isEnd ? dismiss() : slideNext(slides)"
   >
-    <ion-icon class="icon-arrow" name="arrow-forward"></ion-icon>
+    <ion-icon
+      [ngClass]="isEnd ? 'disabled' : ''"
+      class="icon-arrow"
+      name="chevron-forward-outline"
+    ></ion-icon>
   </div>
   <div class="vertical-center">
-    <ion-slides pager="true" [options]="slideOpts" scrollbar style="height: 100vh" #slide>
+    <ion-slides [options]="slideOpts" (ionSlideWillChange)="doCheck()" #slides>
       <ion-slide *ngFor="let image of images">
-        <div syle="display: block">
-          <img [src]="image.urlImage" />
-        </div>
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col>
+              <img [src]="image.urlImage" />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-slide>
     </ion-slides>
   </div>

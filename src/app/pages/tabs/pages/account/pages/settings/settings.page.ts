@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -8,8 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsPage implements OnInit {
   private darkMode;
 
-  constructor() {
+  public currentLanguage: string;
+
+  constructor(private translateService: TranslateService) {
     this.darkMode = true;
+    this.currentLanguage = this.translateService.currentLang;
   }
 
   ngOnInit(): void {}
@@ -17,5 +22,9 @@ export class SettingsPage implements OnInit {
   cambio(): void {
     this.darkMode = !this.darkMode;
     document.body.classList.toggle('dark');
+  }
+
+  changeLanguage(e) {
+    this.translateService.use(e.detail.value);
   }
 }

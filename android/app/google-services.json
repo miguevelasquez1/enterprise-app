@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "879964081618",
+    "firebase_url": "https://app-enterprise-763aa-default-rtdb.firebaseio.com",
+    "project_id": "app-enterprise-763aa",
+    "storage_bucket": "app-enterprise-763aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879964081618:android:40bad65eb7d1ec48ed8c0b",
+        "android_client_info": {
+          "package_name": "com.enterprise.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879964081618-iu0blejn30f1p0il5be448purg0jsq6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC89AfhVMk_Ngk2wB8gjYPG7azdjlmv07c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879964081618-iu0blejn30f1p0il5be448purg0jsq6p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "879964081618-a6pi27ilqmpn3vpenobeqnp5g17hgr12.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.enterprise.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

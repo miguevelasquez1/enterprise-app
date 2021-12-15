@@ -10,13 +10,16 @@ export class ShowImagesPage implements OnInit {
   @Input() images;
   @Input() index: number;
 
-  @ViewChild('slides', { static: false }) slider: IonSlides;
+  @ViewChild('slides') ionSlides: IonSlides;
 
   public slideOpts;
 
   public arrayX = ['sapo', 'sapo', 'sapo'];
 
   imageListTemp = ['ey', 'eyy ey'];
+
+  isEnd = false;
+  isBeginning = false;
 
   constructor(private modalController: ModalController) {}
 
@@ -33,6 +36,12 @@ export class ShowImagesPage implements OnInit {
 
   public slideNext(slide): void {
     slide.slideNext();
+  }
+
+  async doCheck() {
+    this.isBeginning = await this.ionSlides.isBeginning();
+    this.isEnd = await this.ionSlides.isEnd();
+    console.log(this.isBeginning, 'isBeginning', this.isEnd, 'isEnd');
   }
 
   dismiss(): void {

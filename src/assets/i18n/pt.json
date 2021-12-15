@@ -1,0 +1,51 @@
+{
+  "welcome-slide": {
+    "title": "Bem-vindo ao Aplicativo Corporativo",
+    "buttons": {
+      "sign-in": "Entrar",
+      "sign-up": "Check-in"
+    }
+  },
+  "choose-your-category": {
+    "title": "Escolha sua Categoria",
+    "options": {
+      "company": "Companhia",
+      "person": "Pessoa"
+    }
+  },
+  "next": "segue",
+  "sign-up": {
+    "title": "Inscrever-se",
+    "name": "Nome",
+    "email": "Email",
+    "Password": "Senha",
+    "create-an-account": "Crie a sua Conta Aqui"
+  },
+  "login": {
+    "title": "Oi de novo!",
+    "email": "Email",
+    "password": "Password",
+    "sign-in": "Entrar"
+  },
+  "tabs": {
+    "profile": {
+      "title": "Perfil"
+    },
+    "routes": {
+      "title": "Rotas"
+    },
+    "inventory": {
+      "title": "inventário"
+    }
+  },
+  "settings": {
+    "title": "Definições",
+    "language": {
+      "title": "Idioma",
+      "english": "Inglês",
+      "spanish": "Espanhol",
+      "portuguese": "Português",
+      "german": "Alemão"
+    }
+  }
+}

@@ -23,6 +23,6 @@ export class UsuariosPage implements OnInit {
   }
 
   getCurrentUser(): void {
-    this.authService.isAuth2().subscribe((auth: IUser) => {});
+    this.authService.isAuth().subscribe((auth: IUser) => {});
   }
 }

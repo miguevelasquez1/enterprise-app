@@ -5,6 +5,7 @@ import {
 } from '@angular/fire/compat/database';
 import { EventEmitter, Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first, map } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Company } from '../../interfaces/company.interface';
@@ -12,7 +13,6 @@ import { IUser } from '../../interfaces/user.interface';
 // import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Person } from '../../interfaces/person.interface';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -45,11 +45,11 @@ export class AuthService {
   constructor(
     // private angularFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
-    private firebaseAuth: AngularFireAuth,
+    private afAuth: AngularFireAuth,
     private aFDB: AngularFireDatabase,
   ) {
     this._emitNumber = new EventEmitter<unknown>();
-    this.userData$ = this.firebaseAuth.authState;
+    this.userData$ = this.afAuth.authState;
     this.isPersonForm = true;
     this.buildFormAuth();
     this.buildFormPerson();
@@ -94,6 +94,10 @@ export class AuthService {
       records: this.formBuilder.array([]),
       inventory: this.formBuilder.array([]),
     });
+  }
+
+  getUser(): Promise<unknown> {
+    return this.afAuth.authState.pipe(first()).toPromise();
   }
 
   getPersons(): Observable<SnapshotAction<Person>[]> {
@@ -169,9 +173,11 @@ export class AuthService {
 
   public loginFirebase(user: IUser): Promise<unknown> {
     return new Promise((resolve, rejected) => {
-      this.firebaseAuth
+      this.afAuth
         .signInWithEmailAndPassword(user.email, user.password)
         .then(login => {
+          console.log(login, 'login');
+          console.log('login');
           resolve(login);
         })
         .catch(err => rejected(err));
@@ -187,14 +193,15 @@ export class AuthService {
   }
 
   signOut(): Promise<void> {
-    return this.firebaseAuth.signOut();
+    return this.afAuth.signOut();
   }
 
   register(user: IUser): Promise<unknown> {
     return new Promise((resolve, reject) => {
-      this.firebaseAuth
+      this.afAuth
         .createUserWithEmailAndPassword(user.email, user.password)
         .then(userData => {
+          console.log('register');
           this.uid = user.uid;
           const data = {
             email: user.email,
@@ -211,17 +218,14 @@ export class AuthService {
           resolve(userData);
         })
         .catch(err => {
+          console.log('catchhh');
           reject(err);
         });
     });
   }
 
   isAuth(): Observable<unknown> {
-    return this.firebaseAuth.authState;
-  }
-
-  isAuth2(): Observable<unknown> {
-    return this.firebaseAuth.authState.pipe(map(auth => auth));
+    return this.afAuth.authState.pipe(map(auth => auth));
   }
 
   public get emitNumber(): EventEmitter<unknown> {

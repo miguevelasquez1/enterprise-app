@@ -1,0 +1,51 @@
+{
+  "welcome-slide": {
+    "title": "Willkommen in der Unternehmens-App",
+    "buttons": {
+      "sign-in": "Geraten In",
+      "sign-up": "Einchecken"
+    }
+  },
+  "choose-your-category": {
+    "title": "Wählen Sie Ihre Kategorie",
+    "options": {
+      "company": "Begleitung",
+      "person": "Person"
+    }
+  },
+  "next": "nächste",
+  "sign-up": {
+    "title": "Einchecken",
+    "name": "Name",
+    "email": "Email",
+    "Password": "Passwort",
+    "create-an-account": "Ein Konto erstellen"
+  },
+  "login": {
+    "title": "Hallo Nochmal!",
+    "email": "Email",
+    "password": "Passwort",
+    "sign-in": "Geraten In"
+  },
+  "tabs": {
+    "profile": {
+      "title": "Profil"
+    },
+    "routes": {
+      "title": "Routen"
+    },
+    "inventory": {
+      "title": "Inventar"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": {
+      "title": "Sprache",
+      "english": "Englisch",
+      "spanish": "Spanisch",
+      "portuguese": "Portugiesisch",
+      "german": "Deutsch"
+    }
+  }
+}

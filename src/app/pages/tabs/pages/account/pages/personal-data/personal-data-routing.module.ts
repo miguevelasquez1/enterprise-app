@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '',
     component: PersonalDataPage,
   },
+  {
+    path: 'image-preview',
+    loadChildren: () => import('./modals/image-preview/image-preview.module').then( m => m.ImagePreviewPageModule)
+  },
 ];
 
 @NgModule({

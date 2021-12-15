@@ -1,20 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { WelcomeSlidePage } from './welcome-slide.page';
 import { WelcomeSlidePageRoutingModule } from './welcome-slide-routing.module';
 
-import { WelcomeSlidePage } from './welcome-slide.page';
-
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    WelcomeSlidePageRoutingModule
-  ],
-  declarations: [WelcomeSlidePage]
+  imports: [TranslateModule, CommonModule, FormsModule, IonicModule, WelcomeSlidePageRoutingModule],
+  declarations: [WelcomeSlidePage],
 })
 export class WelcomeSlidePageModule {}

@@ -1,0 +1,52 @@
+{
+  "welcome-slide": {
+    "title": "Welcome to the Enterprise App",
+    "buttons": {
+      "sign-in": "Sign In",
+      "sign-up": "Sign Up"
+    }
+  },
+  "choose-your-category": {
+    "title": "Choose your Category",
+    "options": {
+      "company": "Company",
+      "person": "Person"
+    }
+  },
+  "next": "next",
+  "sign-up": {
+    "title": "Sign Up",
+    "name": "Name",
+    "email": "Email",
+    "Password": "Password",
+    "create-an-account": "Create an Account"
+  },
+  "login": {
+    "title": "Hi Again!",
+    "email": "Email",
+    "password": "Password",
+    "sign-in": "Sign In"
+  },
+  "tabs": {
+    "profile": {
+      "title": "Profile"
+    },
+    "routes": {
+      "title": "Routes"
+    },
+    "inventory": {
+      "title": "Inventory"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language",
+      "english": "English",
+      "spanish": "Spanish",
+      "portuguese": "Portuguese",
+      "german": "German"
+    },
+    "sign-out": "Sign Out"
+  }
+}

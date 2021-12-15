@@ -3,7 +3,7 @@
     <ion-icon
       class="arrow-back"
       name="chevron-back-outline"
-      routerLink="/welcome-slide"
+      [routerLink]="['/welcome-slide']"
       slot="start"
     >
     </ion-icon>
@@ -11,13 +11,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="global-grid">
-    <ion-row class="global-row ion-align-items-center ion-justify-content-center">
+  <ion-grid class="full-height">
+    <ion-row class="full-height ion-align-items-center ion-justify-content-center">
       <ion-col size-lg="8">
         <ion-grid>
           <ion-row>
             <ion-col class="ion-margin">
-              <h1>Choose Your Category</h1>
+              <h1>{{ 'choose-your-category.title' | translate }}</h1>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -28,20 +28,20 @@
               <ion-col>
                 <ion-list>
                   <ion-item lines="none">
-                    <ion-label>Company</ion-label>
+                    <ion-label>{{ 'choose-your-category.options.company' | translate }}</ion-label>
                     <ion-checkbox
                       mode="ios"
                       formControlName="company"
-                      (ionChange)="selectOne($event.detail.checked, 'company')"
+                      (ionChange)="selectOne($event, 'company')"
                       slot="start"
                     ></ion-checkbox>
                   </ion-item>
                   <ion-item lines="none">
-                    <ion-label>Person</ion-label>
+                    <ion-label>{{ 'choose-your-category.options.person' | translate }}</ion-label>
                     <ion-checkbox
                       mode="ios"
                       formControlName="person"
-                      (ionChange)="selectOne($event.detail.checked, 'person')"
+                      (ionChange)="selectOne($event, 'person')"
                       slot="start"
                     ></ion-checkbox>
                   </ion-item>
@@ -58,9 +58,9 @@
                 color="tertiary"
                 fill="outline"
                 (click)="selectForm()"
-                routerLink="/set-email"
+                routerLink="/sign-up"
               >
-                Next
+                {{ 'next' | translate }}
               </ion-button>
             </ion-col>
           </ion-row>

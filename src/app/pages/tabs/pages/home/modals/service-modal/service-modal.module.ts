@@ -1,16 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { ServiceModalPageRoutingModule } from './service-modal-routing.module';
-
-import { ServiceModalPage } from './service-modal.page';
 import { InternetImagesModalComponent } from './components/internet-images-modal/internet-images-modal.component';
+import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
+import { PopoverImagesComponent } from './components/popover-images/popover-images.component';
+import { ServiceModalPage } from './service-modal.page';
+import { ServiceModalPageRoutingModule } from './service-modal-routing.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, ServiceModalPageRoutingModule],
-  declarations: [InternetImagesModalComponent, ServiceModalPage],
+  declarations: [PopoverImagesComponent, InternetImagesModalComponent, ServiceModalPage],
 })
 export class ServiceModalPageModule {}

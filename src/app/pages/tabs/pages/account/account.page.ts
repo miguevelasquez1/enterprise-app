@@ -29,11 +29,11 @@ export class AccountPage {
   }
 
   private getRole() {
-    this.authService.isAuth2().subscribe((auth: IUser) => {});
+    this.authService.isAuth().subscribe((auth: IUser) => {});
   }
 
   private getCurrentUser() {
-    this.authService.isAuth2().subscribe((auth: IUser) => {
+    this.authService.isAuth().subscribe((auth: IUser) => {
       if (auth === null) {
         this.usersService.userForm.setValue({
           $key: '',
@@ -44,18 +44,18 @@ export class AccountPage {
         this.photoUrl = '';
       } else {
         const { displayName, email, uid } = auth;
-        let { photoUrl } = auth;
-        if (!photoUrl) {
-          photoUrl = '../../../../../assets/img/default-picture.png';
+        let { photoURL } = auth;
+        if (!photoURL) {
+          photoURL = '../../../../../assets/img/default-picture.png';
         }
         this.usersService.userForm.setValue({
           $key: uid,
           name: displayName,
           email,
-          urlImage: photoUrl,
+          urlImage: photoURL,
         });
         this.name = displayName;
-        this.photoUrl = photoUrl;
+        this.photoUrl = photoURL;
       }
     });
   }

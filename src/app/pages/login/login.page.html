@@ -11,13 +11,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="global-grid">
-    <ion-row class="global-row ion-align-items-center ion-justify-content-center">
-      <ion-col size-lg="10">
+  <ion-grid class="full-height">
+    <ion-row class="full-height ion-align-items-center ion-justify-content-center">
+      <ion-col sizeXs="10">
         <ion-grid>
           <ion-row>
             <ion-col class="ion-margin">
-              <h1>Hi again</h1>
+              <h1>{{ 'login.title' | translate }}</h1>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -25,26 +25,20 @@
         <form [formGroup]="authService.authForm" (ngSubmit)="onSubmitLogin()">
           <ion-item class="ion-margin" lines="none">
             <ion-label>
-              <ion-icon name="mail-outline"></ion-icon>
+              <ion-icon slot="start" name="at-circle-outline"></ion-icon>
+              <ion-text>{{ 'login.email' | translate }}</ion-text>
             </ion-label>
-            <ion-input
-              email
-              class="input-mail"
-              type="email"
-              name="email"
-              formControlName="email"
-              placeholder="Email"
-            >
+            <ion-input email class="input-mail" type="email" name="email" formControlName="email">
             </ion-input>
           </ion-item>
 
           <ion-item class="ion-margin" lines="none">
             <ion-label>
               <ion-icon name="lock-closed-outline"></ion-icon>
+              <ion-text>{{ 'login.password' | translate }}</ion-text>
             </ion-label>
             <ion-input
               password
-              placeholder="Password"
               type="password"
               name="password"
               formControlName="password"
@@ -56,7 +50,7 @@
           <ion-grid>
             <ion-row>
               <ion-col class="ion-text-end">
-                <ion-button type="onSubmitLogin()"> Sign In </ion-button>
+                <ion-button type="onSubmitLogin()"> {{ 'login.sign-in' | translate }} </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>

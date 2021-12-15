@@ -44,7 +44,7 @@ export class RoutesFormPage implements OnInit {
   }
 
   getCurrentUser(): void {
-    this.authService.isAuth2().subscribe();
+    this.authService.isAuth().subscribe();
   }
 
   resetForm(form?: FormGroup): void {

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+
+// import { CurrencyPipe } from '@angular/common';
+import { AuthService } from '../../shared/services/auth/auth.service';
 // import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
 // import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
-// import { CurrencyPipe } from '@angular/common';
-import { AuthService } from '../../shared/services/auth/auth.service';
 // import { ChartService } from '../../../../shared/services/chart/chart.service';
 
 @Component({
@@ -86,7 +87,7 @@ export class RutasFormPage implements OnInit {
   }
 
   getCurrentUser(): void {
-    this.authService.isAuth2().subscribe();
+    this.authService.isAuth().subscribe();
   }
 
   resetForm(form?: FormGroup): void {

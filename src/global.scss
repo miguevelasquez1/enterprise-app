@@ -31,12 +31,75 @@
 }
 
 @font-face {
+  font-family: Poppins-Medium;
+  src: url('./assets/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
   font-family: Poppins-Regular;
   src: url('./assets/fonts/Poppins-Regular.ttf');
+}
+
+h1 {
+  font-family: Poppins-SemiBold;
+  font-size: 48px;
+}
+
+form {
+  ion-item {
+    --border-radius: 15px;
+    --border-width: 1px;
+    ion-label {
+      ion-text, ion-icon {
+        color: var(--ion-color-medium-tint);
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        padding-right: 5px;
+      }
+    }
+
+    ion-input {
+      --padding-start: 5px !important;
+    }
+  }
+}
+
+
+ion-input {
+  font-family: Poppins-SemiBold;
 }
 
 ion-button {
   text-transform: none;
   --border-radius: 12px;
   font-family: Poppins-Regular;
+}
+
+ion-checkbox {
+  --border-radius: 10px;
+}
+
+.arrow-back {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-height-80 {
+  height: 80%;
+}
+
+.image-preview-modal {
+  --height: 50%;
+  --width: 80%;
+
+  @media only screen and (min-width: 768px) {
+  --height: 80%;
+  }
 }

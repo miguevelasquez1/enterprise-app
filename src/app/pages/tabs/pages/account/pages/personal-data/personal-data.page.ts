@@ -1,8 +1,8 @@
 import { AlertController, PopoverController } from '@ionic/angular';
-import { Camera, CameraResultType } from '@capacitor/camera';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from '../../../../../../shared/services/auth/auth.service';
@@ -19,13 +19,14 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./personal-data.page.scss'],
 })
 export class PersonalDataPage {
-  private photoFile: Blob;
   public photoUrl: any;
   public name: string;
   public uploadPercent: Observable<number | undefined>;
+  private photoFile: Blob;
 
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
   constructor(
+    private afAuth: AngularFireAuth,
     public usersService: UsersService,
     private authService: AuthService,
     private sanitizer: DomSanitizer,
@@ -41,7 +42,7 @@ export class PersonalDataPage {
   }
 
   getCurrentUser(): void {
-    this.authService.isAuth2().subscribe((auth: IUser) => {
+    this.authService.isAuth().subscribe((auth: IUser) => {
       if (auth === null) {
         this.usersService.userForm.setValue({
           $key: '',
@@ -52,18 +53,18 @@ export class PersonalDataPage {
         this.photoUrl = '';
       } else {
         const { displayName, email, uid } = auth;
-        let { photoUrl } = auth;
-        if (!photoUrl) {
-          photoUrl = '../../../../../../../assets/img/default-picture.png';
+        let { photoURL } = auth;
+        if (!photoURL) {
+          photoURL = '../../../../../../../assets/img/default-picture.png';
         }
         this.usersService.userForm.setValue({
           $key: uid,
           name: displayName,
           email,
-          urlImage: photoUrl,
+          urlImage: photoURL,
         });
         this.name = displayName;
-        this.photoUrl = photoUrl;
+        this.photoUrl = photoURL;
       }
     });
   }
@@ -72,31 +73,19 @@ export class PersonalDataPage {
     return this.sanitizer.bypassSecurityTrustUrl(this.photoUrl);
   }
 
-  async takePicture(): Promise<void> {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Base64,
-    });
-
-    const rawData = atob(image.base64String);
-    const bytes = new Array(rawData.length);
-    for (let x = 0; x < rawData.length; x++) {
-      bytes[x] = rawData.charCodeAt(x);
-    }
-    const arr = new Uint8Array(bytes);
-    this.photoFile = new Blob([arr], { type: 'image/png' });
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      this.photoUrl = reader.result;
-    };
-    reader.readAsDataURL(this.photoFile);
-  }
-
   onSubmitUpdate(user: IUser): void {
-    this.authService.isAuth2().subscribe((auth: any) => {
+    // this.afAuth.currentUser.then(auth => {
+    //   console.log(user, 'aaaaa');
+    //   console.log(auth, 'auth');
+    //   console.log(this.photoUrl, 'url');
+    //   auth.updateProfile({
+    //     displayName: user.name,
+    //     photoURL: this.photoUrl,
+    //   });
+    // });
+    this.authService.isAuth().subscribe((auth: any) => {
       if (auth) {
+        console.log(auth, 'auth');
         const filePath = `users/${auth.uid}`;
         const ref = this.storage.ref(filePath);
         const task = this.storage.upload(filePath, this.photoFile);
@@ -117,7 +106,7 @@ export class PersonalDataPage {
       }
     });
 
-    this.router.navigate(['/home/account']);
+    this.router.navigate(['/account']);
   }
 
   async presentAlertConfirm(user: IUser): Promise<void> {
@@ -146,14 +135,20 @@ export class PersonalDataPage {
 
   async presentPopoverProfileImage(ev: Event): Promise<void> {
     const popover = await this.popoverController.create({
+      componentProps: { imgUrl: this.photoUrl },
       component: PopoverProfileImageComponent,
       cssClass: 'my-custom-class',
       mode: 'ios',
       event: ev,
       translucent: true,
     });
-    await popover.present();
 
-    const { role } = await popover.onDidDismiss();
+    popover.onWillDismiss().then(dataReturned => {
+      console.log(dataReturned, 'xs');
+      this.photoUrl = dataReturned.data.imgUrl;
+      this.photoFile = dataReturned.data.photoFile;
+    });
+
+    return await popover.present();
   }
 }

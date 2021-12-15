@@ -41,15 +41,24 @@ export class RecordsService {
   getRecords(): Promise<AngularFireList<IRecord>> {
     return new Promise(resolve => {
       this.afAuth.authState.subscribe(res => {
-        this.aFDB
-          .object(`persons/${res.uid}`)
-          .snapshotChanges()
-          .subscribe(data => {
-            if (data.key === res.uid) {
-              this.recordsRef = this.aFDB.list(`persons/${data.key}/records`);
-              resolve(this.recordsRef);
-            }
-          });
+        console.log(res, 'res');
+        if (res) {
+          this.aFDB
+            .object(`persons/${res.uid}`)
+            .snapshotChanges()
+            .subscribe(data => {
+              console.log(data.key, res.uid, 'data.key, res.uid');
+              if (data.key === res.uid) {
+                console.log('persons');
+                this.recordsRef = this.aFDB.list(`persons/${res.uid}/records`);
+                resolve(this.recordsRef);
+              } else {
+                console.log('companies');
+                this.recordsRef = this.aFDB.list(`companies/${res.uid}/records`);
+                resolve(this.recordsRef);
+              }
+            });
+        }
       });
     });
   }
@@ -89,7 +98,7 @@ export class RecordsService {
     address,
     price,
     state,
-  }: IRecord) {
+  }: IRecord): void {
     this.recordsRef.update($key, {
       date,
       employee,

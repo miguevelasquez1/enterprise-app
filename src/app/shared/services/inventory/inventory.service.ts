@@ -34,7 +34,7 @@ export class InventoryService {
     this.userDataObsevable$.subscribe(user => {
       this.userData = user;
     });
-    this.authService.isAuth2().subscribe(auth => {
+    this.authService.isAuth().subscribe(auth => {
       this.userData$.next(auth);
     });
     this.afAuth.authState.subscribe(data => (this.uid = data.uid));
@@ -89,11 +89,11 @@ export class InventoryService {
           .subscribe(data => {
             if (data.key === res.uid) {
               console.log('persons');
-              this.inventoryRef = this.aFDB.list(`persons/${data.key}/inventory`);
+              this.inventoryRef = this.aFDB.list(`persons/${res.uid}/inventory`);
               resolve(this.inventoryRef);
             } else {
               console.log('companies');
-              this.inventoryRef = this.aFDB.list(`companies/${data.key}/inventory`);
+              this.inventoryRef = this.aFDB.list(`companies/${res.uid}/inventory`);
               resolve(this.inventoryRef);
             }
           });

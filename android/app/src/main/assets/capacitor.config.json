@@ -1,0 +1,6 @@
+{
+	"appId": "com.enterprise.app",
+	"appName": "app-enterprise",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

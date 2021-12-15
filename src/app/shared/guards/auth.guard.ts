@@ -22,17 +22,20 @@ export class AuthGuard implements CanActivate {
     private router: Router,
   ) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.afAuth.currentUser.then(user => {
-      console.log(user, 'user');
-      // if (!user) {
-      //   this.router.navigate(['/welcome-slide']);
-      //   return false;
-      // }
-      return true;
-    });
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.authService
+      .getUser()
+      .then(user => {
+        console.log(user, 'user');
+        if (!user) {
+          this.router.navigate(['/welcome-slide']);
+          return false;
+        }
+        return true;
+      })
+      .catch(err => {
+        console.log(err, 'err');
+        return false;
+      });
   }
 }

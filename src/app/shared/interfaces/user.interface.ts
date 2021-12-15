@@ -1,9 +1,10 @@
 export interface IUser {
   uid?: string;
   displayName?: string;
+  name?: string;
   email?: string;
   password?: string;
   phoneNumber?: string;
-  photoUrl?: string;
+  photoURL?: string;
   emailVerified?: boolean;
 }

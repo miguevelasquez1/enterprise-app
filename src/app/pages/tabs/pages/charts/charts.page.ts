@@ -65,7 +65,7 @@ export class ChartsPage {
    * @author Miguel Velásquez
    */
   getData(): void {
-    this.authService.isAuth2().subscribe((auth: IUser) => {
+    this.authService.isAuth().subscribe((auth: IUser) => {
       if (auth) {
         this.userUid = auth.uid;
         // this.registroService.getRegistros().subscribe(list => {

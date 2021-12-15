@@ -27,7 +27,7 @@ export class LayoutComponent implements OnInit {
   }
 
   getRole(): void {
-    this.authService.isAuth2().subscribe(auth => {});
+    this.authService.isAuth().subscribe(auth => {});
   }
 
   cambio(): void {
@@ -37,10 +37,12 @@ export class LayoutComponent implements OnInit {
 
   async signOut(): Promise<void> {
     try {
+      console.log('pasa');
       await this.authService.signOut();
+      console.log('a');
       this.router.navigate(['/welcome-slide']);
     } catch (err) {
-      console.log(err, 'err');
+      console.log(err, 'errorsillow -----------');
     }
   }
 }
