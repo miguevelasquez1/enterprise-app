@@ -40,6 +40,10 @@
   src: url('./assets/fonts/Poppins-Regular.ttf');
 }
 
+.tabs-inner {
+  position: unset !important;
+}
+
 h1 {
   font-family: Poppins-SemiBold;
   font-size: 48px;
@@ -93,6 +97,10 @@ ion-checkbox {
 
 .full-height-80 {
   height: 80%;
+}
+
+.margin-bottom {
+  margin-bottom: 20%;
 }
 
 .image-preview-modal {

@@ -20,6 +20,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modals/service-modal/service-modal.module').then(m => m.ServiceModalPageModule),
   },
+  {
+    path: 'services',
+    loadChildren: () => import('./pages/services/services.module').then(m => m.ServicesPageModule),
+  },
+  {
+    path: 'coupons',
+    loadChildren: () => import('./pages/coupons/coupons.module').then(m => m.CouponsPageModule),
+  },
 ];
 
 @NgModule({

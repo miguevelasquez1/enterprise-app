@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-icon class="arrow-back" name="arrow-back-outline" [routerLink]="['/account']" slot="start">
     </ion-icon>
-    <ion-title>Personal Data</ion-title>
+    <ion-title>{{'personal-data.title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -36,12 +36,12 @@
 
     <ion-input hidden="true" name="urlImage" formControlName="urlImage"> </ion-input>
 
-    <h6>Name</h6>
+    <h6>{{'personal-data.name' | translate}}</h6>
     <ion-item lines="none">
       <ion-input required name="name" formControlName="name"> </ion-input>
     </ion-item>
 
-    <h6>Email</h6>
+    <h6>{{'personal-data.email' | translate}}</h6>
     <ion-item lines="none">
       <ion-input name="email" formControlName="email"> </ion-input>
     </ion-item>
@@ -53,7 +53,7 @@
             [disabled]="!usersService.userForm.valid"
             type="presentAlertConfirm(this.usersService.userForm.value)"
           >
-            Guardar
+            {{'personal-data.save' | translate}}
           </ion-button>
         </ion-col>
       </ion-row>

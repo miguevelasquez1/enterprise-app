@@ -8,18 +8,16 @@
       (click)="inventarioService.resetForm(inventarioService.inventarioForm)"
     >
     </ion-icon>
-    <ion-title>Formulario de inventario</ion-title>
+    <ion-title>{{'inventory.form.title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <app-form></app-form>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+  <ion-grid class="margin-bottom">
+    <ion-row>
+      <ion-col size="12">
+        <app-form></app-form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

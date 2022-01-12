@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>services</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="margin-bottom">
+    <ion-row *ngIf="!services" class="ion-margin">
+      <ion-col class="ion-text-center">
+        <ion-text>No services yet</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" *ngFor="let service of services">
+        <app-service [service]="service"></app-service>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="8">
+        <ion-button (click)="presentServiceFormModal()" expand="block" fill="outline" color="light">
+          <ion-text color="dark">Add New Service</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

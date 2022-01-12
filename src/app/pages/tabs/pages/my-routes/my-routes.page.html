@@ -1,73 +1,73 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>My Routes</ion-title>
+    <ion-title>{{ 'routes.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="div-principal">
-    <!-- <ion-input class="search" type="text" name="filterRegistro" placeholder="Search..." [(ngModel)]="filterRegistro"></ion-input> -->
+  <!-- <ion-input class="search" type="text" name="filterRegistro" placeholder="Search..." [(ngModel)]="filterRegistro"></ion-input> -->
 
-    <ion-item lines="none">
-      <ion-grid>
-        <ion-row>
-          <ion-searchbar [(ngModel)]="filterRegistro" debounce="100"></ion-searchbar>
-        </ion-row>
+  <ion-item lines="none">
+    <ion-grid>
+      <ion-row>
+        <ion-searchbar
+          [placeholder]="'routes.search-placeholder' | translate"
+          [(ngModel)]="filterRegistro"
+          debounce="100"
+        ></ion-searchbar>
+      </ion-row>
 
-        <ion-card>
-          <ion-card-content class="header-content ion-text-center">
-            <ion-grid>
-              <ion-row>
-                <ion-col>Date</ion-col>
-                <ion-col>Service</ion-col>
-                <ion-col>Address</ion-col>
-                <ion-col>Action</ion-col>
+      <ion-card>
+        <ion-card-content class="header-content ion-text-center">
+          <ion-grid>
+            <ion-row>
+              <ion-col>{{ 'routes.labels.date' | translate }}</ion-col>
+              <ion-col>{{ 'routes.labels.service' | translate }}</ion-col>
+              <ion-col>{{ 'routes.labels.address' | translate }}</ion-col>
+              <ion-col>{{ 'routes.labels.action' | translate }}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngFor="let record of recordList | filter:filterRegistro; let i = index">
+        <div id="square">
+          <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" [disabled]=""> -->
+          <!-- <ion-reorder *ngFor="let registro of registroList | filter:filterRegistro; let i = index"> -->
+          <div id="row-section">
+            <div *ngIf="record.userUid === userUid">
+              <ion-row
+                class="ion-align-items-center"
+                id="registro"
+                [ngClass]="(i % 2 == 0) ? 'odd' : 'even'"
+              >
+                <ion-col class="col-element-date">{{record.date | date: 'dd-MM-yyyy' }}</ion-col>
+                <ion-col class="col-element">{{record.service}}</ion-col>
+                <ion-col class="col-element">{{record.address}}</ion-col>
+                <ion-col class="col-element">
+                  <ion-button
+                    routerLink="/my-routes/routes-form"
+                    (click)="recordsService.populateForm(record)"
+                  >
+                    <ion-icon name="create-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="onDelete(record)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
               </ion-row>
-            </ion-grid>
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card *ngFor="let record of recordList | filter:filterRegistro; let i = index">
-          <div id="square">
-            <!-- <ion-reorder-group (ionItemReorder)="doReorder($event)" [disabled]=""> -->
-            <!-- <ion-reorder *ngFor="let registro of registroList | filter:filterRegistro; let i = index"> -->
-            <div id="row-section">
-              <div *ngIf="record.userUid === userUid">
-                <ion-row
-                  class="ion-align-items-center"
-                  id="registro"
-                  [ngClass]="(i % 2 == 0) ? 'odd' : 'even'"
-                >
-                  <ion-col class="col-element-date">{{record.date | date: 'dd-MM-yyyy' }}</ion-col>
-                  <ion-col class="col-element">{{record.service}}</ion-col>
-                  <ion-col class="col-element">{{record.address}}</ion-col>
-                  <ion-col class="col-element">
-                    <ion-button
-                      routerLink="/my-routes/routes-form"
-                      (click)="recordsService.populateForm(record)"
-                    >
-                      <ion-icon name="create-outline"></ion-icon>
-                    </ion-button>
-                    <ion-button (click)="onDelete(record)">
-                      <ion-icon name="trash-outline"></ion-icon>
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
-              </div>
             </div>
-            <!-- </ion-reorder> -->
-            <!-- </ion-reorder-group> -->
           </div>
-        </ion-card>
-      </ion-grid>
-    </ion-item>
-  </div>
-</ion-content>
+          <!-- </ion-reorder> -->
+          <!-- </ion-reorder-group> -->
+        </div>
+      </ion-card>
+    </ion-grid>
+  </ion-item>
 
-<ion-footer>
-  <ion-fab vertical="bottom" horizontal="end">
+  <ion-fab class="margin-bottom" vertical="bottom" horizontal="end">
     <ion-fab-button [routerLink]="['/my-routes/routes-form']" (click)="newForm()">
       <ion-icon class="add-icon" name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-footer>
+</ion-content>

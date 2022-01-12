@@ -11,10 +11,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid style="height: 90%">
+  <ion-grid style="height: 84%">
     <ion-row class="full-height ion-justify-content-center">
       <ion-grid>
-        <ion-row class="ion-justify-content-center">
+        <ion-row>
+          <ion-col> <h2>{{'settings.language.title' | translate}}</h2> </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col size="8">
             <ion-list lines="none">
               <ion-item lines="none">
@@ -43,16 +46,13 @@
             </ion-list>
           </ion-col>
         </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="8">
-            <ion-button expand="block">hola</ion-button>
-          </ion-col>
-        </ion-row>
       </ion-grid>
     </ion-row>
     <ion-row class="ion-align-items-end">
-      <ion-col>
-        <ion-button expand="block">{{ 'settings.sign-out' | translate }}</ion-button>
+      <ion-col class="margin-bottom">
+        <ion-button (click)="signOut()" expand="block"
+          >{{ 'settings.sign-out' | translate }}</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>

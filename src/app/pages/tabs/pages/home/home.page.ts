@@ -10,6 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChangeNameModalPage } from './modals/change-name-modal/change-name-modal.page';
 import { FormControl } from '@angular/forms';
 import { HomeService } from './services/home.service';
+import { Router } from '@angular/router';
 import { ServiceModalPage } from './modals/service-modal/service-modal.page';
 
 @Component({
@@ -50,6 +51,7 @@ export class HomePage implements OnInit {
     private routerOutlet: IonRouterOutlet,
     private alertController: AlertController,
     private modalController: ModalController,
+    private _router: Router,
   ) {
     this.sections = [];
     // this.sectionName.valueChanges
@@ -258,5 +260,13 @@ export class HomePage implements OnInit {
 
   public addService(): void {
     // this.homeService.addServiceField();
+  }
+
+  public navigateToServices() {
+    this._router.navigate(['home/services']);
+  }
+
+  public navigateToCoupons() {
+    this._router.navigate(['home/coupons']);
   }
 }

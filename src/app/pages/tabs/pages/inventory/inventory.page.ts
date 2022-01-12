@@ -36,7 +36,7 @@ export class InventoryPage implements OnInit {
     console.log('pasa 3');
     (await this.inventoryService.getInventory())
       .snapshotChanges()
-      .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+      .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))))
       .subscribe(data => {
         console.log('pasaaaaaa');
         this.inventoryList = data;

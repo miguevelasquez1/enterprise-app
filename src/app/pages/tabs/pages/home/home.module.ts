@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
-
-import { HomePageRoutingModule } from './home-routing.module';
-
+import { CommonModule } from '@angular/common';
 import { HomePage } from './home.page';
+import { HomePageRoutingModule } from './home-routing.module';
+import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
 import { ServiceModalPageModule } from './modals/service-modal/service-modal.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
-    ServiceModalPageModule,
+    TranslateModule,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,

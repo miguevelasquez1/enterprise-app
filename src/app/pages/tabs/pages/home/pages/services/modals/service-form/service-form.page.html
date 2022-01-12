@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h2 class="ion-no-margin">Preview</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-card>
+          <img [src]="defaultImage" alt="" />
+          <ion-card-header>
+            <ion-card-title>{{servicesService.serviceForm.get('title').value}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content
+            >{{ servicesService.serviceForm.get('description').value }}</ion-card-content
+          >
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="10">
+                <ion-button color="dark" expand="block" class="ion-text-center"
+                  >Request for it</ion-button
+                >
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]="servicesService.serviceForm">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8">
+          <ion-item lines="none">
+            <ion-label>Title</ion-label>
+            <ion-input
+              formControlName="title"
+              #title
+              maxlength="30"
+              class="ion-text-center"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button expand="block" color="dark">
+            <ion-icon name="image-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="11">
+          <ion-item lines="none">
+            <ion-label>description</ion-label>
+            <ion-textarea formControlName="description" #description maxlength="256"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="11">
+          <ion-button (click)="submitForm()" color="tertiary" expand="block"
+            >{{isEdit ? 'Update Service' : 'Add Service'}}</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

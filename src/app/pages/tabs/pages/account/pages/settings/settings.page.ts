@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -12,7 +14,11 @@ export class SettingsPage implements OnInit {
 
   public currentLanguage: string;
 
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService,
+    private authService: AuthService,
+    private router: Router,
+  ) {
     this.darkMode = true;
     this.currentLanguage = this.translateService.currentLang;
   }
@@ -24,7 +30,12 @@ export class SettingsPage implements OnInit {
     document.body.classList.toggle('dark');
   }
 
-  changeLanguage(e) {
+  changeLanguage(e): void {
     this.translateService.use(e.detail.value);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+    this.router.navigate(['/welcome-slide']);
   }
 }

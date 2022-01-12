@@ -18,8 +18,20 @@
     "title": "Inscrever-se",
     "name": "Nome",
     "email": "Email",
-    "Password": "Senha",
-    "create-an-account": "Crie a sua Conta Aqui"
+    "password": "Senha",
+    "create-an-account": "Crie a sua Conta Aqui",
+    "google-auth": "Inscreva-se no Google",
+    "error-messages": {
+      "invalid-argument": "Ocorreu uma falha ao entrar. Por favor, verifique os dados inseridos.",
+      "invalid-disabled-field": "Ocorreu uma falha ao entrar. Por favor, verifique os dados inseridos.",
+      "argument-error": "Os dados são necessários. Por favor verifique.",
+      "email-already-in-use": "Este e-mail já está em uso.",
+      "invalid-email": "E-mail inválido",
+      "weak-password": "Senha fraca",
+      "missing-email": "É necessário um e-mail",
+      "password-no-match": "As senhas não coincidem",
+      "minium-characters-password": "A senha deve ter no mínimo 8 caracteres"
+    }
   },
   "login": {
     "title": "Oi de novo!",
@@ -36,16 +48,92 @@
     },
     "inventory": {
       "title": "inventário"
+    },
+    "home": {
+      "title": "Home"
     }
   },
+  "profile": {
+    "title": "Perfil",
+    "personal-data": "Dados Pessoais",
+    "settings": "Configurações"
+  },
+  "personal-data": {
+    "title": "Dados Pessoais",
+    "name": "Nome",
+    "email": "Email",
+    "save": "Salve"
+  },
   "settings": {
-    "title": "Definições",
+    "title": "Configurações",
     "language": {
       "title": "Idioma",
       "english": "Inglês",
       "spanish": "Espanhol",
       "portuguese": "Português",
       "german": "Alemão"
+    },
+    "sign-out": "Sair"
+  },
+  "routes": {
+    "title": "Minhas Rotas",
+    "search-placeholder": "Procurar",
+    "labels": {
+      "date": "Data",
+      "service": "Serviço",
+      "address": "Direção",
+      "action": "Açao"
+    },
+    "form": {
+      "title": "Nova Rota",
+      "states": {
+        "on-hold": "Em Espera",
+        "done": "Feito"
+      },
+      "inputs-label": {
+        "date": "Data",
+        "choose-technical": "Escolha o Técnico",
+        "client-name": "Nome do Cliente",
+        "client-id": "Identificação do Cliente",
+        "service": "Especificações de Serviço",
+        "service-specifications": "Especificações de Serviço",
+        "address": "direção",
+        "price": "Preço"
+      },
+      "buttons": {
+        "save-route": "Adicionar rota",
+        "reset": "Limpar"
+      }
+    }
+  },
+  "inventory": {
+    "title": "Inventário",
+    "labels": {
+      "name": "Nome",
+      "brand": "Marca",
+      "amount": "Montante",
+      "action": "Açao"
+    },
+    "form": {
+      "title": "Formulário de Inventário",
+      "inputs-label": {
+        "date": "Data",
+        "item-name": "Nome do Item",
+        "brand": "Marca",
+        "amount": "Montante"
+      },
+      "buttons": {
+        "add-picture": "Adicione uma Imagem",
+        "add-item": "Adicionar Item",
+        "reset": "Limpar"
+      }
+    }
+  },
+  "home": {
+    "title": "Home",
+    "sections": {
+      "services": "Serviços",
+      "coupons": "Cupons"
     }
   }
 }

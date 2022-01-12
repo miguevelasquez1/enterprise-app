@@ -13,7 +13,7 @@
 <ion-content>
   <ion-grid class="full-height">
     <ion-row class="full-height ion-align-items-center ion-justify-content-center">
-      <ion-col sizeXs="10" sizeLg="8" class="ion-align-self-center">
+      <ion-col sizeXs="12" sizeSm="10" sizeLg="8" class="ion-align-self-center">
         <form [formGroup]="authService.authForm">
           <ion-grid>
             <ion-row>
@@ -50,7 +50,7 @@
                     <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
                     <ion-text>{{ 'sign-up.password' | translate }}</ion-text>
                   </ion-label>
-                  <ion-input type="password"></ion-input>
+                  <ion-input formControlName="password" type="password"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -61,17 +61,44 @@
                     <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
                     <ion-text>{{ 'sign-up.password' | translate }}</ion-text>
                   </ion-label>
-                  <ion-input formControlName="password" type="password"></ion-input>
+                  <ion-input formControlName="confirmPassword" type="password"></ion-input>
                 </ion-item>
+                <div
+                  class="ion-margin-top ion-padding-horizontal ion-text-center"
+                  *ngIf="authService.authForm.hasError('notSame') && authService.authForm.controls.confirmPassword.dirty"
+                >
+                  <ion-text color="danger">
+                    {{'sign-up.error-messages.password-no-match' | translate}}
+                  </ion-text>
+                </div>
+                <div
+                  class="ion-margin-top ion-padding-horizontal ion-text-center"
+                  *ngIf="!authService.authForm.hasError('notSame') && authService.authForm.controls.password.dirty && authService.authForm.controls.password.invalid"
+                >
+                  <ion-text color="danger">
+                    {{'sign-up.error-messages.minium-characters-password' | translate}}
+                  </ion-text>
+                </div>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col class="ion-text-center ion-margin-top">
-                <ion-button (click)="register()" expand="block"
+                <ion-button
+                  (click)="register()"
+                  expand="block"
+                  [disabled]="authService.authForm.hasError('notSame') || authService.authForm.controls.password.invalid"
                   >{{ 'sign-up.create-an-account' | translate }}</ion-button
                 >
               </ion-col>
             </ion-row>
+            <!-- <ion-row>
+              <ion-col>
+                <ion-button (click)="signUpWithGoogle()" expand="block" color="light">
+                  <ion-icon slot="start" name="logo-google"></ion-icon>
+                  <ion-text>{{ 'sign-up.google-auth' | translate }}</ion-text>
+                </ion-button>
+              </ion-col>
+            </ion-row> -->
           </ion-grid>
         </form>
       </ion-col>

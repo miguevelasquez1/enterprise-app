@@ -18,8 +18,20 @@
     "title": "Registrarme",
     "name": "Nombre",
     "email": "Email",
-    "Password": "Contraseña",
-    "create-an-account": "Crear una Cuenta"
+    "password": "Contraseña",
+    "create-an-account": "Crear una Cuenta",
+    "google-auth": "Ingresar con Google",
+    "error-messages": {
+      "invalid-argument": "Existe una falla al ingresar. Por favor verifica los datos ingresados.",
+      "invalid-disabled-field": "Existe una falla al ingresar. Por favor verifica los datos ingresados.",
+      "argument-error": "Hacen falta datos. Por favor verifica.",
+      "email-already-in-use": "Este correo electrónico ya está en uso.",
+      "invalid-email": "Correo Electrónico inválido. Por favor intenta con otro.",
+      "weak-password": "Contraseña débil",
+      "missing-email": "Hace falta un correo electrónico",
+      "password-no-match": "La contraseña no coincide",
+      "minium-characters-password": "La contraseña debe tener mínimo 8 carácteres"
+    }
   },
   "login": {
     "title": "Hola de nuevo!",
@@ -36,7 +48,21 @@
     },
     "inventory": {
       "title": "Inventario"
+    },
+    "home": {
+      "title": "Home"
     }
+  },
+  "profile": {
+    "title": "Perfil",
+    "personal-data": "Datos Personales",
+    "settings": "Configuraciones"
+  },
+  "personal-data": {
+    "title": "Datos Personales",
+    "name": "Nombre",
+    "email": "Email",
+    "save": "Guardar"
   },
   "settings": {
     "title": "Configuraciones",
@@ -48,5 +74,66 @@
       "german": "Alemán"
     },
     "sign-out": "Cerrar Sesión"
+  },
+  "routes": {
+    "title": "Mis Rutas",
+    "search-placeholder": "Buscar",
+    "labels": {
+      "date": "Fecha",
+      "service": "Servicio",
+      "address": "Dirección",
+      "action": "Acción"
+    },
+    "form": {
+      "title": "Nueva Ruta",
+      "states": {
+        "on-hold": "En Espera",
+        "done": "Realizado"
+      },
+      "inputs-label": {
+        "date": "Fecha",
+        "choose-technical": "Escoger Técnico",
+        "client-name": "Nombre del Cliente",
+        "client-id": "Identificación del Cliente",
+        "service": "Servicio",
+        "service-specifications": "Especificaciones del Servicio",
+        "address": "Dirección",
+        "price": "Precio"
+      },
+      "buttons": {
+        "save-route": "Añadir Ruta",
+        "reset": "Limpiar"
+      }
+    }
+  },
+  "inventory": {
+    "title": "Inventario",
+    "labels": {
+      "name": "Nombre",
+      "brand": "Marca",
+      "amount": "Cantidad",
+      "action": "Acción"
+    },
+    "form": {
+      "title": "Formulario de Inventario",
+      "inputs-label": {
+        "date": "Fecha",
+        "item-name": "Nombre del Item",
+        "brand": "Marca",
+        "amount": "Cantidad"
+      },
+      "buttons": {
+        "add-picture": "Añadir una Imagen",
+        "add-item": "Añadir Item",
+        "reset": "Limpiar"
+      }
+    }
+  },
+  "home": {
+    "title": "Home",
+    "sections": {
+      "services": "Servicios",
+      "coupons": "Cupones"
+    }
   }
 }

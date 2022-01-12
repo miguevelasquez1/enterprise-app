@@ -1,12 +1,52 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>New Service</ion-title>
-    <ion-icon class="ion-padding" name="close-outline" slot="end" (click)="dismiss()"></ion-icon>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen>
+  <ion-card style="height: 90%">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">New Service</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="height: 90%">
+      <form class="full-height">
+        <ion-grid style="height: 90%">
+          <ion-row class="full-height ion-align-items-center">
+            <ion-col>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item lines="none">
+                      <ion-label>Title</ion-label>
+                      <ion-input class="input-title"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item lines="none">
+                      <ion-label>Description</ion-label>
+                      <ion-textarea maxlength="120"></ion-textarea>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item lines="none">
+                      <ion-label>Price</ion-label>
+                      <ion-input></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-align-items-end">
+            <ion-col>
+              <ion-button expand="block"> hola </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-<ion-content>
-  <ion-card>
+  <!-- <ion-card>
     <img [src]="homeService.image" alt="" />
     <ion-grid *ngIf="image">
       <ion-row class="ion-text-center ion-margin">
@@ -72,9 +112,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
+  </ion-card> -->
 </ion-content>
-
-<ion-footer>
-  <ion-button expand="block">Save</ion-button>
-</ion-footer>

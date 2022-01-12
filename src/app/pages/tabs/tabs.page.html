@@ -1,5 +1,10 @@
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" translucent="true">
+    <ion-tab-button tab="home" layout="icon-top">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>{{ 'tabs.home.title' | translate }}</ion-label>
+    </ion-tab-button>
+
     <ion-tab-button tab="inventory" layout="icon-top">
       <ion-icon name="file-tray-stacked"></ion-icon>
       <ion-label>{{ 'tabs.inventory.title' | translate }}</ion-label>
@@ -9,11 +14,6 @@
       <ion-icon name="albums"></ion-icon>
       <ion-label>{{ 'tabs.routes.title' | translate }}</ion-label>
     </ion-tab-button>
-
-    <!-- <ion-tab-button tab="home" layout="icon-top">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button> -->
 
     <!-- <ion-tab-button tab="charts" layout="icon-top">
       <ion-icon name="pie-chart"></ion-icon>

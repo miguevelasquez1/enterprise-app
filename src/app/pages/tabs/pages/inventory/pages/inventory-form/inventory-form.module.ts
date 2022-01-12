@@ -6,9 +6,11 @@ import { InventoryFormPage } from './inventory-form.page';
 import { InventoryFormPageRoutingModule } from './inventory-form-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
+    TranslateModule,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,

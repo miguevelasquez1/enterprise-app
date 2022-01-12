@@ -7,103 +7,118 @@
       slot="start"
     ></ion-icon>
     <ion-title
-      >{{recordsService.recordForm.get('$key').value ? 'Actualizar Ruta' : 'Nueva Ruta'}}</ion-title
+      >{{recordsService.recordForm.get('$key').value ? 'routes.form.title' : 'routes.form.title' |
+      translate}}</ion-title
     >
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="oli">
-    <ion-grid>
-      <ion-row>
-        <ion-col class="ion-align-items-center" class="ion-justify-content-center" size="12">
-          <form [formGroup]="recordsService.recordForm" (ngSubmit)="onSubmit()">
-            <ion-input type="hidden" formControlName="$key" value="fiasdhfjkahsdkf"> </ion-input>
+  <ion-grid class="margin-bottom">
+    <ion-row>
+      <ion-col class="ion-align-items-center" class="ion-justify-content-center" size="12">
+        <form [formGroup]="recordsService.recordForm" (ngSubmit)="onSubmit()">
+          <ion-input type="hidden" formControlName="$key" value="fiasdhfjkahsdkf"> </ion-input>
 
-            <ion-segment formControlName="state">
-              <ion-segment-button class="wait-segment-button" value="enEspera">
-                <ion-label>En espera...</ion-label>
-              </ion-segment-button>
-              <ion-segment-button class="success-segment-button" value="realizado">
-                <ion-label>Realizado</ion-label>
-              </ion-segment-button>
-            </ion-segment>
+          <ion-segment formControlName="state">
+            <ion-segment-button class="wait-segment-button" value="enEspera">
+              <ion-label>{{ 'routes.form.states.on-hold' | translate }}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="success-segment-button" value="realizado">
+              <ion-label>{{ 'routes.form.states.done' | translate}}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Date </ion-label>
-              <ion-datetime
-                required
-                formControlName="date"
-                (ionChange)="getDate($event)"
-                displayFormat="YYYY-MM-DD"
-                monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
-              >
-              </ion-datetime>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.date' | translate }}
+            </ion-label>
+            <ion-datetime
+              required
+              formControlName="date"
+              (ionChange)="getDate($event)"
+              displayFormat="YYYY-MM-DD"
+              monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+            >
+            </ion-datetime>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Seleccionar técnico </ion-label>
-              <ion-select required formControlName="employee">
-                <!-- <ion-select-option *ngFor="let technician of techniciansList">
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.choose-technical' | translate }}
+            </ion-label>
+            <ion-select required formControlName="employee">
+              <!-- <ion-select-option *ngFor="let technician of techniciansList">
                   {{technician.name}}
                 </ion-select-option> -->
-              </ion-select>
-            </ion-item>
+            </ion-select>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Nombre del cliente </ion-label>
-              <ion-input required type="name" name="nombreCliente" formControlName="client">
-              </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.client-name' | translate }}</ion-label
+            >
+            <ion-input required type="name" name="nombreCliente" formControlName="client">
+            </ion-input>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Cédula del cliente </ion-label>
-              <ion-input required name="cedulaCliente" formControlName="clientID"> </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.client-id' | translate }}
+            </ion-label>
+            <ion-input required name="cedulaCliente" formControlName="clientID"> </ion-input>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Servicio </ion-label>
-              <ion-input required type="text" name="servicio" formControlName="service">
-              </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.service' | translate }}
+            </ion-label>
+            <ion-input required type="text" name="servicio" formControlName="service"> </ion-input>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Especificaciones del servicio </ion-label>
-              <ion-input required type="text" name="producto" formControlName="product">
-              </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.service-specifications' | translate }}
+            </ion-label>
+            <ion-input required type="text" name="producto" formControlName="product"> </ion-input>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Direccion </ion-label>
-              <ion-input required name="direccion" formControlName="address"> </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.address' | translate }}
+            </ion-label>
+            <ion-input required name="direccion" formControlName="address"> </ion-input>
+          </ion-item>
 
-            <ion-item class="ion-margin" lines="none">
-              <ion-label position="stacked"> Precio </ion-label>
-              <ion-input required name="precio" formControlName="price"> </ion-input>
-            </ion-item>
+          <ion-item class="ion-margin" lines="none">
+            <ion-label position="stacked">
+              {{ 'routes.form.inputs-label.price' | translate }}
+            </ion-label>
+            <ion-input required name="precio" formControlName="price"> </ion-input>
+          </ion-item>
 
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <ion-button expand="block" type="onSubmit()">Save Route</ion-button>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <ion-button
-                    fill="outline"
-                    color="tertiary"
-                    expand="block"
-                    (click)="resetForm(recordsService.recordForm)"
-                    >Reset</ion-button
-                  >
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </form>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand="block" type="onSubmit()"
+                  >{{ 'routes.form.buttons.save-route' | translate }}</ion-button
+                >
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button
+                  fill="outline"
+                  color="tertiary"
+                  expand="block"
+                  (click)="resetForm(recordsService.recordForm)"
+                  >{{ 'routes.form.buttons.reset' | translate }}</ion-button
+                >
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

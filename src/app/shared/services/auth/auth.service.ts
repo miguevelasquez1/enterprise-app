@@ -1,10 +1,20 @@
+import * as firebase from 'firebase/auth';
+
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import {
   AngularFireDatabase,
   AngularFireList,
   SnapshotAction,
 } from '@angular/fire/compat/database';
 import { EventEmitter, Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first, map } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -42,6 +52,13 @@ export class AuthService {
 
   uid: string;
 
+  checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const pass = group.get('password').value;
+    const confirmPass = group.get('confirmPassword').value;
+    console.log(group.get('password').value, '1', group.get('confirmPassword').value, 'ahh');
+    return pass === confirmPass ? null : { notSame: true };
+  };
+
   constructor(
     // private angularFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
@@ -60,19 +77,23 @@ export class AuthService {
   }
 
   private buildFormAuth() {
-    this.authForm = this.formBuilder.group({
-      $key: [null, []],
-      displayName: ['', []],
-      email: [
-        '',
-        [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
-      ],
-      phoneNumber: ['', []],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      urlImage: ['', []],
-      company: [false, []],
-      person: [false, []],
-    });
+    this.authForm = this.formBuilder.group(
+      {
+        $key: [null, []],
+        displayName: ['', [Validators.required]],
+        email: [
+          '',
+          [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
+        ],
+        phoneNumber: ['', []],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+        urlImage: ['', []],
+        company: [false, []],
+        person: [false, []],
+      },
+      { validators: this.checkPasswords },
+    );
   }
 
   private buildFormCompany() {
@@ -196,11 +217,47 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
-  register(user: IUser): Promise<unknown> {
+  public async googleAuth() {
+    return await this.afAuth
+      .signInWithPopup(new firebase.GoogleAuthProvider())
+      .then((user: any) => {
+        console.log(user, 'reeees');
+        console.log(
+          user.additionalUserInfo.profile.given_name.split(' ')[0],
+          user.additionalUserInfo.profile.family_name.split(' ')[0],
+          'hola',
+        );
+        const displayName = `${user.additionalUserInfo.profile.given_name?.split(' ')[0]} ${
+          user.additionalUserInfo.profile.family_name?.split(' ')[0]
+        }`;
+        user.user.updateProfile({ displayName });
+        const data = {
+          email: user.additionalUserInfo.profile.email,
+          name: displayName,
+          phoneNumber: '',
+          uid: user.additionalUserInfo.profile.id,
+        };
+        if (this.isPersonForm) {
+          this.insertPerson(data);
+        } else {
+          this.insertCompany({ ...data, employees: [] });
+        }
+      });
+  }
+
+  sendVerificationMail() {
+    return new Promise(resolve => {
+      this.afAuth.authState.subscribe(auth => {
+        resolve(auth.sendEmailVerification());
+      });
+    });
+  }
+
+  register(user: IUser): Promise<any> {
     return new Promise((resolve, reject) => {
       this.afAuth
         .createUserWithEmailAndPassword(user.email, user.password)
-        .then(userData => {
+        .then(async userData => {
           console.log('register');
           this.uid = user.uid;
           const data = {
@@ -224,7 +281,7 @@ export class AuthService {
     });
   }
 
-  isAuth(): Observable<unknown> {
+  isAuth(): Observable<firebase.User> {
     return this.afAuth.authState.pipe(map(auth => auth));
   }
 

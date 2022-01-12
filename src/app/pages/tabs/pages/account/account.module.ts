@@ -1,16 +1,21 @@
-import { NgModule } from '@angular/core';
+import { AccountPage } from './account.page';
+import { AccountPageRoutingModule } from './account-routing.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { AccountPageRoutingModule } from './account-routing.module';
-
-import { AccountPage } from './account.page';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, IonicModule, AccountPageRoutingModule],
+  imports: [
+    TranslateModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    AccountPageRoutingModule,
+  ],
   declarations: [AccountPage],
 })
 export class AccountPageModule {}

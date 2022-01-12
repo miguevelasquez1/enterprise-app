@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title class="ion-text-center">Inventory</ion-title>
+    <ion-title class="ion-text-center">{{'inventory.title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,10 +12,10 @@
           <ion-card-content class="header-content">
             <ion-grid>
               <ion-row>
-                <ion-col>Name</ion-col>
-                <ion-col>Brand</ion-col>
-                <ion-col>Amount</ion-col>
-                <ion-col>Action</ion-col>
+                <ion-col>{{'inventory.labels.name' | translate}}</ion-col>
+                <ion-col>{{'inventory.labels.brand' | translate}}</ion-col>
+                <ion-col>{{'inventory.labels.amount' | translate}}</ion-col>
+                <ion-col>{{'inventory.labels.action' | translate}}</ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-content>
@@ -58,7 +58,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-fab vertical="bottom" horizontal="end">
+  <ion-fab class="margin-bottom" vertical="bottom" horizontal="end">
     <ion-fab-button routerLink="/inventory/inventory-form" (click)="newInventario()">
       <ion-icon class="add-icon" name="add"></ion-icon>
     </ion-fab-button>

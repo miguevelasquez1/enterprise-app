@@ -37,7 +37,7 @@ export class InventoryService {
     this.authService.isAuth().subscribe(auth => {
       this.userData$.next(auth);
     });
-    this.afAuth.authState.subscribe(data => (this.uid = data.uid));
+    this.afAuth.authState.subscribe(data => (this.uid = data?.uid));
   }
 
   private buildForm() {

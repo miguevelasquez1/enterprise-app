@@ -2,7 +2,9 @@
   <ion-input type="hidden" formControlName="id"> </ion-input>
 
   <ion-item lines="none" class="ion-margin">
-    <ion-label position="stacked"> Fecha </ion-label>
+    <ion-label position="stacked">
+      {{ 'inventory.form.inputs-label.date' | translate }}
+    </ion-label>
     <ion-datetime
       required
       formControlName="date"
@@ -27,7 +29,7 @@
       <ion-col class="ion-text-end">
         <ion-button mode="ios" color="tertiary" (click)="takePicture()">
           <ion-icon slot="start" name="camera-outline"></ion-icon>
-          Add a picture
+          {{ 'inventory.form.buttons.add-picture' | translate }}
         </ion-button>
       </ion-col>
     </ion-row>
@@ -69,17 +71,23 @@
   </div> -->
 
   <ion-item lines="none" class="ion-margin">
-    <ion-label position="stacked"> Nombre del producto </ion-label>
+    <ion-label position="stacked">
+      {{ 'inventory.form.inputs-label.item-name' | translate }}
+    </ion-label>
     <ion-input required type="name" name="nombre" minlength="1" formControlName="name"> </ion-input>
   </ion-item>
 
   <ion-item lines="none" class="ion-margin">
-    <ion-label position="stacked"> Marca </ion-label>
+    <ion-label position="stacked">
+      {{ 'inventory.form.inputs-label.brand' | translate }}
+    </ion-label>
     <ion-input required type="name" name="marca" formControlName="brand"> </ion-input>
   </ion-item>
 
   <ion-item lines="none" class="ion-margin">
-    <ion-label position="stacked"> Cantidad </ion-label>
+    <ion-label position="stacked">
+      {{ 'inventory.form.inputs-label.amount' | translate }}
+    </ion-label>
     <ion-input required type="number" name="cantidad" formControlName="amount"> </ion-input>
   </ion-item>
 
@@ -92,7 +100,7 @@
           type="onSubmit()"
           [disabled]="!inventoryService.inventarioForm.valid || button"
         >
-          Agregar producto
+          {{ 'inventory.form.buttons.add-item' | translate }}
         </ion-button>
       </ion-col>
     </ion-row>
@@ -106,7 +114,7 @@
           expand="block"
           (click)="inventoryService.resetForm(inventoryService.inventarioForm)"
         >
-          Reset
+          {{ 'inventory.form.buttons.reset' | translate }}
         </ion-button>
       </ion-col>
     </ion-row>
