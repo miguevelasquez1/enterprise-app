@@ -1,13 +1,6 @@
 {
-  "appId": "aes.app.com",
-  "appName": "App-Servicio-Tecnico",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
+  "appId": "com.enterprise.app",
+  "appName": "app-enterprise",
   "webDir": "www",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  },
-  "cordova": {}
+  "bundledWebRuntime": false
 }

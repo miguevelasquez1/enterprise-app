@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'home.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="full-height">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-card class="services-card" (click)="navigateToServices()">
+          <ion-card-header>
+            <ion-card-title color="light">
+              {{ 'home.sections.services' | translate }}
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-card class="coupons-card" (click)="navigateToCoupons()">
+          <ion-card-header>
+            <ion-card-title color="light">
+              {{ 'home.sections.coupons' | translate }}
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

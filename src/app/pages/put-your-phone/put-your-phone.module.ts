@@ -1,13 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-
-import { PutYourPhonePageRoutingModule } from './put-your-phone-routing.module';
-
+import { NgModule } from '@angular/core';
 import { PutYourPhonePage } from './put-your-phone.page';
-import { SMS } from '@ionic-native/sms/ngx';
+import { PutYourPhonePageRoutingModule } from './put-your-phone-routing.module';
 
 @NgModule({
   imports: [
@@ -15,7 +12,7 @@ import { SMS } from '@ionic-native/sms/ngx';
     CommonModule,
     FormsModule,
     IonicModule,
-    PutYourPhonePageRoutingModule
+    PutYourPhonePageRoutingModule,
   ],
   declarations: [PutYourPhonePage],
 })

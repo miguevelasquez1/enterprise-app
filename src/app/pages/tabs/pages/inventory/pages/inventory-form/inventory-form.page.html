@@ -1,0 +1,23 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon
+      class="arrow-back"
+      name="arrow-back-outline"
+      routerLink="/inventory"
+      slot="start"
+      (click)="inventarioService.resetForm(inventarioService.inventarioForm)"
+    >
+    </ion-icon>
+    <ion-title>{{'inventory.form.title' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="margin-bottom">
+    <ion-row>
+      <ion-col size="12">
+        <app-form></app-form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

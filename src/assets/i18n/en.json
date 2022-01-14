@@ -1,0 +1,139 @@
+{
+  "welcome-slide": {
+    "title": "Welcome to the Enterprise App",
+    "buttons": {
+      "sign-in": "Sign In",
+      "sign-up": "Sign Up"
+    }
+  },
+  "choose-your-category": {
+    "title": "Choose your Category",
+    "options": {
+      "company": "Company",
+      "person": "Person"
+    }
+  },
+  "next": "next",
+  "sign-up": {
+    "title": "Sign Up",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "create-an-account": "Create an Account",
+    "google-auth": "Sign Up with Google",
+    "error-messages": {
+      "invalid-argument": "An invalid argument was provided",
+      "invalid-disabled-field": "The value provided for the user property is invalid",
+      "argument-error": "Some data is needed",
+      "email-already-in-use": "Email is already in use",
+      "invalid-email": "Invalid email, try with other one",
+      "weak-password": "Weak password, try again",
+      "missing-email": "Missing email. Please type one",
+      "password-no-match": "Passwords do not match",
+      "minium-characters-password": "The password must have a minimum of 8 characters"
+    }
+  },
+  "login": {
+    "title": "Hi Again!",
+    "email": "Email",
+    "password": "Password",
+    "sign-in": "Sign In"
+  },
+  "tabs": {
+    "profile": {
+      "title": "Profile"
+    },
+    "routes": {
+      "title": "Routes"
+    },
+    "inventory": {
+      "title": "Inventory"
+    },
+    "home": {
+      "title": "Home"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "personal-data": "Personal Data",
+    "settings": "settings"
+  },
+  "personal-data": {
+    "title": "Personal Data",
+    "name": "Name",
+    "email": "Email",
+    "save": "Save"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language",
+      "english": "English",
+      "spanish": "Spanish",
+      "portuguese": "Portuguese",
+      "german": "German"
+    },
+    "sign-out": "Sign Out"
+  },
+  "routes": {
+    "title": "My Routes",
+    "search-placeholder": "Search",
+    "labels": {
+      "date": "Date",
+      "service": "Service",
+      "address": "Address",
+      "action": "Action"
+    },
+    "form": {
+      "title": "New Route",
+      "states": {
+        "on-hold": "On hold",
+        "done": "Done"
+      },
+      "inputs-label": {
+        "date": "Date",
+        "choose-technical": "Choose technical",
+        "client-name": "Client Name",
+        "client-id": "Client ID",
+        "service": "Service",
+        "service-specifications": "Service Specifications",
+        "address": "Address",
+        "price": "Price"
+      },
+      "buttons": {
+        "save-route": "Save Route",
+        "reset": "Reset"
+      }
+    }
+  },
+  "inventory": {
+    "title": "Inventory",
+    "labels": {
+      "name": "Name",
+      "brand": "Brand",
+      "amount": "Amount",
+      "action": "Action"
+    },
+    "form": {
+      "title": "Inventory Form",
+      "inputs-label": {
+        "date": "Date",
+        "item-name": "Item Name",
+        "brand": "Brand",
+        "amount": "Amount"
+      },
+      "buttons": {
+        "add-picture": "Add a Picture",
+        "add-item": "Add Item",
+        "reset": "Reset"
+      }
+    }
+  },
+  "home": {
+    "title": "Home",
+    "sections": {
+      "services": "Services",
+      "coupons": "Coupons"
+    }
+  }
+}

@@ -1,37 +1,43 @@
 @font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+  font-family: Poppins-SemiBold;
+  src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
 }
 
 @font-face {
-    font-family: Poppins-Medium;
-    src: url('../../../assets/fonts/Poppins-Medium.ttf');
+  font-family: Poppins-Medium;
+  src: url('../../../assets/fonts/Poppins-Medium.ttf');
 }
 
 .arrow-back {
-    font-size: 24px;
-    margin-left: 5px;
+  font-size: 24px;
+  margin-left: 5px;
 }
 
-h1,ion-input {
-    font-family: Poppins-SemiBold;
+.global-grid,
+.global-row {
+  height: 100%;
+}
+
+h1,
+ion-input {
+  font-family: Poppins-SemiBold;
 }
 
 h1 {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 ion-item {
-    margin: 15px;
-    --border-radius: 15px;
-    --border-width: 1px;
+  margin: 15px;
+  --border-radius: 15px;
+  --border-width: 1px;
 }
 
 ion-select {
-    padding-left: 0;
-    font-family: Poppins-Medium;
+  padding-left: 0;
+  font-family: Poppins-Medium;
 }
 
 ion-input {
-    --color: var(--ion-color-dark-tint);
+  --color: var(--ion-color-dark-tint);
 }

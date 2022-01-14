@@ -10,21 +10,104 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
-// .alert_submit {
-//     font-family: ‘Segoe UI’, Tahoma, Geneva, Verdana, sans-serif;
-// }
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('./assets/fonts/Poppins-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('./assets/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('./assets/fonts/Poppins-Regular.ttf');
+}
+
+.tabs-inner {
+  position: unset !important;
+}
+
+h1 {
+  font-family: Poppins-SemiBold;
+  font-size: 48px;
+}
+
+form {
+  ion-item {
+    --border-radius: 15px;
+    --border-width: 1px;
+    ion-label {
+      ion-text, ion-icon {
+        color: var(--ion-color-medium-tint);
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        padding-right: 5px;
+      }
+    }
+
+    ion-input {
+      --padding-start: 5px !important;
+    }
+  }
+}
+
+
+ion-input {
+  font-family: Poppins-SemiBold;
+}
+
+ion-button {
+  text-transform: none;
+  --border-radius: 12px;
+  font-family: Poppins-Regular;
+}
+
+ion-checkbox {
+  --border-radius: 10px;
+}
+
+.arrow-back {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-height-80 {
+  height: 80%;
+}
+
+.margin-bottom {
+  margin-bottom: 20%;
+}
+
+.image-preview-modal {
+  --height: 50%;
+  --width: 80%;
+
+  @media only screen and (min-width: 768px) {
+  --height: 80%;
+  }
+}

@@ -1,18 +1,22 @@
-@font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+ion-content {
+  // top: 25%;
+}
+
+ion-grid,
+ion-row {
+  height: 100%;
 }
 
 h1 {
-    font-family: Poppins-Semibold;
-    font-size: 56px;
+  font-family: Poppins-Semibold;
+  font-size: 56px;
 }
 
 ion-footer {
-    background-color: #fff;
-    color: black;
+  background-color: var(--ion-color-dark-contrast);
+  color: var(--ion-color-dark);
 }
 
 .padding-segment-button {
-    padding: 15px;
+  padding: 15px;
 }

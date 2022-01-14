@@ -1,0 +1,28 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" translucent="true">
+    <ion-tab-button tab="home" layout="icon-top">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>{{ 'tabs.home.title' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="inventory" layout="icon-top">
+      <ion-icon name="file-tray-stacked"></ion-icon>
+      <ion-label>{{ 'tabs.inventory.title' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="my-routes" layout="icon-top">
+      <ion-icon name="albums"></ion-icon>
+      <ion-label>{{ 'tabs.routes.title' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="charts" layout="icon-top">
+      <ion-icon name="pie-chart"></ion-icon>
+      <ion-label>Charts</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="account" layout="icon-top" class="tab-trash">
+      <ion-icon name="person-circle"></ion-icon>
+      <ion-label>{{ 'tabs.profile.title' | translate }}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

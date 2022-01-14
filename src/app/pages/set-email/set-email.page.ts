@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-set-email',
@@ -7,16 +8,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./set-email.page.scss'],
 })
 export class SetEmailPage implements OnInit {
+  constructor(public authService: AuthService) {}
 
-  constructor(
-    public authService: AuthService
-  ) { }
+  ngOnInit(): void {}
 
-  ngOnInit() {
-  }
-
-  testMethod() {
-    console.log(this.authService.authForm.value, 'authValue');
-  }
-
+  testMethod(): void {}
 }

@@ -1,0 +1,9 @@
+ion-item {
+  --border-radius: 10px;
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-light);
+
+  ion-select-option {
+    background: var(--ion-color-dark);
+  }
+}

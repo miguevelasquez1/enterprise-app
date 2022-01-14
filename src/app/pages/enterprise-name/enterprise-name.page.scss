@@ -1,25 +1,30 @@
 @font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+  font-family: Poppins-SemiBold;
+  src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+}
+
+.global-grid,
+.global-row {
+  height: 100%;
 }
 
 h1 {
-    font-family: Poppins-SemiBold;
-    font-size: 48px;
+  font-family: Poppins-SemiBold;
+  font-size: 48px;
 }
 
 ion-item {
-    margin: 15px;
-    --border-radius: 15px;
-    --border-width: 1px;
+  margin: 15px;
+  --border-radius: 15px;
+  --border-width: 1px;
 }
 
 ion-input {
-    font-family: Poppins-Semibold;
-    --color: var(--ion-color-dark-tint);
+  font-family: Poppins-Semibold;
+  --color: var(--ion-color-dark-tint);
 }
 
 .arrow-back {
-    font-size: 24px;
-    margin-left: 5px;
+  font-size: 24px;
+  margin-left: 5px;
 }

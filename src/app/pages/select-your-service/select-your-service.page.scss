@@ -10,20 +10,38 @@ h1 {
 
 ion-card {
     font-family: Poppins-SemiBold;
+<<<<<<< HEAD
     --color: #000;
+=======
+    --color: var(--ion-color-dark);
+
+    &.active {
+      border: 1px solid var(--ion-color-primary) !important;
+    }
+>>>>>>> intento
 }
 
 .arrow-back {
     font-size: 24px;
     margin-left: 5px;
 }
+<<<<<<< HEAD
 
 ion-card.active {
     border: 2px solid var(--ion-color-primary) !important;
 }
 
+=======
+>>>>>>> intento
 @media only screen and (max-width: 330px) {
     ion-card-content {
         font-size: 12px !important;
     }
 }
+<<<<<<< HEAD
+=======
+
+.global-grid, .global-row {
+  height: 100%;
+}
+>>>>>>> intento

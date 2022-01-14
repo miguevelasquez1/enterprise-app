@@ -1,0 +1,16 @@
+// .tabs-inner {
+//   position: relative;
+
+//   flex: 1;
+
+//   contain: layout size style;
+// }
+
+ion-tab-bar {
+  border-radius: 100px;
+  margin: 15px;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  border: 1px var(--ion-color-light) solid;
+}

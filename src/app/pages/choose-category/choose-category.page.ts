@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-choose-category',
@@ -7,24 +8,19 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./choose-category.page.scss'],
 })
 export class ChooseCategoryPage implements OnInit {
+  constructor(public authService: AuthService) {}
 
-  constructor(
-    public authService: AuthService
-  ) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  public selectOne(e, option) {
-    if (option === 'company' && e) {
+  public selectOne(e: any, option: string) {
+    if (option === 'company' && e.detail.checked) {
       this.authService.authForm.get('person').setValue(false);
-    } else if (option === 'person' && e) {
+    } else if (option === 'person' && e.detail.checked) {
       this.authService.authForm.get('company').setValue(false);
     }
   }
 
-  public selectForm() {
-    this.authService.authForm.get('person').value ? this.authService.isPersonForm = true : this.authService.isPersonForm = false;
+  public selectForm(): void {
+    this.authService.isPersonForm = this.authService.authForm.get('person').value;
   }
-
 }

@@ -1,0 +1,139 @@
+{
+  "welcome-slide": {
+    "title": "Willkommen in der Unternehmens-App",
+    "buttons": {
+      "sign-in": "Geraten In",
+      "sign-up": "Einchecken"
+    }
+  },
+  "choose-your-category": {
+    "title": "Wählen Sie Ihre Kategorie",
+    "options": {
+      "company": "Begleitung",
+      "person": "Person"
+    }
+  },
+  "next": "nächste",
+  "sign-up": {
+    "title": "Einchecken",
+    "name": "Name",
+    "email": "Email",
+    "password": "Passwort",
+    "create-an-account": "Ein Konto erstellen",
+    "google-auth": "Melden Sie sich bei Google an",
+    "error-messages": {
+      "invalid-argument": "Es wurde ein ungültiges Argument angegeben",
+      "invalid-disabled-field": "Der für die Benutzereigenschaft angegebene Wert ist ungültig",
+      "argument-error": "Einige Daten werden benötigt",
+      "email-already-in-use": "E-Mail wird bereits verwendet",
+      "invalid-email": "Ungültige E-Mail, versuchen Sie es mit einer anderen.",
+      "weak-password": "Schwaches Passwort, versuche es noch einmal",
+      "missing-email": "Fehlende E-Mail. Bitte geben Sie eine ein",
+      "password-no-match": "Passwörter stimmen nicht überein",
+      "minium-characters-password": "Das Passwort muss mindestens 8 Zeichen lang sein"
+    }
+  },
+  "login": {
+    "title": "Hallo Nochmal!",
+    "email": "Email",
+    "password": "Passwort",
+    "sign-in": "Geraten In"
+  },
+  "tabs": {
+    "profile": {
+      "title": "Profil"
+    },
+    "routes": {
+      "title": "Routen"
+    },
+    "inventory": {
+      "title": "Inventar"
+    },
+    "home": {
+      "title": "Home"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "personal-data": "Persönliche Daten",
+    "settings": "Konfigurationen"
+  },
+  "personal-data": {
+    "title": "Persönliche Daten",
+    "name": "Name",
+    "email": "Email",
+    "save": "Speichern"
+  },
+  "settings": {
+    "title": "Konfigurationen",
+    "language": {
+      "title": "Sprache",
+      "english": "Englisch",
+      "spanish": "Spanisch",
+      "portuguese": "Portugiesisch",
+      "german": "Deutsch"
+    },
+    "sign-out": "Austragen"
+  },
+  "routes": {
+    "title": "Meine Routen",
+    "search-placeholder": "Suche",
+    "labels": {
+      "date": "Datum",
+      "service": "Service",
+      "address": "Adresse",
+      "action": "Aktion"
+    },
+    "form": {
+      "title": "neue Route",
+      "states": {
+        "on-hold": "In Wartestellung",
+        "done": "Erledigt"
+      },
+      "inputs-label": {
+        "date": "Datum",
+        "choose-technical": "Wähle Technisch",
+        "client-name": "Kundenname",
+        "client-id": "Kundenidentifikation",
+        "service": "Service",
+        "service-specifications": "Leistungsbeschreibung",
+        "address": "Adresse",
+        "price": "Preis"
+      },
+      "buttons": {
+        "save-route": "Route Hinzufügen",
+        "reset": "Zurücksetzen"
+      }
+    }
+  },
+  "inventory": {
+    "title": "Inventário",
+    "labels": {
+      "name": "Nome",
+      "brand": "Marca",
+      "amount": "Montante",
+      "action": "Açao"
+    },
+    "form": {
+      "title": "Inventar",
+      "inputs-label": {
+        "date": "Datum",
+        "item-name": "Artikelname",
+        "brand": "Marke",
+        "amount": "Höhe"
+      },
+      "buttons": {
+        "add-picture": "Bild Hinzufügen",
+        "add-item": "Artikel Hinzufügen",
+        "reset": "Zurücksetzen"
+      }
+    }
+  },
+  "home": {
+    "title": "Heimat",
+    "sections": {
+      "services": "Dienstleistungen",
+      "coupons": "Gutscheine"
+    }
+  }
+}
