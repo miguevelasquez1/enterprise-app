@@ -1,47 +1,34 @@
 @font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+  font-family: Poppins-SemiBold;
+  src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
 }
 
 h1 {
-    font-family: Poppins-SemiBold;
-    font-size: 42px;
+  font-family: Poppins-SemiBold;
+  font-size: 42px;
 }
 
 ion-card {
-    font-family: Poppins-SemiBold;
-<<<<<<< HEAD
-    --color: #000;
-=======
-    --color: var(--ion-color-dark);
+  font-family: Poppins-SemiBold;
+  --color: var(--ion-color-dark);
 
-    &.active {
-      border: 1px solid var(--ion-color-primary) !important;
-    }
->>>>>>> intento
+  &.active {
+    border: 1px solid var(--ion-color-primary) !important;
+  }
 }
 
 .arrow-back {
-    font-size: 24px;
-    margin-left: 5px;
-}
-<<<<<<< HEAD
-
-ion-card.active {
-    border: 2px solid var(--ion-color-primary) !important;
+  font-size: 24px;
+  margin-left: 5px;
 }
 
-=======
->>>>>>> intento
 @media only screen and (max-width: 330px) {
-    ion-card-content {
-        font-size: 12px !important;
-    }
+  ion-card-content {
+    font-size: 12px !important;
+  }
 }
-<<<<<<< HEAD
-=======
 
-.global-grid, .global-row {
+.global-grid,
+.global-row {
   height: 100%;
 }
->>>>>>> intento
