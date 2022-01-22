@@ -1,6 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
+import { Globals } from 'src/app/globals';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { SignUpPage } from './sign-up.page';
@@ -17,5 +18,6 @@ import { TranslateModule } from '@ngx-translate/core';
     SignUpPageRoutingModule,
   ],
   declarations: [SignUpPage],
+  providers: [Globals]
 })
 export class SignUpPageModule {}

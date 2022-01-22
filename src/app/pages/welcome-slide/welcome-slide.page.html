@@ -2,7 +2,10 @@
   <ion-grid>
     <ion-row class="ion-align-items-center ion-justify-content-center">
       <ion-col size-xl="8">
-        <h1>{{'welcome-slide.title' | translate}}</h1>
+        <h1>
+          {{ (globals.isEnterprise ? 'enterprise-app.welcome-slide.title' :
+          'customer-app.welcome-slide.title') | translate}}
+        </h1>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -14,14 +17,20 @@
       <ion-col>
         <ion-segment mode="ios" value="login">
           <ion-segment-button class="padding-segment-button" routerLink="/login" value="login">
-            <ion-label>{{ 'welcome-slide.buttons.sign-in' | translate }}</ion-label>
+            <ion-label
+              >{{ (globals.isEnterprise ? 'enterprise-app.welcome-slide.buttons.sign-in' :
+              'customer-app.welcome-slide.buttons.sign-in') | translate }}</ion-label
+            >
           </ion-segment-button>
           <ion-segment-button
             class="padding-segment-button"
             value="sign-up"
-            routerLink="/choose-category"
+            [routerLink]="globals.isEnterprise ? ['/choose-category'] : ['/sign-up']"
           >
-            <ion-label>{{ 'welcome-slide.buttons.sign-up' | translate }}</ion-label>
+            <ion-label
+              >{{ (globals.isEnterprise ? 'enterprise-app.welcome-slide.buttons.sign-up' :
+              'customer-app.welcome-slide.buttons.sign-up') | translate }}</ion-label
+            >
           </ion-segment-button>
         </ion-segment>
       </ion-col>

@@ -1,6 +1,7 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './shared/guards/auth.guard';
+import { IsEnterpriseGuard } from './guards/is-enterprise/is-enterprise.guard';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
       import('./pages/choose-category/choose-category.module').then(
         m => m.ChooseCategoryPageModule,
       ),
+      canActivate: [IsEnterpriseGuard]
   },
   {
     path: 'set-email',

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Globals } from 'src/app/globals';
+
 @Component({
   selector: 'app-welcome-slide',
   templateUrl: './welcome-slide.page.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeSlidePage implements OnInit {
 
-  constructor() { }
+  constructor(public globals: Globals) { }
 
   ngOnInit() {
   }

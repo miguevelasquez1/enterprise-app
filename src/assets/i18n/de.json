@@ -1,9 +1,20 @@
 {
-  "welcome-slide": {
-    "title": "Willkommen in der Unternehmens-App",
-    "buttons": {
-      "sign-in": "Geraten In",
-      "sign-up": "Einchecken"
+  "enterprise-app": {
+    "welcome-slide": {
+      "title": "Willkommen in der Unternehmens-App",
+      "buttons": {
+        "sign-in": "Geraten In",
+        "sign-up": "Einchecken"
+      }
+    }
+  },
+  "customer-app": {
+    "welcome-slide": {
+      "title": "Willkommen in der Unternehmens-App",
+      "buttons": {
+        "sign-in": "Geraten In",
+        "sign-up": "Einchecken"
+      }
     }
   },
   "choose-your-category": {
@@ -135,5 +146,48 @@
       "services": "Dienstleistungen",
       "coupons": "Gutscheine"
     }
+  },
+  "services": {
+    "title": "Dienstleistungen",
+    "add-new-service": "Neuen Dienst hinzufügen",
+    "edit": "Bearbeiten",
+    "request-it": "Fordere es an",
+    "no-services-yet": "Noch keine Dienstleistungen",
+    "no-able-services": "Bisher keine fähigen Dienste",
+    "service-form": {
+      "preview": "Vorschau",
+      "request-for-it": "Bitte darum",
+      "title-input": "Titel",
+      "description-input": "Bezeichnung",
+      "add-service-button": "Dienst hinzufügen",
+      "update-service-button": "Update-Service"
+    },
+    "request-form": {
+      "title": "Anfrage",
+      "set-an-address": "Eine Adresse festlegen",
+      "condition-description": "Beschreibung der Situation",
+      "description-danger": "Geben Sie eine kurze Beschreibung ein.",
+      "phone-number": "Geben Sie eine kurze Beschreibung ein.",
+      "phone-number-danger": "Die Nummer muss 10 Zeichen lang sein.",
+      "price": "Preis:",
+      "request-button": "Fordere es an",
+      "address-danger": "Geben Sie bitte eine Adresse an.",
+      "addresses": {
+        "title": "Fügen Sie eine Adresse hinzu oder wählen Sie eine aus",
+        "address-placeholder": "Gib eine Adresse ein"
+      }
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "service-detail": {
+        "title": "Service:",
+        "description-label": "Beschreibung:",
+        "address-label": "die Anschrift:",
+        "phone-number-label": "Telefonnummer:"
+      }
+    }
+  },
+  "coupons": {
+    "title": "Gutscheine"
   }
 }

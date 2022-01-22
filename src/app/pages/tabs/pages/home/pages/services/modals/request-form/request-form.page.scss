@@ -1,0 +1,36 @@
+ion-title {
+  font-family: Poppins-Bold;
+  font-size: 20px;
+}
+
+ion-content {
+  ion-item {
+    --border-radius: 15px;
+    --border-width: 1px;
+
+    ion-label {
+
+      ion-text,
+      ion-icon {
+        color: var(--ion-color-medium-tint);
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        padding-right: 5px;
+      }
+    }
+
+    ion-input {
+      --padding-start: 5px !important;
+    }
+  }
+}
+
+
+ion-footer {
+  ion-text {
+    font-family: Poppins-Medium;
+  }
+}

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <ion-item>
+          <h2>{{ 'services.request-form.addresses.title' | translate }}</h2>
+          <div class="ion-text-end">
+            <ion-icon (click)="dismissModal()" name="close-outline"></ion-icon>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="9" class="address-input">
+        <ion-item lines="none">
+          <ion-label><ion-icon name="pin-sharp"></ion-icon></ion-label>
+          <ion-input
+            [formControl]="address"
+            placeholder="{{'services.request-form.addresses.address-placeholder' | translate}}"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button (click)="addAddress()" expand="block">
+          <ion-icon name="add-sharp"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let address of addresses">
+      <ion-col size="12">
+        <ion-item>
+          <ion-card>
+            <ion-card-header>
+              <ion-grid>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="7">
+                    <ion-card-title>{{address.address}}</ion-card-title>
+                  </ion-col>
+                  <ion-col>
+                    <ion-checkbox
+                      (ionChange)="setAddress($event, address.address)"
+                      [checked]="address.address === addressSelected"
+                    ></ion-checkbox>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button
+                      color="danger"
+                      expand="block"
+                      (click)="presentDeleteAlert(address.$key)"
+                    >
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

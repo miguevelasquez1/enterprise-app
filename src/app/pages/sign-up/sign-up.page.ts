@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -34,6 +35,7 @@ export class SignUpPage implements OnInit {
     public authService: AuthService,
     private router: Router,
     private alertCtrl: AlertController,
+    public globals: Globals,
     private _translate: TranslateService,
   ) {}
 

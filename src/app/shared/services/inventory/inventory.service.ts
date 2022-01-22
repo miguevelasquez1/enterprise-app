@@ -83,20 +83,22 @@ export class InventoryService {
   getInventory(): Promise<AngularFireList<IItem>> {
     return new Promise(resolve => {
       this.afAuth.authState.subscribe(res => {
-        this.aFDB
-          .object(`persons/${res.uid}`)
-          .snapshotChanges()
-          .subscribe(data => {
-            if (data.key === res.uid) {
-              console.log('persons');
-              this.inventoryRef = this.aFDB.list(`persons/${res.uid}/inventory`);
-              resolve(this.inventoryRef);
-            } else {
-              console.log('companies');
-              this.inventoryRef = this.aFDB.list(`companies/${res.uid}/inventory`);
-              resolve(this.inventoryRef);
-            }
-          });
+        if (res) {
+          this.aFDB
+            .object(`persons/${res.uid}`)
+            .snapshotChanges()
+            .subscribe(data => {
+              if (data.key === res.uid) {
+                console.log('persons');
+                this.inventoryRef = this.aFDB.list(`persons/${res.uid}/inventory`);
+                resolve(this.inventoryRef);
+              } else {
+                console.log('companies');
+                this.inventoryRef = this.aFDB.list(`companies/${res.uid}/inventory`);
+                resolve(this.inventoryRef);
+              }
+            });
+        }
       });
     });
   }

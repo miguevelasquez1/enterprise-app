@@ -1,6 +1,12 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>coupons</ion-title>
+    <ion-icon
+      slot="start"
+      class="ion-margin-horizontal"
+      [routerLink]="['/home']"
+      name="chevron-back-outline"
+    ></ion-icon>
+    <ion-title>{{ 'coupons.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 

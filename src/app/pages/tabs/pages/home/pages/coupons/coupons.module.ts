@@ -5,9 +5,10 @@ import { CouponsPageRoutingModule } from './coupons-routing.module';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, CouponsPageRoutingModule],
+  imports: [TranslateModule, CommonModule, FormsModule, IonicModule, CouponsPageRoutingModule],
   declarations: [CouponComponent, CouponsPage],
 })
 export class CouponsPageModule {}

@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     private router: Router,
   ) {}
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate() {
     return this.authService
       .getUser()
       .then(user => {

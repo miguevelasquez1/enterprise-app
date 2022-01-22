@@ -31,6 +31,7 @@ export class SettingsPage implements OnInit {
   }
 
   changeLanguage(e): void {
+    console.log(e.detail.value);
     this.translateService.use(e.detail.value);
   }
 

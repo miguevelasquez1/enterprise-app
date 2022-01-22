@@ -3,4 +3,8 @@ export class Service {
   title: string;
   description: string;
   image?: string;
+  price: string;
+  author: string;
+  hostUid: string;
+  isCompany: boolean;
 }

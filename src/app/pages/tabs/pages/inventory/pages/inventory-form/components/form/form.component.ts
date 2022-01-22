@@ -142,8 +142,8 @@ export class FormComponent implements OnInit {
       task
         .snapshotChanges()
         .pipe(
-          finalize(async () => {
-            await ref.getDownloadURL().subscribe(url => {
+          finalize(() => {
+            ref.getDownloadURL().subscribe(url => {
               const date = new Date();
               const monthNames = [
                 'January',
@@ -235,7 +235,7 @@ export class FormComponent implements OnInit {
   public async takePicture(): Promise<void> {
     const image = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Base64,
     });
 

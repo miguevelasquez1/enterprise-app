@@ -1,27 +1,65 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>services</ion-title>
+    <ion-icon
+      slot="start"
+      class="ion-margin-horizontal"
+      [routerLink]="['/home']"
+      name="chevron-back-outline"
+    ></ion-icon>
+    <ion-title>{{ 'services.title' | translate }}</ion-title>
+    <ion-badge
+      *ngIf="globals.isEnterprise"
+      [routerLink]="['notifications']"
+      class="ion-margin"
+      slot="end"
+      color="danger"
+    >
+      {{notificationsLength}}
+    </ion-badge>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="margin-bottom">
-    <ion-row *ngIf="!services" class="ion-margin">
-      <ion-col class="ion-text-center">
-        <ion-text>No services yet</ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="10" *ngFor="let service of services">
-        <app-service [service]="service"></app-service>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="8">
-        <ion-button (click)="presentServiceFormModal()" expand="block" fill="outline" color="light">
-          <ion-text color="dark">Add New Service</ion-text>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ng-container *ngIf="globals.isEnterprise; else clientView">
+    <ion-grid class="margin-bottom">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8">
+          <ion-button
+            (click)="presentServiceFormModal()"
+            expand="block"
+            fill="outline"
+            color="light"
+          >
+            <ion-text color="dark">{{ 'services.add-new-service' | translate }}</ion-text>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="services.length === 0" class="ion-margin">
+        <ion-col class="ion-text-center">
+          <ion-text>{{ 'services.no-services-yet' | translate }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10" *ngFor="let service of services">
+          <app-service [service]="service"></app-service>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+
+  <ng-template #clientView>
+    <ion-grid>
+      <ion-row *ngIf="services.length === 0" class="ion-margin">
+        <ion-col class="ion-text-center">
+          <ion-text>{{ 'services.no-able-services' | translate }}</ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10" *ngFor="let service of services">
+          <app-service [service]="service"></app-service>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
 </ion-content>

@@ -3,7 +3,7 @@
     <ion-icon
       class="arrow-back"
       name="chevron-back-outline"
-      [routerLink]="['/choose-category']"
+      [routerLink]="globals.isEnterprise ? ['/choose-category'] : ['/welcome-slide']"
       slot="start"
     >
     </ion-icon>

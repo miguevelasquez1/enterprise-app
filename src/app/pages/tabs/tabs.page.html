@@ -5,15 +5,19 @@
       <ion-label>{{ 'tabs.home.title' | translate }}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="inventory" layout="icon-top">
-      <ion-icon name="file-tray-stacked"></ion-icon>
-      <ion-label>{{ 'tabs.inventory.title' | translate }}</ion-label>
-    </ion-tab-button>
+    <ng-container *ngIf="globals.isEnterprise">
+      <ion-tab-button tab="inventory" layout="icon-top">
+        <ion-icon name="file-tray-stacked"></ion-icon>
+        <ion-label>{{ 'tabs.inventory.title' | translate }}</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="my-routes" layout="icon-top">
-      <ion-icon name="albums"></ion-icon>
-      <ion-label>{{ 'tabs.routes.title' | translate }}</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="my-routes" layout="icon-top">
+        <ion-icon name="albums"></ion-icon>
+        <ion-label>{{ 'tabs.routes.title' | translate }}</ion-label>
+      </ion-tab-button>
+    </ng-container>
+
+
 
     <!-- <ion-tab-button tab="charts" layout="icon-top">
       <ion-icon name="pie-chart"></ion-icon>

@@ -1,9 +1,20 @@
 {
-  "welcome-slide": {
-    "title": "Bem-vindo ao Aplicativo Corporativo",
-    "buttons": {
-      "sign-in": "Entrar",
-      "sign-up": "Check-in"
+  "enterprise-app": {
+    "welcome-slide": {
+      "title": "Bem-vindo ao Aplicativo Corporativo",
+      "buttons": {
+        "sign-in": "Entrar",
+        "sign-up": "Check-in"
+      }
+    }
+  },
+  "customer-app": {
+    "welcome-slide": {
+      "title": "Bem-vindo ao Aplicativo Corporativo",
+      "buttons": {
+        "sign-in": "Entrar",
+        "sign-up": "Check-in"
+      }
     }
   },
   "choose-your-category": {
@@ -135,5 +146,48 @@
       "services": "Serviços",
       "coupons": "Cupons"
     }
+  },
+  "services": {
+    "title": "Serviços",
+    "add-new-service": "Adicionar novo serviço",
+    "edit": "Editar",
+    "request-it": "Solicitá-lo",
+    "no-services-yet": "Nenhum serviço ainda",
+    "no-able-services": "Nenhum serviço capaz até o momento",
+    "service-form": {
+      "preview": "visualizar",
+      "request-for-it": "Solicite Isso",
+      "title-input": "Título",
+      "description-input": "Descrição",
+      "add-service-button": "Adicionar Serviço",
+      "update-service-button": "Satualize Serviço"
+    },
+    "request-form": {
+      "title": "Serviços",
+      "set-an-address": "Definir um Endereço",
+      "condition-description": "Descrição da Situação",
+      "description-danger": "Digite uma breve descrição.",
+      "phone-number": "Telefone para contato",
+      "phone-number-danger": "O número deve ter 10 caracteres.",
+      "price": "Preço:",
+      "request-button": "Solicitá-lo",
+      "address-danger": "Defina um endereço por favor.",
+      "addresses": {
+        "title": "Adicionar ou escolher um endereço",
+        "address-placeholder": "Insira um endereço"
+      }
+    },
+    "notifications": {
+      "title": "Notificações",
+      "service-detail": {
+        "title": "Serviço:",
+        "description-label": "Descrição:",
+        "address-label": "Direçao:",
+        "phone-number-label": "Número de telefone:"
+      }
+    }
+  },
+  "coupons": {
+    "title": "Cupons"
   }
 }

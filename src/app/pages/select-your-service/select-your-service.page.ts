@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild } from '@angular/core';
 
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { IonCard } from '@ionic/angular';

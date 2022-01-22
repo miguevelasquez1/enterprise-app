@@ -1,0 +1,40 @@
+h2 {
+  font-family: Poppins-Bold;
+}
+
+ion-button {
+  --border-radius: 5px;
+}
+
+ion-card {
+  width: 100%;
+}
+
+ion-card-title {
+  font-size: 20px;
+}
+
+.address-input {
+  ion-item {
+    --border-radius: 15px;
+    --border-width: 1px;
+
+    ion-label {
+
+      ion-text,
+      ion-icon {
+        color: var(--ion-color-medium-tint);
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      ion-icon {
+        padding-right: 5px;
+      }
+    }
+
+    ion-input {
+      --padding-start: 5px !important;
+    }
+  }
+}

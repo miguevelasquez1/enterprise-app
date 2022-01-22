@@ -1,6 +1,8 @@
 import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
 
+import { Globals } from 'src/app/globals';
+import { RequestFormPage } from '../../modals/request-form/request-form.page';
 import { Service } from '../../models/service';
 import { ServiceFormPage } from '../../modals/service-form/service-form.page';
 import { ServicesService } from '../../services/services/services.service';
@@ -14,6 +16,7 @@ export class ServiceComponent implements OnInit {
   @Input() service: Service;
 
   constructor(
+    public globals: Globals,
     private _alertCtrl: AlertController,
     private _servicesService: ServicesService,
     private _modalCtrl: ModalController,
@@ -33,6 +36,16 @@ export class ServiceComponent implements OnInit {
       swipeToClose: true,
       presentingElement: this._routerOutlet.nativeEl,
       cssClass: 'service-form-modal',
+    });
+
+    return await modal.present();
+  }
+
+  async presentRequestFormModal(): Promise<void> {
+    const modal = await this._modalCtrl.create({
+      componentProps: { service: this.service },
+      component: RequestFormPage,
+      swipeToClose: true,
     });
 
     return await modal.present();

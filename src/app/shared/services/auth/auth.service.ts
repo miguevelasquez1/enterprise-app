@@ -15,13 +15,15 @@ import {
   SnapshotAction,
 } from '@angular/fire/compat/database';
 import { EventEmitter, Injectable } from '@angular/core';
+// import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
+import { Observable, Subject } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Company } from '../../interfaces/company.interface';
+import { Customer } from '../../models/customer';
+import { Globals } from 'src/app/globals';
 import { IUser } from '../../interfaces/user.interface';
-// import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 import { Person } from '../../interfaces/person.interface';
 
 @Injectable({
@@ -36,9 +38,11 @@ export class AuthService {
 
   public personForm: FormGroup;
 
-  public personsList: AngularFireList<Person>;
+  public personList: AngularFireList<Person>;
 
   public companyList: AngularFireList<Company>;
+
+  public customerList: AngularFireList<Customer>;
 
   public currentUser: IUser;
 
@@ -64,16 +68,20 @@ export class AuthService {
     private formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
     private aFDB: AngularFireDatabase,
+    private _globals: Globals,
   ) {
+    console.log('a', this.aFDB.list('persons'));
     this._emitNumber = new EventEmitter<unknown>();
     this.userData$ = this.afAuth.authState;
     this.isPersonForm = true;
     this.buildFormAuth();
-    this.buildFormPerson();
-    this.buildFormCompany();
+    this.buildPersonForm();
+    this.buildCompanyForm();
+    this.buildCustomerForm();
 
-    this.personsList = this.aFDB.list('persons');
+    this.personList = this.aFDB.list('persons');
     this.companyList = this.aFDB.list('companies');
+    this.customerList = this.aFDB.list('customers');
   }
 
   private buildFormAuth() {
@@ -96,7 +104,7 @@ export class AuthService {
     );
   }
 
-  private buildFormCompany() {
+  private buildCompanyForm() {
     this.companyForm = this.formBuilder.group({
       $key: [null, []],
       name: ['', []],
@@ -106,7 +114,7 @@ export class AuthService {
     });
   }
 
-  private buildFormPerson() {
+  private buildPersonForm() {
     this.personForm = this.formBuilder.group({
       $key: [null, []],
       name: ['', []],
@@ -117,12 +125,63 @@ export class AuthService {
     });
   }
 
-  getUser(): Promise<unknown> {
+  private buildCustomerForm() {
+    this.personForm = this.formBuilder.group({
+      $key: [null, []],
+      name: ['', []],
+      email: ['', []],
+      phoneNumber: ['', []],
+      records: this.formBuilder.array([]),
+      inventory: this.formBuilder.array([]),
+      selectedAddress: ['', []],
+    });
+  }
+
+  getUser(): Promise<any> {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
 
   getPersons(): Observable<SnapshotAction<Person>[]> {
-    return this.personsList.snapshotChanges();
+    return this.personList.snapshotChanges();
+  }
+
+  getCustomers(): Observable<Customer[]> {
+    return this.customerList
+      .snapshotChanges()
+      .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))));
+  }
+
+  async getCurrentCustomer() {
+    const customer$ = new Subject<Customer>();
+    const user = await this.getUser();
+    this.getCustomers().subscribe(customers => {
+      customers.forEach(customer => {
+        if (user.uid === customer.$key) {
+          customer$.next(customer);
+        }
+      });
+    });
+    return customer$;
+  }
+
+  isCompany(): Promise<boolean> {
+    return new Promise(resolve => {
+      this.afAuth.authState.subscribe(res => {
+        console.log(res, 'ressss');
+        if (res) {
+          this.aFDB
+            .object(`persons/${res.uid}`)
+            .snapshotChanges()
+            .subscribe(data => {
+              if (data.key === res.uid) {
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+        }
+      });
+    });
   }
 
   insertPerson(person: Person): void {
@@ -136,7 +195,7 @@ export class AuthService {
   }
 
   updatePerson(person: Person): void {
-    this.personsList.update(person.$key, {
+    this.personList.update(person.$key, {
       name: person.name,
       email: person.email,
       phoneNumber: person.phoneNumber,
@@ -168,6 +227,26 @@ export class AuthService {
     });
   }
 
+  insertCustomer(customer: Customer): void {
+    const ref = this.aFDB.database.ref('customers');
+
+    ref.child(customer.uid).set({
+      name: customer.name,
+      email: customer.email,
+      phoneNumber: customer.phoneNumber,
+    });
+  }
+
+  updateCustomer(customer: Customer) {
+    console.log(customer, 'customer');
+    return this.customerList.update(customer.$key, {
+      name: customer.name,
+      email: customer.email,
+      phoneNumber: customer.phoneNumber,
+      addressSelected: customer.addressSelected ? customer.addressSelected : '',
+    });
+  }
+
   addEmployeeField(): void {
     this.employeeField.push(this.personForm);
   }
@@ -177,7 +256,7 @@ export class AuthService {
   }
 
   get inventory(): FormArray {
-    return this.companyForm.get('inventory') as FormArray;
+    return this.companyForm.get('Payment') as FormArray;
   }
 
   // getUsersByServerName(name: string): Observable<DocumentChangeAction<unknown>[]> {
@@ -254,6 +333,7 @@ export class AuthService {
   }
 
   register(user: IUser): Promise<any> {
+    console.log('weeeee');
     return new Promise((resolve, reject) => {
       this.afAuth
         .createUserWithEmailAndPassword(user.email, user.password)
@@ -267,11 +347,18 @@ export class AuthService {
             uid: userData.user.uid,
           };
           userData.user.updateProfile({ displayName: user.displayName });
-          if (this.isPersonForm) {
-            this.insertPerson(data);
+          console.log('hey');
+          if (this._globals.isEnterprise) {
+            if (this.isPersonForm) {
+              this.insertPerson(data);
+            } else {
+              this.insertCompany({ ...data, employees: [] });
+            }
           } else {
-            this.insertCompany({ ...data, employees: [] });
+            console.log('pasa');
+            this.insertCustomer(data);
           }
+
           resolve(userData);
         })
         .catch(err => {

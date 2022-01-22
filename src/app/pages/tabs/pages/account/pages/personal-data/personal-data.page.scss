@@ -1,20 +1,10 @@
-@font-face {
-  font-family: Poppins-Medium;
-  src: url('../../../../../../../assets/fonts/Poppins-Medium.ttf');
-}
-
-@font-face {
-  font-family: Poppins-Light;
-  src: url('../../../../../../../assets/fonts/Poppins-Light.ttf');
-}
-
-* {
-  font-family: Poppins-Medium;
-}
-
 .arrow-back {
   font-size: 24px;
   margin-left: 10px;
+}
+
+ion-title {
+  font-family: Poppins-Bold;
 }
 
 ion-icon:focus {

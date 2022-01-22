@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { MyRoutesPage } from './my-routes.page';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyRoutesPage
+    component: MyRoutesPage,
   },
   {
     path: 'routes-form',
-    loadChildren: () => import('./pages/routes-form/routes-form.module').then( m => m.RoutesFormPageModule)
-  }
+    loadChildren: () =>
+      import('./pages/routes-form/routes-form.module').then(m => m.RoutesFormPageModule),
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 
+import { Globals } from 'src/app/globals';
+import { NotificationsService } from './pages/notifications/services/notifications/notifications.service';
 import { Service } from './models/service';
 import { ServiceFormPage } from './modals/service-form/service-form.page';
 import { ServicesService } from './services/services/services.service';
@@ -13,16 +15,23 @@ import { map } from 'rxjs/operators';
 })
 export class ServicesPage implements OnInit {
   services: Service[] = [];
+  notificationsLength = 0;
 
   constructor(
+    public globals: Globals,
     private _servicesService: ServicesService,
+    private _notificationsService: NotificationsService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
   ) {
     console.log(this.services, 'services');
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    (await this._notificationsService.getNotifications()).subscribe(notifications => {
+      this.notificationsLength = notifications.length;
+    });
+  }
 
   async ionViewWillEnter() {
     (await this._servicesService.getServices())

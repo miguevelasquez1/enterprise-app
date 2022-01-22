@@ -1,0 +1,138 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col>
+          <ion-title>{{'services.request-form.title' | translate}}</ion-title>
+          <div class="ion-text-end">
+            <ion-icon (click)="dismissModal()" name="close-outline"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="requestService.requestForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button
+            [color]="address === '' ? 'danger' : ''"
+            (click)="presentAddressesModal()"
+            expand="block"
+          >
+            <ion-icon name="pin-sharp"></ion-icon>
+            {{address !== '' ? address : 'services.request-form.set-an-address' | translate}}
+            <ion-icon slot="end" name="caret-down-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-item lines="none">
+            <ion-label position="stacked"
+              >{{'services.request-form.condition-description' | translate}}</ion-label
+            >
+            <ion-textarea
+              formControlName="conditionDescription"
+              rows="4"
+              maxlength="256"
+            ></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col
+          size="10"
+          class="ion-text-center"
+          *ngIf="requestService.requestForm.controls.conditionDescription.invalid && (requestService.requestForm.controls.conditionDescription.dirty || requestService.requestForm.controls.conditionDescription.touched)"
+        >
+          <ion-text color="danger"
+            >{{'services.request-form.description-danger' | translate}}</ion-text
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-item lines="none">
+            <ion-label position="stacked"
+              >{{'services.request-form.phone-number' | translate}}</ion-label
+            >
+            <ion-input
+              #phoneNumber
+              formControlName="phoneNumber"
+              type="tel"
+              maxlength="10"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col
+          size="10"
+          class="ion-text-center"
+          *ngIf="requestService.requestForm.controls.phoneNumber.invalid && (requestService.requestForm.controls.phoneNumber.dirty || requestService.requestForm.controls.phoneNumber.touched)"
+        >
+          <ion-text color="danger"
+            >{{'services.request-form.phone-number-danger' | translate}}</ion-text
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-title color="dark"> {{service.title}} </ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" class="ion-text-center">
+        <ion-text color="dark"> {{service.author}} </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" class="ion-text-center">
+        <ion-text color="medium"> {{service.description}} </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="5" class="ion-text-center">
+        <ion-text color="dark"
+          >{{'services.request-form.price' | translate}} ${{service.price}}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-button
+          [disabled]="requestService.requestForm.controls.phoneNumber.invalid || requestService.requestForm.controls.conditionDescription.invalid"
+          expand="block"
+          color="tertiary"
+          (click)="sendRequest()"
+          >{{'services.request-form.request-button' | translate}}</ion-button
+        >
+      </ion-col>
+      <ion-col
+        size="10"
+        class="ion-text-center"
+        *ngIf="requestService.requestForm.controls.address.invalid && showAddressDanger; else success"
+      >
+        <ion-text color="danger">{{'services.request-form.address-danger' | translate}}</ion-text>
+      </ion-col>
+      <ng-template #success>
+        <ion-col
+          size="10"
+          class="ion-text-center"
+          *ngIf="showAddressDanger && requestService.requestForm.controls.address.valid "
+        >
+          <ion-text color="success">It's all right</ion-text>
+        </ion-col>
+      </ng-template>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

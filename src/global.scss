@@ -26,6 +26,11 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 @font-face {
+  font-family: Poppins-Bold;
+  src: url('./assets/fonts/Poppins-Bold.ttf');
+}
+
+@font-face {
   font-family: Poppins-SemiBold;
   src: url('./assets/fonts/Poppins-SemiBold.ttf');
 }
@@ -53,8 +58,11 @@ form {
   ion-item {
     --border-radius: 15px;
     --border-width: 1px;
+
     ion-label {
-      ion-text, ion-icon {
+
+      ion-text,
+      ion-icon {
         color: var(--ion-color-medium-tint);
         display: inline-block;
         vertical-align: middle;
@@ -108,6 +116,6 @@ ion-checkbox {
   --width: 80%;
 
   @media only screen and (min-width: 768px) {
-  --height: 80%;
+    --height: 80%;
   }
 }

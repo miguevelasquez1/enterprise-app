@@ -1,6 +1,6 @@
 {
-  "appId": "com.enterprise.app",
-  "appName": "app-enterprise",
+  "appId": "com.services.app",
+  "appName": "services-app",
   "webDir": "www",
   "bundledWebRuntime": false
 }

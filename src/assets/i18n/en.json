@@ -1,9 +1,41 @@
 {
-  "welcome-slide": {
-    "title": "Welcome to the Enterprise App",
-    "buttons": {
-      "sign-in": "Sign In",
-      "sign-up": "Sign Up"
+  "enterprise-app": {
+    "welcome-slide": {
+      "title": "Welcome to the Enterprise App",
+      "buttons": {
+        "sign-in": "Sign In",
+        "sign-up": "Sign Up"
+      }
+    }
+  },
+  "customer-app": {
+    "welcome-slide": {
+      "title": "Welcome to the Enterprise App",
+      "buttons": {
+        "sign-in": "Sign In",
+        "sign-up": "Sign Up"
+      }
+    }
+  },
+  "tabs": {
+    "profile": {
+      "title": "Profile"
+    },
+    "routes": {
+      "title": "Routes"
+    },
+    "inventory": {
+      "title": "Inventory"
+    },
+    "home": {
+      "title": "Home"
+    }
+  },
+  "home": {
+    "title": "Home",
+    "sections": {
+      "services": "Services",
+      "coupons": "Coupons"
     }
   },
   "choose-your-category": {
@@ -39,20 +71,6 @@
     "password": "Password",
     "sign-in": "Sign In"
   },
-  "tabs": {
-    "profile": {
-      "title": "Profile"
-    },
-    "routes": {
-      "title": "Routes"
-    },
-    "inventory": {
-      "title": "Inventory"
-    },
-    "home": {
-      "title": "Home"
-    }
-  },
   "profile": {
     "title": "Profile",
     "personal-data": "Personal Data",
@@ -74,6 +92,29 @@
       "german": "German"
     },
     "sign-out": "Sign Out"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "labels": {
+      "name": "Name",
+      "brand": "Brand",
+      "amount": "Amount",
+      "action": "Action"
+    },
+    "form": {
+      "title": "Inventory Form",
+      "inputs-label": {
+        "date": "Date",
+        "item-name": "Item Name",
+        "brand": "Brand",
+        "amount": "Amount"
+      },
+      "buttons": {
+        "add-picture": "Add a Picture",
+        "add-item": "Add Item",
+        "reset": "Reset"
+      }
+    }
   },
   "routes": {
     "title": "My Routes",
@@ -106,34 +147,47 @@
       }
     }
   },
-  "inventory": {
-    "title": "Inventory",
-    "labels": {
-      "name": "Name",
-      "brand": "Brand",
-      "amount": "Amount",
-      "action": "Action"
+  "services": {
+    "title": "Services",
+    "add-new-service": "Add New Service",
+    "edit": "Edit",
+    "request-it": "Request It",
+    "no-services-yet": "No services yest",
+    "no-able-services": "No able services so far",
+    "service-form": {
+      "preview": "Preview",
+      "request-for-it": "Request for it",
+      "title-input": "Title",
+      "description-input": "Description",
+      "add-service-button": "Add Service",
+      "update-service-button": "Update Service"
     },
-    "form": {
-      "title": "Inventory Form",
-      "inputs-label": {
-        "date": "Date",
-        "item-name": "Item Name",
-        "brand": "Brand",
-        "amount": "Amount"
-      },
-      "buttons": {
-        "add-picture": "Add a Picture",
-        "add-item": "Add Item",
-        "reset": "Reset"
+    "request-form": {
+      "title": "Request",
+      "set-an-address": "Set an Address",
+      "condition-description": "Condition Description",
+      "description-danger": "Type a brief description.",
+      "phone-number": "Phone Number to contact",
+      "phone-number-danger": "The number must have 10 characters.",
+      "price": "Price:",
+      "request-button": "Request it",
+      "address-danger": "Set an address please.",
+      "addresses": {
+        "title": "Add or choose an address",
+        "address-placeholder": "Enter an address"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "service-detail": {
+        "title": "Service:",
+        "description-label": "Description:",
+        "address-label": "Address:",
+        "phone-number-label": "Phone Number:"
       }
     }
   },
-  "home": {
-    "title": "Home",
-    "sections": {
-      "services": "Services",
-      "coupons": "Coupons"
-    }
+  "coupons": {
+    "title": "Coupons"
   }
 }

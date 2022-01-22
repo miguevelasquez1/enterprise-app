@@ -10,25 +10,28 @@
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center">
-        <h2 class="ion-no-margin">Preview</h2>
+        <h2 class="ion-no-margin">{{ 'services.service-form.preview' | translate }}</h2>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">
         <ion-card>
-          <img [src]="defaultImage" alt="" />
+          <img [src]="imageExample" alt="" />
           <ion-card-header>
             <ion-card-title>{{servicesService.serviceForm.get('title').value}}</ion-card-title>
           </ion-card-header>
-          <ion-card-content
-            >{{ servicesService.serviceForm.get('description').value }}</ion-card-content
-          >
+          <ion-card-content>
+            <ion-text>{{ servicesService.serviceForm.get('description').value }}</ion-text>
+            <br />
+            <br />
+            <ion-text>${{ servicesService.serviceForm.get('price').value }}</ion-text>
+          </ion-card-content>
           <ion-grid>
             <ion-row class="ion-justify-content-center">
               <ion-col size="10">
-                <ion-button color="dark" expand="block" class="ion-text-center"
-                  >Request for it</ion-button
-                >
+                <ion-button color="dark" expand="block" class="ion-text-center">
+                  {{ 'services.service-form.request-for-it' | translate }}
+                </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -44,7 +47,7 @@
       <ion-row class="ion-justify-content-center">
         <ion-col size="8">
           <ion-item lines="none">
-            <ion-label>Title</ion-label>
+            <ion-label>{{ 'services.service-form.title-input' | translate }}</ion-label>
             <ion-input
               formControlName="title"
               #title
@@ -54,23 +57,32 @@
           </ion-item>
         </ion-col>
         <ion-col size="3">
-          <ion-button expand="block" color="dark">
+          <ion-button (click)="setImage()" expand="block" color="dark">
             <ion-icon name="image-outline"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="11">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="7">
           <ion-item lines="none">
-            <ion-label>description</ion-label>
+            <ion-label position="stacked"
+              >{{ 'services.service-form.description-input' | translate }}</ion-label
+            >
             <ion-textarea formControlName="description" #description maxlength="256"></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4">
+          <ion-item lines="none">
+            <ion-label>$</ion-label>
+            <ion-input formControlName="price"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col size="11">
           <ion-button (click)="submitForm()" color="tertiary" expand="block"
-            >{{isEdit ? 'Update Service' : 'Add Service'}}</ion-button
+            >{{(isEdit ? 'services.service-form.update-service-button' :
+            'services.service-form.add-service-button') | translate}}</ion-button
           >
         </ion-col>
       </ion-row>

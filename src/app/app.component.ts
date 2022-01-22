@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,7 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private translate: TranslateService) {
+  constructor(private _platform: Platform, private translate: TranslateService) {
+    this._platform.ready().then(() => {
+      console.log('pasa');
+    });
     this.translate.use(this.translate.getBrowserLang());
   }
 }

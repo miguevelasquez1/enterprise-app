@@ -1,9 +1,20 @@
 {
-  "welcome-slide": {
-    "title": "Bienvienido a la Enterprise App",
-    "buttons": {
-      "sign-in": "Ingresar",
-      "sign-up": "Registrarme"
+  "enterprise-app": {
+    "welcome-slide": {
+      "title": "Bienvienido a la Enterprise App",
+      "buttons": {
+        "sign-in": "Ingresar",
+        "sign-up": "Registrarme"
+      }
+    }
+  },
+  "customer-app": {
+    "welcome-slide": {
+      "title": "Nunca hubo una manera más fácil de solicitar servicios",
+      "buttons": {
+        "sign-in": "Ingresar",
+        "sign-up": "Registrarme"
+      }
     }
   },
   "choose-your-category": {
@@ -12,6 +23,12 @@
       "company": "Compañía",
       "person": "Persona"
     }
+  },
+  "login": {
+    "title": "Hola de nuevo!",
+    "email": "Email",
+    "password": "Contraseña",
+    "sign-in": "Ingresar"
   },
   "next": "siguiente",
   "sign-up": {
@@ -32,12 +49,6 @@
       "password-no-match": "La contraseña no coincide",
       "minium-characters-password": "La contraseña debe tener mínimo 8 carácteres"
     }
-  },
-  "login": {
-    "title": "Hola de nuevo!",
-    "email": "Email",
-    "password": "Contraseña",
-    "sign-in": "Ingresar"
   },
   "tabs": {
     "profile": {
@@ -74,6 +85,13 @@
       "german": "Alemán"
     },
     "sign-out": "Cerrar Sesión"
+  },
+  "home": {
+    "title": "Home",
+    "sections": {
+      "services": "Servicios",
+      "coupons": "Cupones"
+    }
   },
   "routes": {
     "title": "Mis Rutas",
@@ -129,11 +147,47 @@
       }
     }
   },
-  "home": {
-    "title": "Home",
-    "sections": {
-      "services": "Servicios",
-      "coupons": "Cupones"
+  "services": {
+    "title": "Servicios",
+    "add-new-service": "Añadir Servicio",
+    "edit": "Editar",
+    "request-it": "Solicitarlo",
+    "no-services-yet": "No hay servicios aún",
+    "no-able-services": "No hay servicios disponibles en este momento",
+    "service-form": {
+      "preview": "Vista Previa",
+      "request-for-it": "Solicitarlo",
+      "title-input": "Título",
+      "description-input": "Descripción",
+      "add-service-button": "Añadir Servicio",
+      "update-service-button": "Actualizar Servicio"
+    },
+    "request-form": {
+      "title": "Solicitar",
+      "set-an-address": "Poner una dirección",
+      "condition-description": "Descripción de su situación",
+      "description-danger": "Escribe tu situación.",
+      "phone-number": "Número teléfono a contactar",
+      "phone-number-danger": "El número debe contener mínimo 6 carácteres.",
+      "price": "Precio:",
+      "request-button": "Solicitar",
+      "address-danger": "Coloca tu dirección.",
+      "addresses": {
+        "title": "Añadir o escoger una dirección",
+        "address-placeholder": "Añadir una dirección"
+      }
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "service-detail": {
+        "title": "Servicio:",
+        "description-label": "Descripción:",
+        "address-label": "Dirección:",
+        "phone-number-label": "Número de Teléfono:"
+      }
     }
+  },
+  "coupons": {
+    "title": "Coupons"
   }
 }
