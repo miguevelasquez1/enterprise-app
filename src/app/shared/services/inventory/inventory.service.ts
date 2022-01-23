@@ -42,7 +42,7 @@ export class InventoryService {
 
   private buildForm() {
     this.inventarioForm = this.formBuilder.group({
-      id: [null, []],
+      $key: [null, []],
       date: ['', [Validators.required]],
       name: ['', [Validators.required]],
       brand: ['', [Validators.required]],
@@ -89,11 +89,9 @@ export class InventoryService {
             .snapshotChanges()
             .subscribe(data => {
               if (data.key === res.uid) {
-                console.log('persons');
                 this.inventoryRef = this.aFDB.list(`persons/${res.uid}/inventory`);
                 resolve(this.inventoryRef);
               } else {
-                console.log('companies');
                 this.inventoryRef = this.aFDB.list(`companies/${res.uid}/inventory`);
                 resolve(this.inventoryRef);
               }
@@ -104,14 +102,17 @@ export class InventoryService {
   }
 
   insertItem({ name, brand, amount, date, images }: IItem) {
+    console.log('insert');
     return this.inventoryRef.push({ name, brand, amount, date, images, employeeUid: this.uid });
   }
 
   updateInventory({ $key, name, brand, amount, date, images }: IItem): void {
+    console.log('update');
     this.inventoryRef.update($key, { name, brand, amount, date, images, employeeUid: this.uid });
   }
 
   deleteInventario($key: string): void {
+    console.log('pasa', $key);
     this.inventoryRef.remove($key);
   }
 

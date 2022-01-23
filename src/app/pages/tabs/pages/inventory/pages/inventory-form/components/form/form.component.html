@@ -1,6 +1,4 @@
 <form [formGroup]="inventoryService.inventarioForm" (ngSubmit)="onSubmit()">
-  <ion-input type="hidden" formControlName="id"> </ion-input>
-
   <ion-item lines="none" class="ion-margin">
     <ion-label position="stacked">
       {{ 'inventory.form.inputs-label.date' | translate }}

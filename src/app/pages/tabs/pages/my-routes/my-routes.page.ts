@@ -34,7 +34,7 @@ export class MyRoutesPage implements OnInit {
   async ionViewWillEnter(): Promise<void> {
     (await this.recordsService.getRecords())
       .snapshotChanges()
-      .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+      .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))))
       .subscribe(data => {
         console.log(data, 'dataaa');
         this.recordList = data;
@@ -53,7 +53,10 @@ export class MyRoutesPage implements OnInit {
         {
           text: 'yes',
           handler: () => {
-            this.recordsService.deleteRecord(ruta.$key);
+            console.log(ruta, 'rute');
+            if (ruta.$key) {
+              this.recordsService.deleteRecord(ruta.$key);
+            }
             // this.registroService.deleteRegistro(ruta.$key);
             // this.chartService.deletePoint(ruta.fecha);
           },

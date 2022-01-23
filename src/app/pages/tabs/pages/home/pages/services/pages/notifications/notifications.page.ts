@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { NotificationsService } from './services/notifications/notifications.service';
 import { Request } from '../../modals/request-form/models/request/request';
+import { Router } from '@angular/router';
 import { ServicesService } from '../../services/services/services.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class NotificationsPage implements OnInit {
   constructor(
     private _notificationsService: NotificationsService,
     private _servicesService: ServicesService,
+    private _router: Router,
   ) {}
 
   async ngOnInit() {
@@ -22,5 +24,13 @@ export class NotificationsPage implements OnInit {
     getNotifications.subscribe(notifications => {
       this.notifications = notifications;
     });
+  }
+
+  removeNotification($key: string) {
+    console.log('pasaa');
+    if ($key !== undefined) {
+      this._notificationsService.removeNotification($key);
+    }
+    this._router.navigate(['/home/services/notifications']);
   }
 }

@@ -185,7 +185,8 @@ export class FormComponent implements OnInit {
    * @author Miguel Velásquez
    */
   private async sendData(): Promise<void> {
-    if (this.inventoryService.inventarioForm.get('id').value === null) {
+    console.log(this.inventoryService.inventarioForm.value, 'value');
+    if (this.inventoryService.inventarioForm.get('$key').value === null) {
       try {
         await this.inventoryService.insertItem(this.inventoryService.inventarioForm.value);
         console.log(

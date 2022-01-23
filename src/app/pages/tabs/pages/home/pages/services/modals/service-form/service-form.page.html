@@ -16,7 +16,10 @@
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">
         <ion-card>
-          <img [src]="imageExample" alt="" />
+          <img
+            [src]="servicesService.serviceForm.controls.image.value ? servicesService.serviceForm.controls.image.value : imageExample"
+            alt=""
+          />
           <ion-card-header>
             <ion-card-title>{{servicesService.serviceForm.get('title').value}}</ion-card-title>
           </ion-card-header>
@@ -81,7 +84,8 @@
       <ion-row class="ion-justify-content-center">
         <ion-col size="11">
           <ion-button (click)="submitForm()" color="tertiary" expand="block"
-            >{{(isEdit ? 'services.service-form.update-service-button' :
+            >{{(servicesService.serviceForm.controls.$key.value ?
+            'services.service-form.update-service-button' :
             'services.service-form.add-service-button') | translate}}</ion-button
           >
         </ion-col>

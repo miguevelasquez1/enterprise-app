@@ -22,15 +22,11 @@ export class InventoryPage implements OnInit {
     private alertCtrl: AlertController,
     private authService: AuthService,
     public inventoryService: InventoryService,
-  ) {
-    console.log('pasa 1');
-  }
+  ) {}
 
   filterRegistro = '';
 
-  ngOnInit(): void {
-    console.log('pasa 2');
-  }
+  ngOnInit(): void {}
 
   async ionViewWillEnter(): Promise<void> {
     console.log('pasa 3');
@@ -38,7 +34,6 @@ export class InventoryPage implements OnInit {
       .snapshotChanges()
       .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))))
       .subscribe(data => {
-        console.log('pasaaaaaa');
         this.inventoryList = data;
       });
   }
@@ -54,7 +49,9 @@ export class InventoryPage implements OnInit {
         {
           text: 'Aceptar',
           handler: () => {
-            this.inventoryService.deleteInventario($key);
+            if ($key) {
+              this.inventoryService.deleteInventario($key);
+            }
           },
         },
       ],

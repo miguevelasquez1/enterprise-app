@@ -22,6 +22,7 @@ export class RequestService {
   }
 
   sendRequestToHost(request: Request, isCompany: boolean) {
+    console.log(request, isCompany, 'avr q');
     if (isCompany) {
       this.requestRef = this._aFDB.list(`companies/${request.hostUid}/requests`);
     } else {
@@ -40,17 +41,17 @@ export class RequestService {
   public async insertRequest(request: Request) {
     const user = await this._authService.getUser();
     this.requestRef = this._aFDB.list(`customers/${user.uid}/requests`);
+    console.log(`customers/${user.uid}/requests`, request, 'request');
     this.requestRef.push({
       address: request.address,
       conditionDescription: request.conditionDescription,
       phoneNumber: request.phoneNumber,
-      hostUid: request.hostUid,
-      serviceTitle: request.serviceTitle,
     });
   }
 
   private _buildRequestForm() {
     this.requestForm = this._fb.group({
+      $key: ['', Validators.required],
       address: ['', Validators.required],
       conditionDescription: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.minLength(10)]],

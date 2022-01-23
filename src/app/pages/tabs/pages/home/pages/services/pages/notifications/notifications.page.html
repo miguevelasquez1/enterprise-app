@@ -19,11 +19,8 @@
     </ion-row>
   </ion-grid> -->
   <ion-list>
-    <ion-item-sliding
-      [routerLink]="['service-detail', notification]"
-      *ngFor="let notification of notifications"
-    >
-      <ion-item>
+    <ion-item-sliding *ngFor="let notification of notifications">
+      <ion-item [routerLink]="['service-detail', notification]">
         <ion-label>
           <ion-grid>
             <ion-row>
@@ -45,7 +42,7 @@
         <ion-item-option [routerLink]="['service-detail', notification]">
           <ion-icon name="eye-outline"></ion-icon>
         </ion-item-option>
-        <ion-item-option color="danger">
+        <ion-item-option color="danger" (click)="removeNotification(notification.$key)">
           <ion-icon name="trash-outline"></ion-icon>
         </ion-item-option>
       </ion-item-options>

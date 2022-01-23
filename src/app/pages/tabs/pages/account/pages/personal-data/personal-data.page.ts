@@ -74,15 +74,6 @@ export class PersonalDataPage {
   }
 
   onSubmitUpdate(user: IUser): void {
-    // this.afAuth.currentUser.then(auth => {
-    //   console.log(user, 'aaaaa');
-    //   console.log(auth, 'auth');
-    //   console.log(this.photoUrl, 'url');
-    //   auth.updateProfile({
-    //     displayName: user.name,
-    //     photoURL: this.photoUrl,
-    //   });
-    // });
     this.authService.isAuth().subscribe((auth: any) => {
       if (auth) {
         console.log(auth, 'auth');
@@ -95,9 +86,11 @@ export class PersonalDataPage {
           .pipe(
             finalize(() => {
               ref.getDownloadURL().subscribe(url => {
+                console.log(user, 'user');
+                console.log(auth, 'auth');
                 auth.updateProfile({
-                  displayName: user.displayName,
-                  photoURL: url,
+                  displayName: user.name,
+                  photoURL: user.urlImage,
                 });
               });
             }),

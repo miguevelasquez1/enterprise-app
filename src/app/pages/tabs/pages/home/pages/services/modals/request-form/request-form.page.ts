@@ -1,10 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  IonRouterOutlet,
-  ModalController,
-  PickerController,
-  ToastController,
-} from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 import { AddressesPage } from './modals/addresses/addresses.page';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
@@ -32,7 +27,7 @@ export class RequestFormPage implements OnInit {
     private _toastCtrl: ToastController,
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const user = await this._authService.getUser();
     this._authService.getCustomers().subscribe(data => {
       data.forEach(customer => {
@@ -44,7 +39,7 @@ export class RequestFormPage implements OnInit {
     });
   }
 
-  async sendRequest() {
+  async sendRequest(): Promise<void> {
     console.log(this.service, 'serviceeee');
     if (this.requestService.requestForm.get('address').invalid) {
       this.showAddressDanger = true;
@@ -74,7 +69,7 @@ export class RequestFormPage implements OnInit {
     }
   }
 
-  async presentAddressesModal() {
+  async presentAddressesModal(): Promise<void> {
     const modal = await this._modalCtrl.create({
       component: AddressesPage,
       cssClass: 'my-custom-class',
@@ -83,7 +78,7 @@ export class RequestFormPage implements OnInit {
     return await modal.present();
   }
 
-  dismissModal() {
+  dismissModal(): void {
     this._modalCtrl.dismiss();
   }
 }

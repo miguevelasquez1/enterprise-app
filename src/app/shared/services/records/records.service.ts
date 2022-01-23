@@ -27,7 +27,7 @@ export class RecordsService {
       $key: [null, []],
       date: [null, [Validators.required]],
       employeeUid: [null, [Validators.required]],
-      employee: [null, []],
+      employee: ['', []],
       client: ['', [Validators.required]],
       clientID: [null, []],
       service: ['', [Validators.required]],
@@ -41,19 +41,15 @@ export class RecordsService {
   getRecords(): Promise<AngularFireList<IRecord>> {
     return new Promise(resolve => {
       this.afAuth.authState.subscribe(res => {
-        console.log(res, 'res');
         if (res) {
           this.aFDB
             .object(`persons/${res.uid}`)
             .snapshotChanges()
             .subscribe(data => {
-              console.log(data.key, res.uid, 'data.key, res.uid');
               if (data.key === res.uid) {
-                console.log('persons');
                 this.recordsRef = this.aFDB.list(`persons/${res.uid}/records`);
                 resolve(this.recordsRef);
               } else {
-                console.log('companies');
                 this.recordsRef = this.aFDB.list(`companies/${res.uid}/records`);
                 resolve(this.recordsRef);
               }
@@ -74,6 +70,10 @@ export class RecordsService {
     price,
     state,
   }: IRecord): void {
+    console.log(
+      { date, employee, client, clientID, service, product, address, price, state },
+      'ke',
+    );
     this.recordsRef.push({
       date,
       employee,
@@ -113,6 +113,7 @@ export class RecordsService {
   }
 
   deleteRecord($key: string): void {
+    console.log('pasa');
     this.recordsRef.remove($key);
   }
 

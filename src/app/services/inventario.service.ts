@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { Inventory } from '../models/inventory';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { User } from '../models/user';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AuthService } from './auth.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from './auth.service';
+import { Injectable } from '@angular/core';
+import { Inventory } from '../models/inventory';
+import { User } from '../models/user';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InventarioService {
-
   inventarioList: AngularFireList<any>;
   selectedInventario: Inventory = new Inventory();
   inventarioForm: FormGroup;
@@ -24,28 +24,26 @@ export class InventarioService {
     private authService: AuthService,
     private angularFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
-    private aFDB: AngularFireDatabase
+    private aFDB: AngularFireDatabase,
   ) {
     this.buildForm();
     this.userDataObsevable$ = this.getUserData$();
     this.userDataObsevable$.subscribe(user => {
       this.userData = user;
-      console.log(user, 'user');
     });
     this.authService.isAuth2().subscribe(auth => {
       this.userData$.next(auth);
-      console.log(this.userData$, 'userDataaaa');
     });
   }
 
   private buildForm() {
-    this.inventarioForm = this.formBuilder.group ({
+    this.inventarioForm = this.formBuilder.group({
       id: [null, []],
       fecha: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       marca: ['', [Validators.required]],
       cantidad: ['', [Validators.required]],
-      imagen: this.formBuilder.array([])
+      imagen: this.formBuilder.array([]),
     });
   }
 
@@ -56,7 +54,7 @@ export class InventarioService {
   createImagenField() {
     const imageField = this.formBuilder.group({
       urlImage: ['', []],
-      dateImage: ['', []]
+      dateImage: ['', []],
     });
 
     return imageField;
@@ -79,20 +77,28 @@ export class InventarioService {
   }
 
   getInventario() {
-    return this.angularFirestore.collection('UsersEnterprise').doc(this.userData.uid).collection('inventory').get();
+    return this.angularFirestore
+      .collection('UsersEnterprise')
+      .doc(this.userData.uid)
+      .collection('inventory')
+      .get();
   }
 
   insertInventario(inventario: Inventory) {
-    console.log(inventario, 'inventario');
     this.authService.isAuth2().subscribe(auth => {
       if (auth) {
-        this.angularFirestore.collection('UsersEnterprise').doc(auth.uid).collection('inventory').doc('id' + (new Date()).getTime()).set({
-          name: inventario.name,
-          brand: inventario.brand,
-          amount: inventario.amount,
-          date: inventario.date,
-          image: inventario.image
-        });
+        this.angularFirestore
+          .collection('UsersEnterprise')
+          .doc(auth.uid)
+          .collection('inventory')
+          .doc('id' + new Date().getTime())
+          .set({
+            name: inventario.name,
+            brand: inventario.brand,
+            amount: inventario.amount,
+            date: inventario.date,
+            image: inventario.image,
+          });
       }
     });
   }
@@ -102,13 +108,18 @@ export class InventarioService {
     this.authService.isAuth2().subscribe(auth => {
       if (auth) {
         console.log(auth.uid, 'uid');
-        this.angularFirestore.collection('UsersEnterprise').doc(auth.uid).collection('inventory').doc(inventario.id).set({
-          name: inventario.name,
-          brand: inventario.brand,
-          amount: inventario.amount,
-          date: inventario.date,
-          image: inventario.image
-        });
+        this.angularFirestore
+          .collection('UsersEnterprise')
+          .doc(auth.uid)
+          .collection('inventory')
+          .doc(inventario.id)
+          .set({
+            name: inventario.name,
+            brand: inventario.brand,
+            amount: inventario.amount,
+            date: inventario.date,
+            image: inventario.image,
+          });
       }
     });
   }
@@ -127,7 +138,7 @@ export class InventarioService {
       this.imageList = producto.imagen;
       return this.formBuilder.group({
         urlImage: [producto.imagen.urlImage, []],
-        dateImage: [producto.imagen.dateImage, []]
+        dateImage: [producto.imagen.dateImage, []],
       });
     }
   }
@@ -140,5 +151,4 @@ export class InventarioService {
     this.imageList = [];
     this.removeAllImagenField();
   }
-
 }

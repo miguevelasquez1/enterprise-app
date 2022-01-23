@@ -24,4 +24,8 @@ export class NotificationsService {
       .snapshotChanges()
       .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))));
   }
+
+  removeNotification($key: string) {
+    return this.notificationsRef.remove($key);
+  }
 }

@@ -34,17 +34,23 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/account']);
     } catch (err) {
       console.log(err.code, 'err');
+      await this.presentAlert(err.code);
     }
   }
 
-  async presentAlert(err: string): Promise<void> {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Alerta',
-      message: err,
-      buttons: ['OK'],
-    });
+  async presentAlert(code: string): Promise<void> {
+    console.log(code, 'code 1');
+    code = code.split('/')[1];
+    console.log(code, 'code 2');
+    if (this.authService.authErrors[code]) {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Alert',
+        message: this.authService.authErrors[code],
+        buttons: ['OK'],
+      });
 
-    await alert.present();
+      await alert.present();
+    }
   }
 }

@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Globals } from './globals';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { NgModule } from '@angular/core';
+import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouteReuseStrategy } from '@angular/router';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -40,7 +41,7 @@ export const rootLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     IonicModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [Globals, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [OneSignal, Globals, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -15,8 +15,6 @@ export class ServiceFormPage implements OnInit {
 
   image: Blob;
 
-  isEdit = false;
-
   constructor(
     private _authService: AuthService,
     private _modalCtrl: ModalController,
@@ -26,13 +24,7 @@ export class ServiceFormPage implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter() {
-    if (this.servicesService.serviceForm.get('$key').value) {
-      this.isEdit = true;
-    }
-  }
-
-  async setImage() {
+  async setImage(): Promise<void> {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
@@ -49,19 +41,19 @@ export class ServiceFormPage implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(this.image);
       reader.onloadend = () => {
-        this.imageExample = reader.result;
+        this.servicesService.serviceForm.get('image').setValue(reader.result);
       };
     } catch (err) {
       console.log(err, 'err');
     }
   }
 
-  async submitForm() {
+  async submitForm(): Promise<void> {
     const loading = await this._loadingCtrl.create({
       spinner: 'bubbles',
       translucent: true,
     });
-    await await loading.present();
+    await loading.present();
     await this._setValues();
     return new Promise(resolve => {
       if (!this.servicesService.serviceForm.get('$key').value) {
@@ -73,11 +65,12 @@ export class ServiceFormPage implements OnInit {
       if (this.image) {
         const url = await this.servicesService.uploadPhotoToFirebase(res, this.image);
         this.servicesService.serviceForm.get('image').setValue(url);
-      } else {
+      } else if (!this.servicesService.serviceForm.get('$key').value) {
         this.servicesService.serviceForm
           .get('image')
           .setValue('../../../../../../../../../assets/img/washing-machine.jpg');
       }
+      console.log(this.servicesService.serviceForm.value, 'valor');
       await this.servicesService.updateService({
         ...this.servicesService.serviceForm.value,
         $key: res,

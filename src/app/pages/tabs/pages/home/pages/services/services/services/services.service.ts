@@ -35,16 +35,13 @@ export class ServicesService {
     const type = (await this._authService.isCompany()) ? 'companies' : 'persons';
     const user = await this._authService.getUser();
     const filePath = `${type}/${user.uid}/services/${serviceKey}`;
-    console.log(filePath, 'path');
     const ref = this._storage.ref(filePath);
     const task = this._storage.upload(filePath, file);
-    console.log('pasa');
     return new Promise(resolve => {
       task
         .snapshotChanges()
         .pipe(
           finalize(() => {
-            console.log('jmm');
             ref.getDownloadURL().subscribe(url => resolve(url));
           }),
         )
@@ -73,10 +70,8 @@ export class ServicesService {
 
   public getServicesForEnterprises(key: string, uid: string): AngularFireList<Service> {
     if (key === uid) {
-      console.log('persons');
       this.servicesRef = this._aFDB.list(`persons/${uid}/services`);
     } else {
-      console.log('companies');
       this.servicesRef = this._aFDB.list(`companies/${uid}/services`);
     }
     return this.servicesRef;
