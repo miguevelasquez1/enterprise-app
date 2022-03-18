@@ -19,3 +19,7 @@ ion-card {
     object-fit: cover;
   }
 }
+
+.border-danger {
+  --border-color: var(--ion-color-danger);
+}

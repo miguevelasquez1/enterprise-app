@@ -58,5 +58,10 @@
       <ion-icon name="settings-sharp"></ion-icon>
       <ion-label>{{ 'profile.settings' | translate }}</ion-label>
     </ion-item>
+
+    <ion-item *ngIf="isAdmin" lines="none" [routerLink]="['/account/manage-company']">
+      <ion-icon name="rocket-sharp"></ion-icon>
+      <ion-label>{{ 'profile.manage-company' | translate }}</ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

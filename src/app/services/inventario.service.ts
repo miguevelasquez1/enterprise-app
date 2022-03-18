@@ -104,10 +104,8 @@ export class InventarioService {
   }
 
   updateInventario(inventario: Inventory) {
-    console.log(inventario, 'inventario');
     this.authService.isAuth2().subscribe(auth => {
       if (auth) {
-        console.log(auth.uid, 'uid');
         this.angularFirestore
           .collection('UsersEnterprise')
           .doc(auth.uid)

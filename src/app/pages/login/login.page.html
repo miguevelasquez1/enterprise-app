@@ -3,7 +3,7 @@
     <ion-icon
       class="arrow-back"
       name="chevron-back-outline"
-      routerLink="/welcome-slide"
+      [routerLink]="globals.isEnterprise ? ['/login-options'] : ['/welcome-slide']"
       slot="start"
     >
     </ion-icon>
@@ -23,6 +23,31 @@
         </ion-grid>
 
         <form [formGroup]="authService.authForm" (ngSubmit)="onSubmitLogin()">
+          <ion-item class="ion-margin" lines="none" *ngIf="type === 'employee'">
+            <ion-label>
+              <ion-icon slot="start" name="rocket-sharp"></ion-icon>
+            </ion-label>
+            <ion-input
+              email
+              placeholder="{{'login.company-email' | translate}}"
+              class="input-mail"
+              type="email"
+              name="companyEmail"
+              formControlName="companyEmail"
+            >
+            </ion-input>
+            <ion-icon
+              name="checkmark-circle-outline"
+              color="success"
+              *ngIf="authService.authForm.get('companyEmail').valid && authService.authForm.get('companyEmail').dirty"
+            ></ion-icon>
+            <ion-icon
+              color="danger"
+              *ngIf="authService.authForm.get('companyEmail').hasError('noExists') && authService.authForm.get('companyEmail').dirty"
+              name="close-circle-outline"
+            ></ion-icon>
+          </ion-item>
+
           <ion-item class="ion-margin" lines="none">
             <ion-label>
               <ion-icon slot="start" name="at-circle-outline"></ion-icon>

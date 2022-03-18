@@ -41,7 +41,11 @@ export const rootLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     IonicModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [OneSignal, Globals, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    // OneSignal,
+    Globals,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

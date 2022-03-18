@@ -1,3 +1,3 @@
 export class Globals {
-  isEnterprise = false;
+  isEnterprise = true;
 }

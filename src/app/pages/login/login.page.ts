@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { Globals } from 'src/app/globals';
 import { MenuController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,14 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   public serverEnabled = false;
 
-  private subscription;
+  public type = 'person';
+
+  emailExists;
 
   constructor(
+    public globals: Globals,
+    private _activatedRoute: ActivatedRoute,
+    private _chRef: ChangeDetectorRef,
     public menuCtrl: MenuController,
     public authService: AuthService,
     public router: Router,
@@ -26,22 +32,24 @@ export class LoginPage implements OnInit {
 
   ionViewDidEnter(): void {
     this.menuCtrl.enable(false);
+    this.authService.authForm.reset();
+    this._activatedRoute.queryParams.subscribe((params: { type: string }) => {
+      this.type = params.type;
+    });
   }
 
   async onSubmitLogin(): Promise<void> {
     try {
       await this.authService.loginFirebase(this.authService.authForm.value);
+      this.authService.authForm.reset();
       this.router.navigate(['/account']);
     } catch (err) {
-      console.log(err.code, 'err');
       await this.presentAlert(err.code);
     }
   }
 
   async presentAlert(code: string): Promise<void> {
-    console.log(code, 'code 1');
     code = code.split('/')[1];
-    console.log(code, 'code 2');
     if (this.authService.authErrors[code]) {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',

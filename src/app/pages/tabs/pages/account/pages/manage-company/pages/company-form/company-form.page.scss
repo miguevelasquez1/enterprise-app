@@ -1,0 +1,24 @@
+ion-title,
+ion-input,
+ion-text,
+ion-button {
+  font-family: Poppins-Regular;
+}
+
+ion-item {
+  --border-radius: 15px;
+  --background: var(--ion-color-light);
+}
+
+ion-text {
+  color: var(--ion-color-medium-shade);
+}
+
+.name {
+  font-family: Poppins-Bold;
+}
+
+.menu {
+  font-size: 32px;
+  margin-right: 5px;
+}

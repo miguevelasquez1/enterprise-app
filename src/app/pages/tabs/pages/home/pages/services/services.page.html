@@ -21,22 +21,24 @@
 
 <ion-content>
   <ng-container *ngIf="globals.isEnterprise; else clientView">
-    <ion-grid class="margin-bottom">
+    <ion-grid class="ion-margin-top">
       <ion-row class="ion-justify-content-center">
         <ion-col size="8">
           <ion-button
             (click)="presentServiceFormModal()"
             expand="block"
-            fill="outline"
-            color="light"
+            color="primary"
           >
-            <ion-text color="dark">{{ 'services.add-new-service' | translate }}</ion-text>
+            <ion-icon name="add-outline"></ion-icon>
+            <ion-text>{{ 'services.add-new-service' | translate }}</ion-text>
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="services.length === 0" class="ion-margin">
+    </ion-grid>
+    <ion-grid class="full-height-80">
+      <ion-row *ngIf="services.length === 0" class="ion-margin full-height-80 ion-align-items-center">
         <ion-col class="ion-text-center">
-          <ion-text>{{ 'services.no-services-yet' | translate }}</ion-text>
+          <ion-text class="no-able" color="medium">{{ 'services.no-services-yet' | translate }}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
@@ -48,13 +50,14 @@
   </ng-container>
 
   <ng-template #clientView>
-    <ion-grid>
-      <ion-row *ngIf="services.length === 0" class="ion-margin">
+    <ion-grid class="full-height-80" *ngIf="services.length === 0">
+      <ion-row class="ion-margin full-height ion-align-items-center">
         <ion-col class="ion-text-center">
-          <ion-text>{{ 'services.no-able-services' | translate }}</ion-text>
+          <ion-text class="no-able">{{ 'services.no-able-services' | translate }}</ion-text>
         </ion-col>
       </ion-row>
-
+    </ion-grid>
+    <ion-grid class="margin-bottom">
       <ion-row class="ion-justify-content-center">
         <ion-col size="10" *ngFor="let service of services">
           <app-service [service]="service"></app-service>

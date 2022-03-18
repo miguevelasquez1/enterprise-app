@@ -20,16 +20,12 @@ export class AuthGuard implements CanActivate {
     return this.authService
       .getUser()
       .then(user => {
-        console.log(user, 'user');
         if (!user) {
           this.router.navigate(['/welcome-slide']);
           return false;
         }
         return true;
       })
-      .catch(err => {
-        console.log(err, 'err');
-        return false;
-      });
+      .catch(() => false);
   }
 }

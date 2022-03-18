@@ -40,7 +40,6 @@ export class TypeAPasswordPage implements OnInit {
       await this.authService.register(this.authService.authForm.value);
       this.router.navigate(['/account']);
     } catch (err) {
-      console.log(err, 'err');
       this.presentAlert(err.code);
     }
   }

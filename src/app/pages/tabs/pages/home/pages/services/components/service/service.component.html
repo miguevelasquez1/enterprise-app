@@ -6,7 +6,10 @@
     alt=""
   />
   <ion-card-header>
-    <ion-card-subtitle>{{ service.author }}</ion-card-subtitle>
+    <ion-card-subtitle
+      >{{ hostName }} <ion-icon name="shield-checkmark-outline"></ion-icon
+    ></ion-card-subtitle>
+    <ion-card-subtitle *ngIf="isCompany">{{ service.author }}</ion-card-subtitle>
     <ion-card-title>{{ service.title }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>

@@ -8,4 +8,6 @@ export interface IUser {
   photoURL?: string;
   emailVerified?: boolean;
   urlImage?: string;
+  idiom?: string;
+  companyKey?: string;
 }

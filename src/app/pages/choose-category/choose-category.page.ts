@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-choose-category',
@@ -8,19 +9,38 @@ import { AuthService } from '../../shared/services/auth/auth.service';
   styleUrls: ['./choose-category.page.scss'],
 })
 export class ChooseCategoryPage implements OnInit {
-  constructor(public authService: AuthService) {}
+  option = '';
 
-  ngOnInit() {}
+  constructor(public authService: AuthService, private _router: Router) {}
 
-  public selectOne(e: any, option: string) {
-    if (option === 'company' && e.detail.checked) {
+  ngOnInit(): void {}
+
+  public selectOne(e: any, option: string): void {
+    this.option = option;
+    if (this.option === 'company' && e.detail.checked) {
       this.authService.authForm.get('person').setValue(false);
-    } else if (option === 'person' && e.detail.checked) {
+      this.authService.authForm.get('employee').setValue(false);
+    } else if (this.option === 'person' && e.detail.checked) {
       this.authService.authForm.get('company').setValue(false);
+      this.authService.authForm.get('employee').setValue(false);
+    } else if (this.option === 'employee' && e.detail.checked) {
+      this.authService.authForm.get('company').setValue(false);
+      this.authService.authForm.get('person').setValue(false);
     }
   }
 
   public selectForm(): void {
     this.authService.isPersonForm = this.authService.authForm.get('person').value;
+    if (this.authService.isPersonForm) {
+      this._router.navigate(['/sign-up']);
+    } else if (this.option === 'employee') {
+      this._router.navigate(['/sign-up'], {
+        queryParams: {
+          type: 'employee',
+        },
+      });
+    } else {
+      this._router.navigate(['/company-name']);
+    }
   }
 }

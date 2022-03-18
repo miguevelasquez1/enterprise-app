@@ -1,8 +1,8 @@
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 import { AuthService } from '../../../../shared/services/auth/auth.service';
-import { Component } from '@angular/core';
 import { IUser } from '../../../../shared/interfaces/user.interface';
 import { UsersService } from '../../../../shared/services/users/users.service';
 
@@ -11,21 +11,26 @@ import { UsersService } from '../../../../shared/services/users/users.service';
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
-export class AccountPage {
+export class AccountPage implements OnInit {
   public name: string;
   public email: string;
   public photoUrl: string;
   public occupation: string;
+  public isAdmin = false;
 
   constructor(
     public usersService: UsersService,
-    private authService: AuthService,
+    public authService: AuthService,
     private sanitizer: DomSanitizer,
   ) {}
 
-  ionViewWillEnter(): void {
+  async ngOnInit() {}
+
+  async ionViewWillEnter() {
     this.getCurrentUser();
     this.getRole();
+    console.log(await this.authService.getCurrentPerson(), 'jmm');
+    this.isAdmin = (await this.authService.getCurrentPerson()).isAdmin;
   }
 
   private getRole() {

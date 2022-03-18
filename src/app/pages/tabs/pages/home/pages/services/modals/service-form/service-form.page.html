@@ -27,7 +27,7 @@
             <ion-text>{{ servicesService.serviceForm.get('description').value }}</ion-text>
             <br />
             <br />
-            <ion-text>${{ servicesService.serviceForm.get('price').value }}</ion-text>
+            <ion-text *ngIf="servicesService.serviceForm.get('price').value && servicesService.serviceForm.get('price').value !== '0'">${{ servicesService.serviceForm.get('price').value }}</ion-text>
           </ion-card-content>
           <ion-grid>
             <ion-row class="ion-justify-content-center">
@@ -49,11 +49,12 @@
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col size="8">
-          <ion-item lines="none">
-            <ion-label>{{ 'services.service-form.title-input' | translate }}</ion-label>
+          <ion-item lines="none" [ngClass]="servicesService.serviceForm.controls.title.touched && servicesService.serviceForm.controls.title.invalid ? 'border-danger' : ''">
+            <ion-label [color]="servicesService.serviceForm.controls.title.touched && servicesService.serviceForm.controls.title.invalid ? 'danger' : 'dark'">{{ 'services.service-form.title-input' | translate }}</ion-label>
             <ion-input
               formControlName="title"
               #title
+              required
               maxlength="30"
               class="ion-text-center"
             ></ion-input>
@@ -66,24 +67,30 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="7">
-          <ion-item lines="none">
-            <ion-label position="stacked"
-              >{{ 'services.service-form.description-input' | translate }}</ion-label
+        <ion-col size="6">
+          <ion-item lines="none" [ngClass]="servicesService.serviceForm.controls.description.touched && servicesService.serviceForm.controls.description.invalid ? 'border-danger' : ''">
+            <ion-label [color]="servicesService.serviceForm.controls.description.touched && servicesService.serviceForm.controls.description.invalid ? 'danger' : 'dark'" position="stacked"
+              >{{ 'services.service-form.description-input' | translate }} </ion-label
             >
-            <ion-textarea formControlName="description" #description maxlength="256"></ion-textarea>
+            <ion-textarea minlength="10" formControlName="description" #description maxlength="256"></ion-textarea>
+            <ion-text *ngIf="servicesService.serviceForm.controls.description.touched && servicesService.serviceForm.controls.description.invalid" class="ion-padding" color="danger">{{'services.service-form.description-alert' | translate}}</ion-text>
+
           </ion-item>
         </ion-col>
-        <ion-col size="4">
-          <ion-item lines="none">
-            <ion-label>$</ion-label>
+        <ion-col size="5">
+          <ion-item [ngClass]="servicesService.serviceForm.controls.price.touched && servicesService.serviceForm.controls.price.invalid ? 'border-danger' : ''" lines="none">
+            <ion-label [color]="servicesService.serviceForm.controls.price.touched && servicesService.serviceForm.controls.price.invalid ? 'danger' : 'dark'">$</ion-label>
             <ion-input formControlName="price"></ion-input>
+            <ion-icon *ngIf="servicesService.serviceForm.controls.price.value !== '0'; else check" name="close-circle-outline" (click)="changePrice()"></ion-icon>
+            <ng-template #check>
+            <ion-icon *ngIf="servicesService.serviceForm.controls.price.value === '0'" name="add-circle-outline" (click)="changePrice()"></ion-icon>
+            </ng-template>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col size="11">
-          <ion-button (click)="submitForm()" color="tertiary" expand="block"
+          <ion-button [disabled]="servicesService.serviceForm.invalid" (click)="submitForm()" color="primary" expand="block"
             >{{(servicesService.serviceForm.controls.$key.value ?
             'services.service-form.update-service-button' :
             'services.service-form.add-service-button') | translate}}</ion-button

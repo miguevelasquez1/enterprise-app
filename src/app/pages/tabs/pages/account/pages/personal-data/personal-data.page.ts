@@ -76,7 +76,6 @@ export class PersonalDataPage {
   onSubmitUpdate(user: IUser): void {
     this.authService.isAuth().subscribe((auth: any) => {
       if (auth) {
-        console.log(auth, 'auth');
         const filePath = `users/${auth.uid}`;
         const ref = this.storage.ref(filePath);
         const task = this.storage.upload(filePath, this.photoFile);
@@ -86,8 +85,6 @@ export class PersonalDataPage {
           .pipe(
             finalize(() => {
               ref.getDownloadURL().subscribe(url => {
-                console.log(user, 'user');
-                console.log(auth, 'auth');
                 auth.updateProfile({
                   displayName: user.name,
                   photoURL: user.urlImage,
@@ -137,7 +134,6 @@ export class PersonalDataPage {
     });
 
     popover.onWillDismiss().then(dataReturned => {
-      console.log(dataReturned, 'xs');
       this.photoUrl = dataReturned.data.imgUrl;
       this.photoFile = dataReturned.data.photoFile;
     });

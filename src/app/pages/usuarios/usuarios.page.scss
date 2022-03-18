@@ -1,15 +1,10 @@
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../../../assets/fonts/Poppins-Medium.ttf');
+  src: url("../../../assets/fonts/Poppins-Medium.ttf");
 }
 
 ion-col {
   text-align: center;
-}
-
-.arrow-back {
-  font-size: 24px;
-  margin-left: 10px;
 }
 
 .search {

@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon class="arrow-back" name="arrow-back-outline" [routerLink]="['/account']" slot="start">
+    </ion-icon>
+    <ion-title>{{'manage-company.title' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="companyService.companyForm">
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">
+              <ion-text>{{'manage-company.company-name' | translate}}</ion-text>
+            </ion-label>
+            <ion-input formControlName="name" class="name" required> </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">
+              <ion-text>{{'manage-company.company-email' | translate}}</ion-text>
+            </ion-label>
+            <ion-input formControlName="email" position="stacked"> </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">
+              <ion-text> {{'manage-company.company-description' | translate}} </ion-text>
+            </ion-label>
+            <ion-textarea formControlName="description" rows="5" position="stacked"> </ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button (click)="updateCompanyData()" [disabled]="!hasChange" expand="block">
+            {{'personal-data.save' | translate}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

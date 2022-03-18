@@ -1,10 +1,9 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { Globals } from 'src/app/globals';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 interface MessagesIndex {
@@ -31,8 +30,13 @@ export class SignUpPage implements OnInit {
     /* ADD HERE THE OTHERs IDs AND THE CORRESPONDING MESSAGEs */
   } as MessagesIndex;
 
+  type: string;
+
+  validations: boolean;
+
   constructor(
     public authService: AuthService,
+    private _activatedRoute: ActivatedRoute,
     private router: Router,
     private alertCtrl: AlertController,
     public globals: Globals,
@@ -41,18 +45,24 @@ export class SignUpPage implements OnInit {
 
   ngOnInit(): void {}
 
+  ionViewDidEnter(): void {
+    this.authService.authForm.reset();
+    this._activatedRoute.queryParams.subscribe((params: { type: string }) => {
+      this.type = params.type;
+    });
+  }
+
   async signUpWithGoogle(): Promise<void> {
     await this.authService.googleAuth();
     this.router.navigate(['/account']);
   }
 
   async register(): Promise<void> {
-    console.log(this.authService.authForm.hasError('notSame'), 'errorrr');
     try {
       await this.authService.register(this.authService.authForm.value);
       this.router.navigate(['/account']);
+      this.authService.authForm.reset();
     } catch (err) {
-      console.log(err, 'err');
       this.presentAlert(err.code);
     }
   }

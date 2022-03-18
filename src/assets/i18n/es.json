@@ -21,16 +21,27 @@
     "title": "Escoge tu Categoría",
     "options": {
       "company": "Compañía",
+      "employee": "Empleado",
       "person": "Persona"
     }
   },
   "login": {
     "title": "Hola de nuevo!",
+    "company-email": "Email de la compañía",
     "email": "Email",
     "password": "Contraseña",
-    "sign-in": "Ingresar"
+    "sign-in": "Ingresar",
+    "login-options": {
+      "title": "How do you want to enter?",
+      "person": "Persona",
+      "company": "Compañía"
+    }
   },
   "next": "siguiente",
+  "company-name": {
+    "title": "Crea una nueva compañía",
+    "name": "Nombre"
+  },
   "sign-up": {
     "title": "Registrarme",
     "name": "Nombre",
@@ -67,7 +78,8 @@
   "profile": {
     "title": "Perfil",
     "personal-data": "Datos Personales",
-    "settings": "Configuraciones"
+    "settings": "Configuraciones",
+    "manage-company": "Administrar compañía"
   },
   "personal-data": {
     "title": "Datos Personales",
@@ -85,6 +97,13 @@
       "german": "Alemán"
     },
     "sign-out": "Cerrar Sesión"
+  },
+  "manage-company": {
+    "title": "Mi Compañía",
+    "company-name": "Nombre de la compañia",
+    "company-email": "Email de la compañía",
+    "company-description": "Descripción",
+    "saved-successfully": "La información ha sido guardada satisfactoriamente"
   },
   "home": {
     "title": "Home",
@@ -158,7 +177,9 @@
       "preview": "Vista Previa",
       "request-for-it": "Solicitarlo",
       "title-input": "Título",
+      "title-alert": "Escribe un título...",
       "description-input": "Descripción",
+      "description-alert": "min. 10 carácteres",
       "add-service-button": "Añadir Servicio",
       "update-service-button": "Actualizar Servicio"
     },
@@ -180,14 +201,20 @@
     "notifications": {
       "title": "Notificaciones",
       "service-detail": {
-        "title": "Servicio:",
+        "title": "Detalle del Servicio",
         "description-label": "Descripción:",
+        "client-name": "Cliente",
         "address-label": "Dirección:",
         "phone-number-label": "Número de Teléfono:"
       }
     }
   },
   "coupons": {
-    "title": "Coupons"
+    "title": "Cupones",
+    "add-new-coupon": "Añadir un nuevo cupón",
+    "edit": "Editar",
+    "request-it": "Solicitarlo",
+    "no-coupons-yet": "Aún no hay cupones",
+    "no-able-coupons": "No hay cupones disponibles en este momento"
   }
 }

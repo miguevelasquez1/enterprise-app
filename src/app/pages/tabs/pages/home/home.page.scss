@@ -2,6 +2,10 @@ ion-title {
   font-family: Poppins-Bold;
 }
 
+ion-row {
+  height: 50%;
+}
+
 ion-footer {
   background: var(--ion-color-dark-contrast);
 }
@@ -16,12 +20,12 @@ ion-card {
 }
 
 .services-card {
-  background-image: url('../../../../../assets/img/washing-machine.jpg') !important;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .5);
+  background-image: url("../../../../../assets/img/washing-machine.jpg") !important;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-position: 50% 35%;
 }
 
 .coupons-card {
-  background-image: url('../../../../../assets/img/coupons.jpg') !important;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .5);
+  background-image: url("../../../../../assets/img/coupons.jpg") !important;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
 }

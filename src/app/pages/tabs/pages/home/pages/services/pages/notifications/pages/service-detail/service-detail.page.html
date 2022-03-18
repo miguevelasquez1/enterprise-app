@@ -6,39 +6,63 @@
       [routerLink]="['/home/services/notifications']"
       name="chevron-back-outline"
     ></ion-icon>
-    <ion-title>
-      {{'services.notifications.service-detail.title' | translate}} {{service.serviceTitle}}
-    </ion-title>
+    <ion-title> {{'services.notifications.service-detail.title' | translate}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h2 class="ion-text-center">{{service.serviceTitle}}</h2>
+
   <ion-card>
     <ion-card-content>
-      <ion-grid>
-        <ion-row class="ion-margin-vertical">
-          <ion-col>
-            {{'services.notifications.service-detail.description-label' | translate}}<br />
-            {{service.conditionDescription}}
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-margin-vertical">
-          <ion-col>
-            {{'services.notifications.service-detail.address-label' | translate}}<br />
-            {{service.address}}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-item lines="none">
+        <ion-grid>
+          <ion-row class="ion-margin-bottom ion-justify-content-center">
+            <ion-col size="12" class="ion-text-center">
+              <ion-text>
+                {{'services.notifications.service-detail.client-name' | translate}}
+              </ion-text>
+              <br />
+              {{service.name}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-vertical">
+            <ion-col class="ion-text-center">
+              <ion-text>
+                {{'services.notifications.service-detail.description-label' | translate}}
+              </ion-text>
+              <br />
+              {{service.conditionDescription}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-text>
+                {{'services.notifications.service-detail.address-label' | translate}}
+              </ion-text>
+              <br />
+              {{service.address}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-content>
       <ion-item lines="none">
-        <ion-label class="ion-text-center"
-          >{{'services.notifications.service-detail.phone-number-label' | translate}}
-          {{service.phoneNumber}}</ion-label
-        >
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-text>
+                {{'services.notifications.service-detail.phone-number-label' | translate}}
+              </ion-text>
+              <br />
+              {{service.phoneNumber}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-card-content>
   </ion-card>

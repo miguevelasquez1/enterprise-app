@@ -22,6 +22,7 @@ export class NotificationsPage implements OnInit {
   async ngOnInit() {
     const getNotifications = await this._notificationsService.getNotifications();
     getNotifications.subscribe(notifications => {
+      console.log(notifications, 'notifications');
       this.notifications = notifications;
     });
   }

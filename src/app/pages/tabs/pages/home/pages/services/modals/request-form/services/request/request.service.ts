@@ -1,9 +1,9 @@
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Request, RequestDto } from '../../models/request/request';
 
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { Injectable } from '@angular/core';
-import { Request } from '../../models/request/request';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,8 @@ export class RequestService {
 
   requestRef: AngularFireList<Request>;
 
+  requestDtoRef: AngularFireList<RequestDto>;
+
   constructor(
     private _authService: AuthService,
     private _aFDB: AngularFireDatabase,
@@ -21,15 +23,17 @@ export class RequestService {
     this._buildRequestForm();
   }
 
-  sendRequestToHost(request: Request, isCompany: boolean) {
-    console.log(request, isCompany, 'avr q');
+  sendRequestToHost(request: Request, isCompany: boolean): void {
     if (isCompany) {
-      this.requestRef = this._aFDB.list(`companies/${request.hostUid}/requests`);
+      this.requestDtoRef = this._aFDB.list(`companies/${request.hostUid}/requests`);
     } else {
-      this.requestRef = this._aFDB.list(`persons/${request.hostUid}/requests`);
+      this.requestDtoRef = this._aFDB.list(`persons/${request.hostUid}/requests`);
     }
 
-    this.requestRef.push({
+    console.log(request, 'request');
+
+    this.requestDtoRef.push({
+      name: request.name,
       address: request.address,
       conditionDescription: request.conditionDescription,
       phoneNumber: request.phoneNumber,
@@ -38,14 +42,17 @@ export class RequestService {
     });
   }
 
-  public async insertRequest(request: Request) {
+  public async insertRequest(request: Request): Promise<void> {
+    console.log(request, 'request 2');
     const user = await this._authService.getUser();
-    this.requestRef = this._aFDB.list(`customers/${user.uid}/requests`);
-    console.log(`customers/${user.uid}/requests`, request, 'request');
-    this.requestRef.push({
+    this.requestDtoRef = this._aFDB.list(`customers/${user.uid}/requests`);
+    this.requestDtoRef.push({
+      name: request.name,
       address: request.address,
       conditionDescription: request.conditionDescription,
+      hostUid: request.hostUid,
       phoneNumber: request.phoneNumber,
+      serviceTitle: request.serviceTitle,
     });
   }
 

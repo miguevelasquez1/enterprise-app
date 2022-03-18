@@ -60,6 +60,14 @@ const routes: Routes = [
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
+  {
+    path: 'company-name',
+    loadChildren: () => import('./pages/company-name/company-name.module').then( m => m.CompanyNamePageModule)
+  },
+  {
+    path: 'login-options',
+    loadChildren: () => import('./pages/login-options/login-options.module').then( m => m.LoginOptionsPageModule)
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

@@ -26,11 +26,10 @@ export class AddressesPage implements OnInit {
   async ngOnInit() {
     const getAddresses = await this._addressService.getAddresses();
     getAddresses.subscribe(async addresses => {
-      console.log(addresses, 'addresseeeeees');
       this.addresses = addresses;
       if (this.addresses.length === 1) {
         const user = await this._authService.getUser();
-        this._authService.updateCustomer({
+        await this._authService.updateCustomer({
           $key: user.uid,
           name: user.displayName,
           email: user.email,
@@ -38,10 +37,8 @@ export class AddressesPage implements OnInit {
           addressSelected: this.addresses[0].address,
         });
       }
-      (await this._authService.getCurrentCustomer()).subscribe(customer => {
-        console.log(customer, 'avrrrr');
-        this.addressSelected = customer.addressSelected;
-      });
+      const customer = await this._authService.getCurrentCustomer();
+      this.addressSelected = customer.addressSelected;
     });
   }
 
@@ -51,7 +48,6 @@ export class AddressesPage implements OnInit {
 
   addAddress() {
     this._addressService.insertAddress(this.address.value).then(async () => {
-      console.log(this.addresses.length, 'length');
       if (this.addresses.length === 1) {
         const user = await this._authService.getUser();
         await this._authService.updateCustomer({
@@ -80,7 +76,7 @@ export class AddressesPage implements OnInit {
             this._addressService.deleteAddress($key).then(async () => {
               if (this.addresses.length === 0) {
                 const user = await this._authService.getUser();
-                this._authService.updateCustomer({
+                await this._authService.updateCustomer({
                   $key: user.uid,
                   name: user.displayName,
                   email: user.email,
@@ -98,10 +94,9 @@ export class AddressesPage implements OnInit {
   }
 
   async setAddress(e: any, address: string) {
-    console.log('QQQQQQQQQQQQ');
     if (e.detail.checked) {
       const user = await this._authService.getUser();
-      this._authService.updateCustomer({
+      await this._authService.updateCustomer({
         $key: user.uid,
         name: user.displayName,
         email: user.email,

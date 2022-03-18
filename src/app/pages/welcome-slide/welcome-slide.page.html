@@ -1,11 +1,22 @@
 <ion-content>
-  <ion-grid>
-    <ion-row class="ion-align-items-center ion-justify-content-center">
-      <ion-col size-xl="8">
-        <h1>
-          {{ (globals.isEnterprise ? 'enterprise-app.welcome-slide.title' :
-          'customer-app.welcome-slide.title') | translate}}
-        </h1>
+  <ion-grid class="full-height">
+    <ion-row class="full-height ion-align-items-center">
+      <ion-col>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <img src="../../../assets/icon/favicon.png" alt="" />
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-col size-xl="8">
+              <h1>
+                {{ (globals.isEnterprise ? 'enterprise-app.welcome-slide.title' :
+                'customer-app.welcome-slide.title') | translate}}
+              </h1>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -16,7 +27,11 @@
     <ion-row>
       <ion-col>
         <ion-segment mode="ios" value="login">
-          <ion-segment-button class="padding-segment-button" routerLink="/login" value="login">
+          <ion-segment-button
+            class="padding-segment-button"
+            [routerLink]="globals.isEnterprise ? ['/login-options'] : ['/login']"
+            value="login"
+          >
             <ion-label
               >{{ (globals.isEnterprise ? 'enterprise-app.welcome-slide.buttons.sign-in' :
               'customer-app.welcome-slide.buttons.sign-in') | translate }}</ion-label

@@ -16,8 +16,7 @@ import {
   SnapshotAction,
 } from '@angular/fire/compat/database';
 import { EventEmitter, Injectable } from '@angular/core';
-// import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Observer, Subject, Subscription } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -229,17 +228,26 @@ export class AuthService {
     this.authForm = this.formBuilder.group(
       {
         $key: [null, []],
+        companyKey: [null, []],
+        companyName: ['', Validators.required],
         displayName: ['', [Validators.required]],
         email: [
           '',
           [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
+        ],
+        companyEmail: [
+          '',
+          [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
+          this.companyEmailExists.bind(this),
         ],
         phoneNumber: ['', []],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
         urlImage: ['', []],
         company: [false, []],
+        employee: [false, []],
         person: [false, []],
+        idiom: ['', []],
       },
       { validators: this.checkPasswords },
     );
@@ -248,10 +256,9 @@ export class AuthService {
   private buildCompanyForm() {
     this.companyForm = this.formBuilder.group({
       $key: [null, []],
-      name: ['', []],
+      name: ['', [Validators.required]],
       email: ['', []],
       phoneNumber: ['', []],
-      employees: this.formBuilder.array([]),
     });
   }
 
@@ -263,6 +270,8 @@ export class AuthService {
       phoneNumber: ['', []],
       records: this.formBuilder.array([]),
       inventory: this.formBuilder.array([]),
+      idiom: ['', []],
+      isAdmin: [true, []],
     });
   }
 
@@ -275,11 +284,16 @@ export class AuthService {
       records: this.formBuilder.array([]),
       inventory: this.formBuilder.array([]),
       selectedAddress: ['', []],
+      idiom: ['', []],
     });
   }
 
-  getUser(): Promise<any> {
+  getUser() {
     return this.afAuth.authState.pipe(first()).toPromise();
+  }
+
+  getCompanies(): Observable<SnapshotAction<Company>[]> {
+    return this.companyList.snapshotChanges();
   }
 
   getPersons(): Observable<SnapshotAction<Person>[]> {
@@ -292,22 +306,121 @@ export class AuthService {
       .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))));
   }
 
-  async getCurrentCustomer() {
-    const customer$ = new Subject<Customer>();
+  companyEmailExists(control: AbstractControl): Promise<{ noExists: boolean } | null> {
+    const noExists: Promise<{ noExists: boolean } | null> = new Promise(resolve => {
+      const ref = this.aFDB.database.ref('companies');
+      ref
+        .orderByChild('email')
+        .equalTo(control.value)
+        .on('value', snapshot => {
+          if (snapshot.exists()) {
+            this.authForm.get('companyKey').setValue(Object.keys(snapshot.val())[0]);
+          }
+          console.log(snapshot.exists(), 'existe?');
+          resolve(snapshot.exists() ? null : { noExists: true });
+        });
+    });
+    return noExists;
+  }
+
+  async getCurrentCustomer(): Promise<Customer> {
     const user = await this.getUser();
-    this.getCustomers().subscribe(customers => {
-      customers.forEach(customer => {
-        if (user.uid === customer.$key) {
-          customer$.next(customer);
-        }
+
+    const promise: Promise<Customer> = new Promise(resolve => {
+      this.getCustomers().subscribe(customers => {
+        customers.forEach(customer => {
+          if (user.uid === customer.$key) {
+            resolve(customer);
+          }
+        });
       });
     });
-    return customer$;
+
+    return promise;
+  }
+
+  async getCurrentCompanyByKey(userKey: string): Promise<Company> {
+    const ref = this.aFDB.database.ref('companies');
+    const companyPromise: Promise<Company> = new Promise((resolve, reject) => {
+      ref
+        .orderByKey()
+        .equalTo(userKey)
+        .on('value', snapshot => {
+          if (!snapshot.exists()) {
+            reject({});
+          }
+          console.log(snapshot.val(), 'AAAAAAAAAAAAAA');
+          snapshot.forEach(child => {
+            const company: Company = { $key: child.key, ...child.val() };
+            resolve(company);
+          });
+        });
+    });
+
+    return companyPromise;
+  }
+
+  getCurrentCompanyByEmail(userKey: string, userEmail: string): Promise<Company> {
+    const ref = this.aFDB.database.ref('companies');
+    const companyPromise: Promise<Company> = new Promise((resolve, reject) => {
+      ref
+        .orderByChild(`employees/${userKey}/email`)
+        .equalTo(userEmail)
+        .on('value', snapshot => {
+          console.log('entra');
+          if (!snapshot.exists()) {
+            reject({});
+          }
+          snapshot.forEach(child => {
+            const company: Company = { $key: child.key, ...child.val() };
+            resolve(company);
+          });
+        });
+    });
+
+    return companyPromise;
+  }
+
+  async getCurrentPerson(): Promise<Person> {
+    const user = await this.getUser();
+    const personPromise: Promise<Person> = new Promise(resolve =>
+      (async () => {
+        try {
+          const company = await this.getCurrentCompanyByEmail(user.uid, user.email);
+          if (company?.$key) {
+            this.aFDB.database
+              .ref(`companies/${company.$key}/employees`)
+              .orderByKey()
+              .on('value', snapshot => {
+                snapshot.forEach(child => {
+                  (async () => {
+                    if ((await this.getUser()).uid === child.key) {
+                      resolve({ $key: child.key, ...child.val() });
+                    }
+                  })();
+                });
+              });
+          }
+        } catch {
+          this.aFDB.database
+            .ref('persons')
+            .orderByKey()
+            .equalTo(user.uid)
+            .on('value', snapshot => {
+              snapshot.forEach(child => {
+                resolve({ $key: child.key, ...child.val() });
+              });
+            });
+        }
+      })(),
+    );
+    return personPromise;
   }
 
   isCompany(): Promise<boolean> {
     return new Promise(resolve => {
       this.afAuth.authState.subscribe(res => {
+        console.log(res, 'response');
         if (res) {
           this.aFDB
             .object(`persons/${res.uid}`)
@@ -333,13 +446,14 @@ export class AuthService {
     });
   }
 
-  insertPerson(person: Person): void {
+  async insertPerson(person: Person): Promise<void> {
     const ref = this.aFDB.database.ref('persons');
 
     ref.child(person.uid).set({
       name: person.name,
       email: person.email,
       phoneNumber: person.phoneNumber,
+      idiom: person.idiom,
     });
   }
 
@@ -348,22 +462,15 @@ export class AuthService {
       name: person.name,
       email: person.email,
       phoneNumber: person.phoneNumber,
+      idiom: person.idiom,
     });
   }
 
-  getCompany() {
-    // return this.companyList.snapshotChanges();
-  }
-
-  insertCompany(company: Company): void {
+  async insertCompany(company: Company) {
     const ref = this.aFDB.database.ref('companies');
 
-    ref.child(company.uid).set({
+    return await ref.child(company.uid).set({
       name: company.name,
-      email: company.email,
-      phoneNumber: company.phoneNumber,
-      employees: company.employees,
-      uid: company.uid,
     });
   }
 
@@ -372,8 +479,30 @@ export class AuthService {
       name: company.name,
       email: company.email,
       phoneNumber: company.phoneNumber,
-      employees: company.employees,
     });
+  }
+
+  async insertEmployee(newCompany: boolean, employee: Person, companyKey?: string): Promise<void> {
+    if (newCompany && employee.uid) {
+      const ref = this.aFDB.database.ref(`companies/${employee.uid}/employees`);
+      ref.child(employee.uid).set({
+        name: employee.name,
+        email: employee.email,
+        phoneNumber: employee.phoneNumber,
+        idiom: employee.idiom,
+        isAdmin: true,
+      });
+    } else {
+      console.log('eh');
+      const ref = this.aFDB.database.ref(`companies/${companyKey}/employees`);
+      ref.child(employee.uid).set({
+        name: employee.name,
+        email: employee.email,
+        phoneNumber: employee.phoneNumber,
+        idiom: employee.idiom,
+        isAdmin: false,
+      });
+    }
   }
 
   insertCustomer(customer: Customer): void {
@@ -383,15 +512,17 @@ export class AuthService {
       name: customer.name,
       email: customer.email,
       phoneNumber: customer.phoneNumber,
+      idiom: customer.idiom,
     });
   }
 
-  updateCustomer(customer: Customer) {
-    return this.customerList.update(customer.$key, {
+  async updateCustomer(customer: Customer): Promise<void> {
+    return await this.customerList.update(customer.$key, {
       name: customer.name,
       email: customer.email,
       phoneNumber: customer.phoneNumber,
       addressSelected: customer.addressSelected ? customer.addressSelected : '',
+      idiom: customer.idiom,
     });
   }
 
@@ -407,14 +538,6 @@ export class AuthService {
     return this.companyForm.get('Payment') as FormArray;
   }
 
-  // getUsersByServerName(name: string): Observable<DocumentChangeAction<unknown>[]> {
-  //   return this.angularFirestore
-  //     .collection('Servers')
-  //     .doc(name)
-  //     .collection('Users')
-  //     .snapshotChanges();
-  // }
-
   populateForm(user: IUser): void {
     this.authForm.setValue(user);
   }
@@ -424,7 +547,6 @@ export class AuthService {
       this.afAuth
         .signInWithEmailAndPassword(user.email, user.password)
         .then(async login => {
-          console.log(login.user.uid, 'login');
           const isCompany = await this.isCompany();
           if (this._globals.isEnterprise && isCompany !== undefined) {
             resolve(login);
@@ -440,7 +562,6 @@ export class AuthService {
           }
         })
         .catch(err => {
-          console.log(err, 'errrrrrr');
           rejected(err);
         });
     });
@@ -458,10 +579,10 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
-  public async googleAuth() {
+  public async googleAuth(): Promise<void> {
     return await this.afAuth
       .signInWithPopup(new firebase.GoogleAuthProvider())
-      .then((user: any) => {
+      .then(async (user: any) => {
         const displayName = `${user.additionalUserInfo.profile.given_name?.split(' ')[0]} ${
           user.additionalUserInfo.profile.family_name?.split(' ')[0]
         }`;
@@ -471,11 +592,12 @@ export class AuthService {
           name: displayName,
           phoneNumber: '',
           uid: user.additionalUserInfo.profile.id,
+          idiom: user.idiom,
         };
         if (this.isPersonForm) {
-          this.insertPerson(data);
+          await this.insertPerson(data);
         } else {
-          this.insertCompany({ ...data, employees: [] });
+          const res = await this.insertCompany({ ...data, employees: [] });
         }
       });
   }
@@ -499,13 +621,17 @@ export class AuthService {
             name: user.displayName,
             phoneNumber: user.phoneNumber,
             uid: userData.user.uid,
+            idiom: user.idiom,
           };
           userData.user.updateProfile({ displayName: user.displayName });
           if (this._globals.isEnterprise) {
             if (this.isPersonForm) {
               this.insertPerson(data);
+            } else if (user.companyKey && user.companyKey !== '') {
+              this.insertEmployee(false, data, user.companyKey);
             } else {
-              this.insertCompany({ ...data, employees: [] });
+              await this.insertCompany({ ...data, employees: [] });
+              this.insertEmployee(true, data);
             }
           } else {
             this.insertCustomer(data);
@@ -514,7 +640,6 @@ export class AuthService {
           resolve(userData);
         })
         .catch(err => {
-          console.log('catchhh');
           reject(err);
         });
     });

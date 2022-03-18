@@ -42,10 +42,15 @@
     "title": "Choose your Category",
     "options": {
       "company": "Company",
+      "employee": "Employee",
       "person": "Person"
     }
   },
   "next": "next",
+  "company-name": {
+    "title": "Create a New Company",
+    "name": "Company name"
+  },
   "sign-up": {
     "title": "Sign Up",
     "name": "Name",
@@ -67,14 +72,21 @@
   },
   "login": {
     "title": "Hi Again!",
+    "company-email": "Company Email",
     "email": "Email",
     "password": "Password",
-    "sign-in": "Sign In"
+    "sign-in": "Sign In",
+    "login-options": {
+      "title": "How do you want to enter?",
+      "person": "Person",
+      "company": "Company"
+    }
   },
   "profile": {
     "title": "Profile",
     "personal-data": "Personal Data",
-    "settings": "settings"
+    "settings": "settings",
+    "manage-company": "Manage Company"
   },
   "personal-data": {
     "title": "Personal Data",
@@ -92,6 +104,13 @@
       "german": "German"
     },
     "sign-out": "Sign Out"
+  },
+  "manage-company": {
+    "title": "My Company",
+    "company-name": "Company Name",
+    "company-email": "Company Email",
+    "company-description": "Company Description",
+    "saved-successfully": "The information has been saved successfully"
   },
   "inventory": {
     "title": "Inventory",
@@ -152,13 +171,15 @@
     "add-new-service": "Add New Service",
     "edit": "Edit",
     "request-it": "Request It",
-    "no-services-yet": "No services yest",
-    "no-able-services": "No able services so far",
+    "no-services-yet": "No services yet",
+    "no-able-services": "There aren't able services right now",
     "service-form": {
       "preview": "Preview",
       "request-for-it": "Request for it",
       "title-input": "Title",
+      "title-alert": "Title is missing...",
       "description-input": "Description",
+      "description-alert": "min. 10 characters",
       "add-service-button": "Add Service",
       "update-service-button": "Update Service"
     },
@@ -180,7 +201,8 @@
     "notifications": {
       "title": "Notifications",
       "service-detail": {
-        "title": "Service:",
+        "title": "Service Detail",
+        "client-name": "Client",
         "description-label": "Description:",
         "address-label": "Address:",
         "phone-number-label": "Phone Number:"
@@ -188,6 +210,11 @@
     }
   },
   "coupons": {
-    "title": "Coupons"
+    "title": "Coupons",
+    "add-new-coupon": "Add New Coupon",
+    "edit": "Edit",
+    "request-it": "Request It",
+    "no-coupons-yet": "No coupons yet",
+    "no-able-coupons": "There aren't able coupons right now"
   }
 }

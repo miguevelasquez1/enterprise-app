@@ -21,6 +21,35 @@
                 <h1>{{ 'sign-up.title' | translate }}</h1>
               </ion-col>
             </ion-row>
+            <ion-row *ngIf="type === 'employee'">
+              <ion-col>
+                <ion-item class="ion-margin-vertical" lines="none">
+                  <ion-label>
+                    <ion-icon slot="start" name="rocket-sharp"></ion-icon>
+                  </ion-label>
+                  <ion-input
+                    email
+                    placeholder="{{'login.company-email' | translate}}"
+                    class="input-mail"
+                    type="email"
+                    name="companyEmail"
+                    required
+                    formControlName="companyEmail"
+                  >
+                  </ion-input>
+                  <ion-icon
+                    name="checkmark-circle-outline"
+                    color="success"
+                    *ngIf="authService.authForm.get('companyEmail').valid && authService.authForm.get('companyEmail').dirty"
+                  ></ion-icon>
+                  <ion-icon
+                    color="danger"
+                    *ngIf="authService.authForm.get('companyEmail').hasError('noExists') && authService.authForm.get('companyEmail').dirty"
+                    name="close-circle-outline"
+                  ></ion-icon>
+                </ion-item>
+              </ion-col>
+            </ion-row>
             <ion-row>
               <ion-col>
                 <ion-item lines="none">
@@ -84,11 +113,21 @@
             <ion-row>
               <ion-col class="ion-text-center ion-margin-top">
                 <ion-button
+                  *ngIf="type !== 'employee'; else employeeButton"
                   (click)="register()"
                   expand="block"
                   [disabled]="authService.authForm.hasError('notSame') || authService.authForm.controls.password.invalid"
                   >{{ 'sign-up.create-an-account' | translate }}</ion-button
                 >
+                <ng-template #employeeButton>
+                  <ion-button
+                    (click)="register()"
+                    expand="block"
+                    [disabled]="authService.authForm.hasError('notSame') || authService.authForm.controls.password.invalid || authService.authForm.get('companyEmail').invalid"
+                  >
+                    {{ 'sign-up.create-an-account' | translate }}</ion-button
+                  >
+                </ng-template>
               </ion-col>
             </ion-row>
             <!-- <ion-row>

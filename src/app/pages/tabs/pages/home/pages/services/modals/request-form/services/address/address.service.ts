@@ -17,24 +17,19 @@ export class AddressService {
   }
 
   deleteAddress($key: string): Promise<void> {
-    console.log($key, 'avr');
     return this.addressesRef.remove($key);
   }
 
   async getAddresses(): Promise<Observable<Address[]>> {
     await this.setAddressRef();
-    console.log('2', this.addressesRef);
     return this.addressesRef
       .snapshotChanges()
       .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))));
   }
 
   async setAddressRef(): Promise<void> {
-    console.log('1');
     const user = await this._authService.getUser();
-    console.log(user.uid, 'uid');
     this.addressesRef = this._db.list(`customers/${user.uid}/addresses`);
-    console.log(this.addressesRef);
   }
 
   insertAddress(address) {

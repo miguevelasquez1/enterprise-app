@@ -1,6 +1,6 @@
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../../../assets/fonts/Poppins-SemiBold.ttf');
+  src: url("../../../assets/fonts/Poppins-SemiBold.ttf");
 }
 
 .global-grid,
@@ -23,9 +23,4 @@ ion-item {
 ion-input {
   font-family: Poppins-Semibold;
   --color: var(--ion-color-dark-tint);
-}
-
-.arrow-back {
-  font-size: 24px;
-  margin-left: 5px;
 }

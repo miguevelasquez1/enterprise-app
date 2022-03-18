@@ -1,5 +1,5 @@
 import { Camera, CameraResultType } from '@capacitor/camera';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
@@ -8,21 +8,28 @@ import { ServicesService } from '../../services/services/services.service';
 @Component({
   selector: 'app-service-form',
   templateUrl: './service-form.page.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./service-form.page.scss'],
 })
 export class ServiceFormPage implements OnInit {
-  imageExample: string | ArrayBuffer = '../../../../../../../../../assets/img/washing-machine.jpg';
+  imageExample: string | ArrayBuffer = '../../../../../../../../../assets/img/tools.jpg';
 
   image: Blob;
 
+  isCompany: boolean;
+
   constructor(
     private _authService: AuthService,
+    private _cdRef: ChangeDetectorRef,
     private _modalCtrl: ModalController,
     public servicesService: ServicesService,
     private _loadingCtrl: LoadingController,
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit(): Promise<void> {
+    await this._setValues();
+    this.isCompany = await this._authService.isCompany();
+  }
 
   async setImage(): Promise<void> {
     try {
@@ -42,6 +49,7 @@ export class ServiceFormPage implements OnInit {
       reader.readAsDataURL(this.image);
       reader.onloadend = () => {
         this.servicesService.serviceForm.get('image').setValue(reader.result);
+        this._cdRef.markForCheck();
       };
     } catch (err) {
       console.log(err, 'err');
@@ -54,7 +62,6 @@ export class ServiceFormPage implements OnInit {
       translucent: true,
     });
     await loading.present();
-    await this._setValues();
     return new Promise(resolve => {
       if (!this.servicesService.serviceForm.get('$key').value) {
         resolve(this.servicesService.insertService(this.servicesService.serviceForm.value));
@@ -68,10 +75,10 @@ export class ServiceFormPage implements OnInit {
       } else if (!this.servicesService.serviceForm.get('$key').value) {
         this.servicesService.serviceForm
           .get('image')
-          .setValue('../../../../../../../../../assets/img/washing-machine.jpg');
+          .setValue('../../../../../../../../../assets/img/tools.jpg');
       }
       console.log(this.servicesService.serviceForm.value, 'valor');
-      await this.servicesService.updateService({
+      this.servicesService.updateService({
         ...this.servicesService.serviceForm.value,
         $key: res,
       });
@@ -81,11 +88,26 @@ export class ServiceFormPage implements OnInit {
     });
   }
 
+  changePrice(): void {
+    if (this.servicesService.serviceForm.get('price').value === '0') {
+      this.servicesService.serviceForm.get('price').setValue('');
+    } else {
+      this.servicesService.serviceForm.get('price').setValue('0');
+    }
+  }
+
   private async _setValues() {
     const user = await this._authService.getUser();
+    console.log(user, 'user');
     this.servicesService.serviceForm.get('author').setValue(user.displayName);
     const isCompany = await this._authService.isCompany();
     this.servicesService.serviceForm.get('isCompany').setValue(isCompany);
-    this.servicesService.serviceForm.get('hostUid').setValue(user.uid);
+    console.log(isCompany, 'isCompany');
+    if (isCompany) {
+      const company = await this._authService.getCurrentCompanyByEmail(user.uid, user.email);
+      this.servicesService.serviceForm.get('hostUid').setValue(company.$key);
+    } else {
+      this.servicesService.serviceForm.get('hostUid').setValue(user.uid);
+    }
   }
 }

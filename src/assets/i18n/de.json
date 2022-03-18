@@ -21,10 +21,15 @@
     "title": "Wählen Sie Ihre Kategorie",
     "options": {
       "company": "Begleitung",
+      "employee": "Angestellter",
       "person": "Person"
     }
   },
   "next": "nächste",
+  "company-name": {
+    "title": "Ein neues Unternehmen gründen",
+    "name": "Name der Firma"
+  },
   "sign-up": {
     "title": "Einchecken",
     "name": "Name",
@@ -46,9 +51,15 @@
   },
   "login": {
     "title": "Hallo Nochmal!",
+    "company-email": "Firmen-E-Mail",
     "email": "Email",
     "password": "Passwort",
-    "sign-in": "Geraten In"
+    "sign-in": "Geraten In",
+    "login-options": {
+      "title": "Wie möchten Sie einsteigen?",
+      "person": "Person",
+      "company": "Gesellschaft"
+    }
   },
   "tabs": {
     "profile": {
@@ -67,7 +78,8 @@
   "profile": {
     "title": "Profil",
     "personal-data": "Persönliche Daten",
-    "settings": "Konfigurationen"
+    "settings": "Konfigurationen",
+    "manage-company": "Unternehmen verwalten"
   },
   "personal-data": {
     "title": "Persönliche Daten",
@@ -85,6 +97,12 @@
       "german": "Deutsch"
     },
     "sign-out": "Austragen"
+  },
+  "manage-company": {
+    "title": "Meine Firma",
+    "company-name": "Name der Firma",
+    "company-email": "Firmen-E-Mail",
+    "company-description": "Firmen Beschreibung"
   },
   "routes": {
     "title": "Meine Routen",
@@ -158,7 +176,9 @@
       "preview": "Vorschau",
       "request-for-it": "Bitte darum",
       "title-input": "Titel",
+      "title-alert": "Titel fehlt...",
       "description-input": "Bezeichnung",
+      "description-alert": "min. 10 Zeichen",
       "add-service-button": "Dienst hinzufügen",
       "update-service-button": "Update-Service"
     },
@@ -180,14 +200,20 @@
     "notifications": {
       "title": "Benachrichtigungen",
       "service-detail": {
-        "title": "Service:",
+        "title": "Servicedetails",
         "description-label": "Beschreibung:",
+        "client-name": "Klient",
         "address-label": "die Anschrift:",
         "phone-number-label": "Telefonnummer:"
       }
     }
   },
   "coupons": {
-    "title": "Gutscheine"
+    "title": "Gutscheine",
+    "add-new-coupon": "neuen gutschein hinzufügen",
+    "edit": "Bearbeiten",
+    "request-it": "fordere es an",
+    "no-coupons-yet": "Noch Keine Gutscheine",
+    "no-able-coupons": "Derzeit sind keine Coupons verfügbar"
   }
 }

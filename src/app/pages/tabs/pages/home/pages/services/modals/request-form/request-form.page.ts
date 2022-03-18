@@ -40,19 +40,22 @@ export class RequestFormPage implements OnInit {
   }
 
   async sendRequest(): Promise<void> {
-    console.log(this.service, 'serviceeee');
     if (this.requestService.requestForm.get('address').invalid) {
       this.showAddressDanger = true;
     } else {
+      console.log('entra');
+      const { name } = await this._authService.getCurrentCustomer();
+
+      this.requestService.requestForm.get('hostUid').setValue(this.service.hostUid);
+      this.requestService.requestForm.get('serviceTitle').setValue(this.service.title);
       await this.requestService.insertRequest({
         ...this.requestService.requestForm.value,
         address: this.address,
+        name,
       });
-      this.requestService.requestForm.get('hostUid').setValue(this.service.hostUid);
-      this.requestService.requestForm.get('serviceTitle').setValue(this.service.title);
 
       this.requestService.sendRequestToHost(
-        this.requestService.requestForm.value,
+        { ...this.requestService.requestForm.value, name },
         this.service.isCompany,
       );
       this.dismissModal();
@@ -64,7 +67,6 @@ export class RequestFormPage implements OnInit {
         duration: 1000,
         position: 'top',
       });
-      console.log(this.requestService.requestForm.value, 'requestForm');
       return await toast.present();
     }
   }

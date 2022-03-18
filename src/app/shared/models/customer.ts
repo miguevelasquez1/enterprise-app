@@ -6,6 +6,7 @@ export class Customer {
   phoneNumber: string;
   addresses?: Address[];
   addressSelected?: string;
+  idiom?: string;
 }
 
 export class Address {

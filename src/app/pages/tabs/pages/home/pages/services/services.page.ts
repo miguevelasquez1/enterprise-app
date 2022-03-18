@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import { IonRouterOutlet, LoadingController, ModalController } from '@ionic/angular';
 
 import { Globals } from 'src/app/globals';
 import { NotificationsService } from './pages/notifications/services/notifications/notifications.service';
@@ -23,24 +23,29 @@ export class ServicesPage implements OnInit {
     private _notificationsService: NotificationsService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
-  ) {
-    console.log(this.services, 'services');
-  }
+    private _loadingCtrl: LoadingController,
+  ) {}
 
   async ngOnInit() {
+    const loading = await this._loadingCtrl.create({
+      spinner: 'bubbles',
+      translucent: true,
+      duration: 3000,
+    });
+    await loading.present();
     (await this._notificationsService.getNotifications()).subscribe(notifications => {
       this.notificationsLength = notifications.length;
     });
-  }
-
-  async ionViewWillEnter() {
-    (await this._servicesService.getServices())
-      .snapshotChanges()
-      .pipe(map(changes => changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }))))
-      .subscribe(data => {
-        console.log(data, 'data');
-        this.services = data;
-      });
+    (await this._servicesService.getServices()).subscribe(async services => {
+      if (this.globals.isEnterprise) {
+        this.services = services;
+      } else {
+        services.forEach(service => {
+          this.services.push(service);
+        });
+      }
+      await loading.dismiss();
+    });
   }
 
   async presentServiceFormModal(): Promise<void> {

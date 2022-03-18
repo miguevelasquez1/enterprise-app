@@ -21,10 +21,15 @@
     "title": "Escolha sua Categoria",
     "options": {
       "company": "Companhia",
+      "employee": "empregado",
       "person": "Pessoa"
     }
   },
   "next": "segue",
+  "company-name": {
+    "title": "criar uma nova companhia",
+    "name": "Nome da companhia"
+  },
   "sign-up": {
     "title": "Inscrever-se",
     "name": "Nome",
@@ -46,9 +51,15 @@
   },
   "login": {
     "title": "Oi de novo!",
+    "company-email": "Email da Companhia",
     "email": "Email",
     "password": "Password",
-    "sign-in": "Entrar"
+    "sign-in": "Entrar",
+    "login-options": {
+      "title": "Como você quer ingressar?",
+      "person": "Pessoa",
+      "company": "Companhia"
+    }
   },
   "tabs": {
     "profile": {
@@ -67,7 +78,8 @@
   "profile": {
     "title": "Perfil",
     "personal-data": "Dados Pessoais",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "manage-company": "Gerenciar companhia"
   },
   "personal-data": {
     "title": "Dados Pessoais",
@@ -85,6 +97,13 @@
       "german": "Alemão"
     },
     "sign-out": "Sair"
+  },
+  "manage-company": {
+    "title": "Minha Companhia",
+    "company-name": "Nome da Companhia",
+    "company-email": "Email da Companhia",
+    "company-description": "Descrição",
+    "saved-successfully": "Die Informationen wurden erfolgreich gespeichert"
   },
   "routes": {
     "title": "Minhas Rotas",
@@ -158,7 +177,9 @@
       "preview": "visualizar",
       "request-for-it": "Solicite Isso",
       "title-input": "Título",
+      "title-alert": "Está faltando o título...",
       "description-input": "Descrição",
+      "description-alert": "min. 10 caracteres",
       "add-service-button": "Adicionar Serviço",
       "update-service-button": "Satualize Serviço"
     },
@@ -180,14 +201,20 @@
     "notifications": {
       "title": "Notificações",
       "service-detail": {
-        "title": "Serviço:",
+        "title": "Detalhes do Serviço",
         "description-label": "Descrição:",
+        "client-name": "Cliente",
         "address-label": "Direçao:",
         "phone-number-label": "Número de telefone:"
       }
     }
   },
   "coupons": {
-    "title": "Cupons"
+    "title": "Cupons",
+    "add-new-coupon": "Adicionar Novo Cupom",
+    "edit": "Editar",
+    "request-it": "Solicitá-lo",
+    "no-coupons-yet": "Ainda Não Há Cupons",
+    "no-able-coupons": "Não há cupons disponíveis no momento"
   }
 }
